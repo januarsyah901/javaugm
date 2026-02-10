@@ -34,8 +34,8 @@ export default function Navbar() {
     return (
         <nav
             className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-                    ? 'bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-lg border-b border-zinc-200/50 dark:border-zinc-800/50 py-3'
-                    : 'bg-transparent py-5'
+                ? 'bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-lg border-b border-zinc-200/50 dark:border-zinc-800/50 py-3'
+                : 'bg-transparent py-5'
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,15 +43,17 @@ export default function Navbar() {
 
                     {/* 1. Logo */}
                     <div className="flex-shrink-0 flex items-center gap-2">
-                        {/* Logo Image */}
-                        <div className="relative w-10 h-10 overflow-hidden rounded-full shadow-sm">
+                        <div className="relative flex-shrink-0 rounded-full shadow-sm overflow-hidden">
                             <Image
                                 src="/logo.png"
                                 alt="Logo JAVA UGM"
-                                fill
-                                className="object-cover"
+                                width={40}   // Setara w-10 (40px)
+                                height={40}  // Setara h-10 (40px)
+                                className="object-cover w-10 h-10" // Tetap beri class size untuk memastikan responsivitas
+                                priority     // Tambahkan ini agar logo dimuat duluan (mencegah flickering)
                             />
                         </div>
+
                         <Link
                             href="/"
                             className={`font-bold text-xl tracking-tight transition-colors ${scrolled ? 'text-zinc-800 dark:text-zinc-100' : 'text-zinc-800 dark:text-white'
@@ -91,8 +93,8 @@ export default function Navbar() {
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className={`p-2 rounded-md transition-colors ${scrolled
-                                    ? 'text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-                                    : 'text-zinc-800 dark:text-zinc-100 hover:bg-white/10'
+                                ? 'text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                                : 'text-zinc-800 dark:text-zinc-100 hover:bg-white/10'
                                 }`}
                             aria-label="Toggle menu"
                         >
@@ -105,8 +107,8 @@ export default function Navbar() {
             {/* 4. Mobile Menu Dropdown (Animated) */}
             <div
                 className={`md:hidden absolute top-full left-0 w-full bg-white dark:bg-zinc-950 border-b border-zinc-100 dark:border-zinc-800 shadow-xl transition-all duration-300 ease-in-out origin-top ${isOpen
-                        ? 'opacity-100 scale-y-100 translate-y-0 visible'
-                        : 'opacity-0 scale-y-95 -translate-y-2 invisible'
+                    ? 'opacity-100 scale-y-100 translate-y-0 visible'
+                    : 'opacity-0 scale-y-95 -translate-y-2 invisible'
                     }`}
             >
                 <div className="px-4 py-6 space-y-3">
