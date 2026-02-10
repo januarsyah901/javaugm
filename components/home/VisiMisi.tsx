@@ -19,8 +19,7 @@ export default function VisiMisi() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
                     {/* Vision Card */}
-                    <div className="bg-white dark:bg-zinc-900 rounded-2xl p-8 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-zinc-800 relative overflow-hidden group hover:border-primary/20 transition-colors">
-                        <div className="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all"></div>
+                    <div>
 
                         <div className="flex items-center gap-4 mb-6">
                             <div className="p-3 bg-primary/10 rounded-xl text-primary">

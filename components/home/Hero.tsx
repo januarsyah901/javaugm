@@ -1,43 +1,64 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Hero() {
     return (
-        <section className="relative overflow-hidden bg-white dark:bg-zinc-900 py-20 sm:py-32">
-            {/* Background Effect */}
-            <div className="absolute inset-0 z-0 opacity-10 pattern-dots pattern-emerald-500 pattern-bg-white pattern-size-4 pattern-opacity-100 dark:pattern-bg-zinc-900"></div>
-            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-gradient-to-tr from-secondary/20 to-primary/20 blur-3xl"></div>
+        <section className="relative overflow-hidden bg-white dark:bg-zinc-950 pt-32 pb-20 sm:pt-40 sm:pb-32">
+
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/herobg.JPEG"
+                    alt="Hero Background"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+                <div className="absolute inset-0 bg-black/60 md:bg-black/50"></div>
+            </div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-emerald-800 bg-emerald-100 mb-8 border border-emerald-200">
-                    <span className="flex h-2 w-2 rounded-full bg-emerald-600 mr-2"></span>
-                    Kabinet Fathul Afaq (1447/1448 H)
+
+                {/* Badge Kabinet */}
+                <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-emerald-100 bg-emerald-900/40 backdrop-blur-md border border-emerald-500/30 mb-8 shadow-lg shadow-emerald-900/20 cursor-default">
+                    <span>Kabinet Fathul Afaq (1447/1448 H)</span>
                 </div>
 
-                <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6">
-                    Membuka <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-600">Cakrawala</span>, <br className="hidden sm:block" />
-                    Menebar <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-yellow-500">Manfaat</span>.
+                {/* Main Heading */}
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white mb-8 leading-[1.1] drop-shadow-sm">
+                    Membuka <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">Cakrawala</span>, <br />
+                    Menebar <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">Manfaat</span>.
                 </h1>
 
-                <p className="mt-6 text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                    Jama’ah Vokasi Al-‘Alim (JAVA) hadir sebagai wadah intelektual muslim yang beradab, solutif, dan berdaya guna bagi Sekolah Vokasi UGM.
+                {/* Subheading */}
+                <p className="mt-4 text-lg md:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
+                    Wadah intelektual muslim Sekolah Vokasi UGM yang beradab, solutif, dan berdaya guna dalam bingkai persaudaraan.
                 </p>
 
-                <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                {/* CTA Buttons */}
+                <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4 items-center">
                     <Link
                         href="/profile"
-                        className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-primary rounded-full hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50"
+                        className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-primary px-8 font-medium text-white transition-all duration-300 hover:bg-emerald-700 hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]"
                     >
-                        Tentang Kami
-                        <ArrowRight className="ml-2 h-5 w-5" />
+                        <span className="mr-2">Tentang Kami</span>
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
+
                     <Link
                         href="/blog"
-                        className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-slate-700 bg-white border border-slate-200 rounded-full hover:bg-slate-50 transition-all hover:border-slate-300 dark:bg-zinc-800 dark:text-slate-200 dark:border-zinc-700 dark:hover:bg-zinc-700"
+                        className="inline-flex h-12 items-center justify-center px-8 text-base font-medium text-white bg-transparent border border-white/30 rounded-full hover:bg-white/10 hover:text-white hover:border-white transition-all backdrop-blur-sm"
                     >
                         Baca Artikel
                     </Link>
+                </div>
+
+                {/* Footer Quote / Small Text */}
+                <div className="mt-16 pt-8 border-t border-white/20 max-w-lg mx-auto">
+                    <p className="text-xs text-slate-300 font-medium tracking-wide uppercase">
+                        Sekolah Vokasi Universitas Gadjah Mada
+                    </p>
                 </div>
             </div>
         </section>
