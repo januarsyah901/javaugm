@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/ui/Navbar";
+import Footer from "@/components/ui/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +27,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-50 text-slate-900`}
       >
-        {children}
+        <div className="flex flex-col min-h-screen">
+          {/* We need to dynamically import Navbar if it has client side logic? 
+              Navbar has 'use client', so it's fine to import here in a server component (RootLayout). 
+              Next.js handles the boundary automatically. */}
+          <Navbar />
+          <main className="flex-grow pt-16">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
