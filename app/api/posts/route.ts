@@ -22,9 +22,11 @@ export async function POST(req: Request) {
             );
         }
 
+        const author = session?.user?.name || session?.user?.email || 'Admin';
+
         const { data, error } = await supabaseAdmin
             .from('posts')
-            .insert([body])
+            .insert([{ ...body, author }])
             .select()
             .single();
 

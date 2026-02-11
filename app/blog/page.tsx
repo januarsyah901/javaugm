@@ -25,7 +25,7 @@ export default async function BlogPage() {
     const displayPosts: any[] = posts || [];
 
     return (
-        <div className="bg-slate-50 dark:bg-black min-h-screen py-12">
+        <div className="bg-slate-50 pt-25 dark:bg-black min-h-screen py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Page Header */}

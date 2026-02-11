@@ -142,11 +142,71 @@ export default async function BlogDetailPage({ params }: PageProps) {
                     <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Baca Artikel Lainnya</h3>
                     <Link href="/blog" className="text-primary hover:underline font-medium">Lihat Semua</Link>
                 </div>
-                {/* Logic to fetch related posts would go here */}
-                <div className="p-8 bg-slate-50 dark:bg-zinc-900 rounded-xl text-center border border-dashed border-slate-300 dark:border-zinc-700">
-                    <p className="text-slate-500">Artikel terkait akan muncul di sini.</p>
-                </div>
+                {/* Related Posts Logic */}
+                {(() => {
+                    // Fetch related posts (server-side in async component)
+                    // We need to use a separate function or direct logic here.
+                    // Since this is an async component, we can wait for another supabase call.
+                    return <RelatedPosts currentPostId={post.id} category={post.category} />;
+                })()}
+
             </section>
+        </div>
+    );
+}
+
+async function RelatedPosts({ currentPostId, category }: { currentPostId: number, category: string }) {
+    const { data: relatedPosts } = await supabase
+        .from('posts')
+        .select('id, title, slug, excerpt, image_url, created_at, category')
+        .eq('category', category)
+        .neq('id', currentPostId)
+        .eq('is_published', true)
+        .limit(3);
+
+    if (!relatedPosts || relatedPosts.length === 0) {
+        return (
+            <div className="p-8 bg-slate-50 dark:bg-zinc-900 rounded-xl text-center border border-dashed border-slate-300 dark:border-zinc-700">
+                <p className="text-slate-500">Belum ada artikel terkait lainnya.</p>
+            </div>
+        );
+    }
+
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {relatedPosts.map((post) => (
+                <Link href={`/blog/${post.slug}`} key={post.id} className="group block bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-slate-100 dark:border-zinc-800">
+                    <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-zinc-800">
+                        {post.image_url ? (
+                            <Image
+                                src={post.image_url}
+                                alt={post.title}
+                                fill
+                                className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+                            />
+                        ) : (
+                            <div className="w-full h-full flex items-center justify-center text-slate-300">
+                                <span className="text-4xl font-bold opacity-20">JAVA</span>
+                            </div>
+                        )}
+                        <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">
+                            {post.category}
+                        </div>
+                    </div>
+                    <div className="p-6">
+                        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-3">
+                            <Calendar size={14} />
+                            {new Date(post.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        </div>
+                        <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                            {post.title}
+                        </h4>
+                        <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                            {post.excerpt}
+                        </p>
+                    </div>
+                </Link>
+            ))}
         </div>
     );
 }

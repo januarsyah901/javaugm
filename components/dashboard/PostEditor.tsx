@@ -33,11 +33,32 @@ const generateSlug = (text: string) => {
         .replace(/-+$/, '');            // Trim - from end
 };
 
+// Helper to generate excerpt from content
+const generateExcerpt = (content: string) => {
+    // Remove markdown characters roughly
+    const plainText = content
+        .replace(/#{1,6}\s/g, '') // Headers
+        .replace(/(\*\*|__)(.*?)\1/g, '$2') // Bold
+        .replace(/(\*|_)(.*?)\1/g, '$2') // Italic
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1') // Links
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '') // Images
+        .replace(/`{3,}[\s\S]*?`{3,}/g, '') // Code blocks
+        .replace(/`(.+?)`/g, '$1') // Inline code
+        .replace(/\n/g, ' ') // Newlines to spaces
+        .trim();
+
+    return plainText.length > 150 ? plainText.substring(0, 150) + '...' : plainText;
+};
+
 export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Baru" }: PostEditorProps) {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [isPreview, setIsPreview] = useState(false);
+
+    // Track if fields were manually edited
+    const [slugManuallyEdited, setSlugManuallyEdited] = useState(!!initialData?.slug);
+    const [excerptManuallyEdited, setExcerptManuallyEdited] = useState(!!initialData?.excerpt);
 
     const [formData, setFormData] = useState({
         title: initialData?.title || '',
@@ -51,16 +72,23 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        // Handle checkbox manually? No, checkbox is input type checkbox handled below separately if strict checking
-        // But for text/select/textarea, this is generic.
 
         setFormData(prev => {
             const updates = { ...prev, [name]: value };
-            // Auto generate slug from title if slug hasn't been manually edited (simple heuristic)
-            // Only IF creating new post (no initialData) OR if user clears slug field
-            if (name === 'title' && !initialData && !prev.slug) {
+
+            // Auto-generate slug from title
+            if (name === 'title' && !slugManuallyEdited) {
                 updates.slug = generateSlug(value);
             }
+
+            // Auto-generate excerpt from content
+            if (name === 'content' && !excerptManuallyEdited) {
+                // Debounce or just update? For simplicity, update directly but maybe check length
+                if (value.length > 10) {
+                    updates.excerpt = generateExcerpt(value);
+                }
+            }
+
             return updates;
         });
     };
@@ -72,8 +100,12 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
 
     const handleSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData(prev => ({ ...prev, slug: e.target.value }));
-        // Allow manual editing without auto-format? Or force slugify?
-        // Let's force lowercase but allow dashes
+        setSlugManuallyEdited(true);
+    };
+
+    const handleExcerptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setFormData(prev => ({ ...prev, excerpt: e.target.value }));
+        setExcerptManuallyEdited(true);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -86,6 +118,12 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
                 throw new Error("Judul, Slug, dan Konten wajib diisi.");
             }
 
+            // Ensure excerpt exists
+            let finalFormData = { ...formData };
+            if (!finalFormData.excerpt.trim()) {
+                finalFormData.excerpt = generateExcerpt(finalFormData.content);
+            }
+
             let response;
             if (initialData?.id) {
                 // UPDATE via API
@@ -94,7 +132,7 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(formData),
+                    body: JSON.stringify(finalFormData),
                 });
             } else {
                 // INSERT via API
@@ -103,7 +141,7 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(formData),
+                    body: JSON.stringify(finalFormData),
                 });
             }
 
@@ -284,7 +322,7 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
                                 <textarea
                                     name="excerpt"
                                     value={formData.excerpt}
-                                    onChange={handleChange}
+                                    onChange={handleExcerptChange}
                                     rows={4}
                                     className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
                                 ></textarea>
