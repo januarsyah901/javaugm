@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, ChevronRight, User } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useSession, signIn, signOut } from "next-auth/react";
 
 // Data Navigasi (Mudah diedit)
 const navLinks = [
@@ -14,6 +15,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+    const { data: session } = useSession();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
@@ -78,14 +80,36 @@ export default function Navbar() {
                             </Link>
                         ))}
 
-                        {/* Login Button */}
-                        <Link
-                            href="/login"
-                            className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-                        >
-                            <User size={16} />
-                            <span>Login Pengurus</span>
-                        </Link>
+                        {/* Login Button - Updated to use session */}
+                        {session ? (
+                            <div className="flex items-center gap-4">
+                                {session.user?.image && (
+                                    <div className="relative w-8 h-8 rounded-full overflow-hidden border border-zinc-200 dark:border-zinc-700">
+                                        <Image
+                                            src={session.user.image}
+                                            alt={session.user.name || "User"}
+                                            width={32}
+                                            height={32}
+                                            className="object-cover"
+                                        />
+                                    </div>
+                                )}
+                                <button
+                                    onClick={() => signOut()}
+                                    className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-500/90 text-white text-sm font-medium hover:bg-red-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                                >
+                                    <span>Logout</span>
+                                </button>
+                            </div>
+                        ) : (
+                            <button
+                                onClick={() => signIn('google')}
+                                className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                            >
+                                <User size={16} />
+                                <span>Login Pengurus</span>
+                            </button>
+                        )}
                     </div>
 
                     {/* 3. Mobile Menu Button */}
@@ -125,14 +149,28 @@ export default function Navbar() {
                     ))}
 
                     <div className="pt-4 mt-4 border-t border-zinc-100 dark:border-zinc-900">
-                        <Link
-                            href="/login"
-                            className="flex w-full items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-white font-medium hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-500/20"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            <User size={18} />
-                            Login Pengurus
-                        </Link>
+                        {session ? (
+                            <button
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    signOut();
+                                }}
+                                className="flex w-full items-center justify-center gap-2 px-4 py-3 rounded-xl bg-red-500 text-white font-medium hover:bg-red-600 transition-colors shadow-lg shadow-red-500/20"
+                            >
+                                Logout
+                            </button>
+                        ) : (
+                            <button
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    signIn('google');
+                                }}
+                                className="flex w-full items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-white font-medium hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-500/20"
+                            >
+                                <User size={18} />
+                                Login Pengurus
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
