@@ -23,7 +23,7 @@ export default function Footer() {
                             </p>
                         </div>
                         <p className="text-zinc-400 text-sm leading-relaxed max-w-sm">
-                            Jama’ah Vokasi Al-‘Alim (JAVA) adalah Lembaga Dakwah Kampus di Sekolah Vokasi UGM. Berkomitmen untuk membuka cakrawala pemikiran dan menebar kebermanfaatan.
+                            Jama’ah Vokasi Al-‘Alim (JAVA) adalah Lembaga dakwah Fakultas di Sekolah Vokasi UGM. Berkomitmen untuk membuka cakrawala pemikiran dan menebar kebermanfaatan.
                         </p>
 
                         {/* Quote Kecil / Tagline */}
