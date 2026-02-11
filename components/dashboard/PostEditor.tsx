@@ -3,7 +3,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
 import { ChevronLeft, Save, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -84,23 +83,32 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
                 throw new Error("Judul, Slug, dan Konten wajib diisi.");
             }
 
-            let result;
+            let response;
             if (initialData?.id) {
-                // UPDATE
-                result = await supabase
-                    .from('posts')
-                    .update(formData)
-                    .eq('id', initialData.id)
-                    .select();
+                // UPDATE via API
+                response = await fetch(`/api/posts/${initialData.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
             } else {
-                // INSERT
-                result = await supabase
-                    .from('posts')
-                    .insert([formData])
-                    .select();
+                // INSERT via API
+                response = await fetch('/api/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
             }
 
-            if (result.error) throw result.error;
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || "Gagal menyimpan artikel via API.");
+            }
 
             // Redirect back to dashboard
             router.push('/dashboard');

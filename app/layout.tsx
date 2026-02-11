@@ -39,7 +39,7 @@ export default function RootLayout({
               Navbar has 'use client', so it's fine to import here in a server component (RootLayout). 
               Next.js handles the boundary automatically. */}
             <Navbar />
-            <main className="flex-grow pt-20">
+            <main className="flex-grow">
               {children}
             </main>
             <Footer />

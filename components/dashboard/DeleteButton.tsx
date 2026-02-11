@@ -4,7 +4,6 @@
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
 
 export default function DeleteButton({ id, title }: { id: number, title?: string }) {
     const [isDeleting, setIsDeleting] = useState(false);
@@ -16,13 +15,16 @@ export default function DeleteButton({ id, title }: { id: number, title?: string
 
         setIsDeleting(true);
         try {
-            const { error } = await supabase
-                .from('posts')
-                .delete()
-                .eq('id', id);
+            const response = await fetch(`/api/posts/${id}`, {
+                method: 'DELETE',
+            });
 
-            if (error) throw error;
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.error || "Gagal menghapus artikel.");
+            }
 
+            // Refresh the page to reflect deletion
             router.refresh();
         } catch (error) {
             console.error("Error deleting post:", error);

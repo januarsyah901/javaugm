@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Menu, X, ChevronRight, User } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useSession, signIn, signOut } from "next-auth/react";
+import { usePathname } from 'next/navigation';
 
 // Data Navigasi (Mudah diedit)
 const navLinks = [
@@ -16,6 +17,7 @@ const navLinks = [
 
 export default function Navbar() {
     const { data: session } = useSession();
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
@@ -32,6 +34,9 @@ export default function Navbar() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Don't show navbar on dashboard
+    if (pathname?.startsWith('/dashboard')) return null;
 
     return (
         <nav
@@ -71,14 +76,26 @@ export default function Navbar() {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className={`relative group text-sm font-medium transition-colors ${scrolled ? 'text-zinc-600 dark:text-zinc-300' : 'text-zinc-700 dark:text-zinc-200'
-                                    } hover:text-primary dark:hover:text-primary`}
+                                className={`relative group text-sm font-medium transition-colors ${scrolled ? 'text-white dark:text-white' : 'text-white dark:text-white'
+                                    }`}
                             >
                                 {link.name}
                                 {/* Animated Underline */}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
                             </Link>
                         ))}
+
+                        {/* Dashboard Link for Logged-in Users */}
+                        {session && (
+                            <Link
+                                href="/dashboard"
+                                className={`relative group text-sm font-medium transition-colors ${scrolled ? 'text-white dark:text-white' : 'text-white dark:text-white'
+                                    }`}
+                            >
+                                Dashboard
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                            </Link>
+                        )}
 
                         {/* Login Button - Updated to use session */}
                         {session ? (
@@ -147,6 +164,18 @@ export default function Navbar() {
                             <ChevronRight size={16} className="text-zinc-400 group-hover:text-primary transition-colors" />
                         </Link>
                     ))}
+
+                    {/* Dashboard Link Mobile */}
+                    {session && (
+                        <Link
+                            href="/dashboard"
+                            className="flex items-center justify-between p-3 rounded-xl text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-primary dark:hover:text-primary transition-all group"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            <span className="font-medium">Dashboard</span>
+                            <ChevronRight size={16} className="text-zinc-400 group-hover:text-primary transition-colors" />
+                        </Link>
+                    )}
 
                     <div className="pt-4 mt-4 border-t border-zinc-100 dark:border-zinc-900">
                         {session ? (

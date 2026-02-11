@@ -1,6 +1,6 @@
 
 import { notFound } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 import PostEditor from "@/components/dashboard/PostEditor";
 
 interface EditPageProps {
@@ -10,7 +10,7 @@ interface EditPageProps {
 export default async function EditPostPage({ params }: EditPageProps) {
     const { id } = await params;
 
-    const { data: post, error } = await supabase
+    const { data: post, error } = await supabaseAdmin
         .from('posts')
         .select('*')
         .eq('id', id)

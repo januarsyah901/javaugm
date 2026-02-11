@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 import Link from 'next/link';
 import { Plus, Trash2, Edit } from 'lucide-react';
 import DeleteButton from "@/components/dashboard/DeleteButton";
@@ -8,8 +8,8 @@ import DeleteButton from "@/components/dashboard/DeleteButton";
 export const revalidate = 0; // Ensure data is always fresh
 
 export default async function DashboardPage() {
-    // 1. Fetch Posts from Supabase
-    const { data: posts } = await supabase
+    // 1. Fetch Posts from Supabase Admin (Bypass RLS to see all posts including drafts)
+    const { data: posts } = await supabaseAdmin
         .from('posts')
         .select('*')
         .order('created_at', { ascending: false });
