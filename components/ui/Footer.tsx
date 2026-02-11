@@ -72,8 +72,8 @@ export default function Footer() {
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                                <a href="mailto:java.sv@ugm.ac.id" className="text-zinc-400 hover:text-white transition-colors">
-                                    java.sv@ugm.ac.id
+                                <a href="mailto:javaugm1447@gmail.com" className="text-zinc-400 hover:text-white transition-colors">
+                                    javaugm1447@gmail.com
                                 </a>
                             </li>
                         </ul>
