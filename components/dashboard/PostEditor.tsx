@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, Save, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface PostEditorProps {
     initialData?: {
@@ -35,6 +37,7 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [isPreview, setIsPreview] = useState(false);
 
     const [formData, setFormData] = useState({
         title: initialData?.title || '',
@@ -171,16 +174,58 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
 
                         {/* Content */}
                         <div>
-                            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Konten Artikel</label>
-                            <textarea
-                                name="content"
-                                value={formData.content}
-                                onChange={handleChange}
-                                rows={20}
-                                placeholder="Tulis konten artikel di sini..."
-                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-serif leading-relaxed text-slate-800 dark:text-slate-200"
-                            ></textarea>
-                            <p className="text-xs text-slate-400 mt-2 text-right">Mendukung format text biasa.</p>
+                            <div className="flex justify-between items-center mb-2">
+                                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300">Konten Artikel</label>
+                                <div className="flex bg-slate-100 dark:bg-zinc-800 rounded-lg p-1">
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsPreview(false)}
+                                        className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${!isPreview
+                                            ? 'bg-white dark:bg-zinc-700 text-slate-800 dark:text-white shadow-sm'
+                                            : 'text-slate-500 hover:text-slate-700 dark:text-slate-400'
+                                            }`}
+                                    >
+                                        Tulis
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsPreview(true)}
+                                        className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${isPreview
+                                            ? 'bg-white dark:bg-zinc-700 text-slate-800 dark:text-white shadow-sm'
+                                            : 'text-slate-500 hover:text-slate-700 dark:text-slate-400'
+                                            }`}
+                                    >
+                                        Preview
+                                    </button>
+                                </div>
+                            </div>
+
+                            {isPreview ? (
+                                <div className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 min-h-[500px] prose prose-sm dark:prose-invert max-w-none overflow-y-auto">
+                                    {formData.content ? (
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                            {formData.content}
+                                        </ReactMarkdown>
+                                    ) : (
+                                        <p className="text-slate-400 italic">Belum ada konten untuk ditampilkan.</p>
+                                    )}
+                                </div>
+                            ) : (
+                                <textarea
+                                    name="content"
+                                    value={formData.content}
+                                    onChange={handleChange}
+                                    rows={20}
+                                    placeholder="Tulis konten artikel di sini (mendukung Markdown)..."
+                                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-mono text-sm leading-relaxed text-slate-800 dark:text-slate-200"
+                                ></textarea>
+                            )}
+                            <div className="flex justify-between mt-2">
+                                <p className="text-xs text-slate-400">Mendukung format Markdown.</p>
+                                <a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline">
+                                    Panduan Markdown
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -269,3 +314,4 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
         </div>
     );
 }
+

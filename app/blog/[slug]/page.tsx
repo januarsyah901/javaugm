@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { Calendar, User, Tag, ArrowLeft, Share2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export async function generateStaticParams() {
     const { data: posts } = await supabase.from('posts').select('slug');
@@ -104,12 +106,10 @@ export default async function BlogDetailPage({ params }: PageProps) {
                             </p>
                         )}
 
-                        {/* Full Content - currently rendering as raw text. 
-                            If content is markdown, we would need a markdown parser. 
-                            Assuming plain text or basic HTML for now. */}
-                        <div className="whitespace-pre-wrap">
+                        {/* Markdown Content */}
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {post.content}
-                        </div>
+                        </ReactMarkdown>
                     </div>
 
                     {/* Share & Tags */}
@@ -136,7 +136,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                 </div>
             </article>
 
-            {/* Related Posts Placeholder - Only shown if dynamic logic added */}
+            {/* Related Posts Placeholder */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                 <div className="flex items-center justify-between mb-8">
                     <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Baca Artikel Lainnya</h3>
