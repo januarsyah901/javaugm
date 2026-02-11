@@ -27,8 +27,9 @@ export default async function DashboardPage() {
                     className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors shadow-sm"
                 >
                     <Plus size={18} />
-                    <span className="font-medium">Tambah Baru</span>
+                    <span className="font-medium hidden md:inline">Tambah Baru</span>
                 </Link>
+
             </div>
 
             <div className="overflow-x-auto">
