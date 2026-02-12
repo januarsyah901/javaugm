@@ -116,12 +116,12 @@ export default function ProfilePage() {
                         </div>
 
                         <div className="order-1 lg:order-2 relative group">
-                            <div className="relative h-[450px] w-full rounded-[2rem] overflow-hidden shadow-2xl">
+                            <div className="relative h-[450px] w-full overflow-hidden shadow-2xl">
                                 <Image
                                     src="/kabinet.png"
                                     alt="Philosophy"
                                     fill
-                                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                                    className="object-cover transition-transform duration-1000"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
                                 <div className="absolute bottom-8 left-8 right-8">

@@ -83,9 +83,12 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                                         className="object-cover transform group-hover:scale-105 transition-transform duration-500"
                                     />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-slate-300">
-                                        <span className="text-4xl font-bold opacity-20">Java</span>
-                                    </div>
+                                    <Image
+                                        src="/placeholder.png"
+                                        alt="Placeholder"
+                                        fill
+                                        className="object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                    />
                                 )}
                                 <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">
                                     {post.category}

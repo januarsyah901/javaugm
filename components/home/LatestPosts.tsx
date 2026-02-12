@@ -37,9 +37,12 @@ export default async function LatestPosts() {
                                         className="object-cover transform group-hover:scale-110 transition-transform duration-500"
                                     />
                                 ) : (
-                                    <div className="flex items-center justify-center w-full h-full text-slate-400">
-                                        <span className="text-4xl font-bold opacity-20">Java</span>
-                                    </div>
+                                    <Image
+                                        src="/placeholder.png"
+                                        alt="Placeholder"
+                                        fill
+                                        className="object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                    />
                                 )}
                                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary shadow-lg">
                                     {post.category}

@@ -35,12 +35,13 @@ export const authOptions: NextAuthOptions = {
                     // Check if user exists
                     const { data: existingUser } = await supabaseAdmin
                         .from('users') // Assumes 'users' table exists 
-                        .select('role, department')
+                        .select('id, role, department')
                         .eq('email', email)
                         .single();
 
                     if (existingUser) {
                         // User exists, just update role/department in token
+                        token.id = existingUser.id;
                         token.role = existingUser.role;
                         token.department = existingUser.department;
 
@@ -73,6 +74,7 @@ export const authOptions: NextAuthOptions = {
                             .single();
 
                         if (!error && createdUser) {
+                            token.id = createdUser.id;
                             token.role = createdUser.role;
                             token.department = createdUser.department;
                         } else {
@@ -90,6 +92,8 @@ export const authOptions: NextAuthOptions = {
         },
         async session({ session, token }) {
             if (session.user) {
+                // @ts-ignore
+                session.user.id = token.id;
                 session.user.role = token.role as string;
                 session.user.department = token.department as string;
             }

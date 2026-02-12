@@ -41,6 +41,26 @@ export default async function BlogDetailPage({ params }: PageProps) {
         day: 'numeric', month: 'long', year: 'numeric'
     });
 
+    // Fetch author department
+    let authorDepartment = 'Divisi';
+
+    try {
+        // Try to find author in users table
+        // First try by author_id (if exists from migration), then by name
+        if ((post as any).author_id) {
+            const { data } = await supabase.from('users').select('department').eq('id', (post as any).author_id).single();
+            if (data?.department) authorDepartment = data.department;
+        }
+
+        // Fallback to name search if author_id didnt yield result or didnt exist
+        if (authorDepartment === 'Divisi' && post.author) {
+            const { data } = await supabase.from('users').select('department').eq('name', post.author).single();
+            if (data?.department) authorDepartment = data.department;
+        }
+    } catch (e) {
+        console.error('Error fetching author department:', e);
+    }
+
     return (
         <div className="bg-white dark:bg-black min-h-screen pb-20">
 
@@ -55,9 +75,13 @@ export default async function BlogDetailPage({ params }: PageProps) {
                         priority
                     />
                 ) : (
-                    <div className="w-full h-full bg-slate-800 flex items-center justify-center">
-                        <span className="text-white text-4xl font-bold opacity-30">Java</span>
-                    </div>
+                    <Image
+                        src="/placeholder.png"
+                        alt="Placeholder"
+                        fill
+                        className="object-cover"
+                        priority
+                    />  
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
 
@@ -77,7 +101,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                             </span>
                         </div>
 
-                        <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                        <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight border-l-8 border-primary pl-4">
                             {post.title}
                         </h1>
 
@@ -87,7 +111,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                             </div>
                             <div>
                                 <p className="text-white font-medium">Ditulis oleh {post.author || 'Admin Java'}</p>
-                                <p className="text-white/60 text-xs">Divisi Syiar</p>
+                                <p className="text-white/60 text-xs">{authorDepartment}</p>
                             </div>
                         </div>
                     </div>
@@ -99,14 +123,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
                 <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-8 md:p-12 border border-zinc-100 dark:border-zinc-800">
 
                     <div className="prose prose-lg dark:prose-invert max-w-none text-slate-800 dark:text-slate-200">
-                        {/* Excerpt as lead */}
-                        {post.excerpt && (
-                            <p className="lead text-xl text-slate-600 dark:text-slate-300 font-serif italic mb-8 border-l-4 border-primary pl-4">
-                                {post.excerpt}
-                            </p>
-                        )}
-
-                        {/* Markdown Content */}
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {post.content}
                         </ReactMarkdown>
