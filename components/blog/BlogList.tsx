@@ -84,7 +84,7 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                                     />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center text-slate-300">
-                                        <span className="text-4xl font-bold opacity-20">JAVA</span>
+                                        <span className="text-4xl font-bold opacity-20">Java</span>
                                     </div>
                                 )}
                                 <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">

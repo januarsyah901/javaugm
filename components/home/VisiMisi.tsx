@@ -29,7 +29,7 @@ export default function VisiMisi() {
                         </div>
 
                         <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed italic">
-                            "Mewujudkan JAVA sebagai ruang untuk menumbuhkan intelektual muslim yang beradab, solutif, dan berdaya guna dalam rangka membangun peradaban yang mulia."
+                            "Mewujudkan Java sebagai ruang untuk menumbuhkan intelektual muslim yang beradab, solutif, dan berdaya guna dalam rangka membangun peradaban yang mulia."
                         </p>
                     </div>
 

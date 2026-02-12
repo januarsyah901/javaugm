@@ -79,7 +79,7 @@ export default function DashboardLayoutClient({
                         <div className="relative w-9 h-9 flex-shrink-0 rounded-full shadow-sm overflow-hidden">
                             <Image
                                 src="/logo.png"
-                                alt="Logo JAVA UGM"
+                                alt="Logo Java UGM"
                                 fill
                                 className="object-cover"
                                 priority

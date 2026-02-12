@@ -37,7 +37,7 @@ export default function ProfilePage() {
 
                     {/* Main Heading (Font Extrabold & Gradient Text) */}
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white mb-6 leading-[1.1] drop-shadow-sm">
-                        JAVA <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">Al-'Alim</span>
+                        Java <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">Al-'Alim</span>
                     </h1>
 
                     {/* Subheading (Style Slate-200) */}
@@ -66,7 +66,7 @@ export default function ProfilePage() {
                             {/* Ganti src dengan foto ketua umum asli */}
                             <Image
                                 src="/ketua.png"
-                                alt="Ketua Umum JAVA"
+                                alt="Ketua Umum Java"
                                 fill
                                 className="object-cover"
                             />
@@ -74,11 +74,11 @@ export default function ProfilePage() {
                         <div className="flex-1 text-center md:text-left space-y-4">
                             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Sambutan Ketua Media</h2>
                             <p className="text-slate-600 dark:text-slate-300 italic leading-relaxed">
-                                "Selamat datang di keluarga besar JAVA Al-'Alim. Di era disrupsi ini, kita membutuhkan pemuda yang tidak hanya cakap secara vokasional, tetapi juga kokoh secara spiritual. Mari bersama-sama membuka cakrawala (Fathul Afaq) untuk menebar kebermanfaatan seluas-luasnya."
+                                "Selamat datang di keluarga besar Java Al-'Alim. Di era disrupsi ini, kita membutuhkan pemuda yang tidak hanya cakap secara vokasional, tetapi juga kokoh secara spiritual. Mari bersama-sama membuka cakrawala (Fathul Afaq) untuk menebar kebermanfaatan seluas-luasnya."
                             </p>
                             <div>
                                 <h4 className="font-bold text-emerald-600 dark:text-emerald-400 text-lg">Januarsyah Akbar</h4>
-                                <span className="text-sm text-slate-500 uppercase tracking-wider">Mas’ul JAVA 1447 H</span>
+                                <span className="text-sm text-slate-500 uppercase tracking-wider">Mas’ul Java 1447 H</span>
                             </div>
                         </div>
                     </div>

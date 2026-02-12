@@ -38,7 +38,7 @@ VALUES
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod.', 
   'Full content regarding urgency of knowledge...', 
   'Dakwah', 
-  'Admin JAVA', 
+  'Admin Java', 
   'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop',
   true
 ),
@@ -48,7 +48,7 @@ VALUES
   'Refleksi diri sebagai mahasiswa di penghujung tahun.', 
   'Full reflection content here...', 
   'Internal', 
-  'Admin JAVA', 
+  'Admin Java', 
   'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2070&auto=format&fit=crop',
   true
 ),
@@ -58,7 +58,7 @@ VALUES
   'Cara membagi waktu agar kuliah lancar dan organisasi jalan terus.', 
   'Full tips content here...', 
   'Vokasi', 
-  'Admin JAVA', 
+  'Admin Java', 
   'https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=2070&auto=format&fit=crop',
   true
 );

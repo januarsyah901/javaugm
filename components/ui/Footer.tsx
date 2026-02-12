@@ -16,14 +16,14 @@ export default function Footer() {
                     <div className="md:col-span-5 space-y-6">
                         <div>
                             <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent inline-block">
-                                JAVA Al-'Alim
+                                Java Al-'Alim
                             </h3>
                             <p className="text-zinc-500 text-sm mt-2 font-medium tracking-wide">
                                 KABINET FATHUL AFAQ (1447/1448 H)
                             </p>
                         </div>
                         <p className="text-zinc-400 text-sm leading-relaxed max-w-sm">
-                            Jama’ah Vokasi Al-‘Alim (JAVA) adalah Lembaga dakwah Fakultas di Sekolah Vokasi UGM. Berkomitmen untuk membuka cakrawala pemikiran dan menebar kebermanfaatan.
+                            Jama’ah Vokasi Al-‘Alim (Java) adalah Lembaga dakwah Fakultas di Sekolah Vokasi UGM. Berkomitmen untuk membuka cakrawala pemikiran dan menebar kebermanfaatan.
                         </p>
 
                         {/* Quote Kecil / Tagline */}
@@ -145,7 +145,7 @@ export default function Footer() {
 
                 {/* Copyright Section */}
                 <div className="border-t border-zinc-900 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-500">
-                    <p>&copy; {currentYear} Jama’ah Vokasi Al-‘Alim (JAVA) UGM. All rights reserved.</p>
+                    <p>&copy; {currentYear} Jama’ah Vokasi Al-‘Alim (Java) UGM. All rights reserved.</p>
                     <div className="flex gap-6">
                         <Link href="/privacy" className="hover:text-zinc-300 transition-colors">Privacy Policy</Link>
                         <Link href="/terms" className="hover:text-zinc-300 transition-colors">Terms of Service</Link>

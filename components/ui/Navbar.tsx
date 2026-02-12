@@ -53,7 +53,7 @@ export default function Navbar() {
                         <div className="relative flex-shrink-0 rounded-full shadow-sm overflow-hidden">
                             <Image
                                 src="/logo.png"
-                                alt="Logo JAVA UGM"
+                                alt="Logo Java UGM"
                                 width={40}   // Setara w-10 (40px)
                                 height={40}  // Setara h-10 (40px)
                                 className="object-cover w-10 h-10" // Tetap beri class size untuk memastikan responsivitas
@@ -66,7 +66,7 @@ export default function Navbar() {
                             className={`font-bold text-xl tracking-tight transition-colors ${scrolled ? 'text-zinc-800 dark:text-zinc-100' : 'text-zinc-800 dark:text-white'
                                 }`}
                         >
-                            JAVA <span className="text-primary">Al-'Alim</span>
+                            Java <span className="text-primary">Al-'Alim</span>
                         </Link>
                     </div>
 

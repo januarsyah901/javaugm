@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JAVA Al-'Alim",
+  title: "Java Al-'Alim",
   description: "Lembaga Dakwah Fakultas Vokasi Universitas Gadjah Mada",
   icons: {
     icon: "/favicon.png",

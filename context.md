@@ -1,9 +1,9 @@
 
-#  Project Specification: JAVA Web Portal (Kabinet Fathul Afaq)
+#  Project Specification: Java Web Portal (Kabinet Fathul Afaq)
 
 ## 1. Project Identity & Context
 
-* **Organization Name:** Jama’ah Vokasi Al-‘Alim (JAVA) - Sekolah Vokasi UGM.
+* **Organization Name:** Jama’ah Vokasi Al-‘Alim (Java) - Sekolah Vokasi UGM.
 * **Cabinet Name:** Fathul Afaq (1447/1448 H).
 * **Philosophy:** "Fathul Afaq" (Pembuka Cakrawala). Merepresentasikan semangat perluasan wawasan dan kebermanfaatan nilai Islam di bidang vokasi.
 * **Primary Goal:** Website Profil Organisasi & Media Dakwah Digital (Blog System).
@@ -80,7 +80,7 @@ Table posts_categories {
 * **Latest Posts:** Menampilkan 3 artikel terbaru dengan *query* `is_published: true`.
 
 
-2. **Profile Page:** Detail filosofi Fathul Afaq dan struktur organisasi JAVA.
+2. **Profile Page:** Detail filosofi Fathul Afaq dan struktur organisasi Java.
 3. **Blog Page:** List artikel dengan pagination dan filter berdasarkan **Category Enum**.
 4. **Blog Detail:** Menggunakan *dynamic routing* berdasarkan `slug`. Harus mendukung rendering gambar dari `post_images`.
 
@@ -112,7 +112,7 @@ AI Agent harus mengimplementasikan fungsi berikut:
 
 ## 6. Key Content to Hardcode (Organization Info)
 
-* **Vision:** "Mewujudkan JAVA sebagai ruang untuk menumbuhkan intelektual muslim yang beradab, solutif, dan berdaya guna..." (Copy-paste dari input user).
+* **Vision:** "Mewujudkan Java sebagai ruang untuk menumbuhkan intelektual muslim yang beradab, solutif, dan berdaya guna..." (Copy-paste dari input user).
 * **Missions:** (5 Poin Misi A sampai E).
 * **Footer:** Informasi kontak, lokasi Sekolah Vokasi UGM, dan link sosial media.
 

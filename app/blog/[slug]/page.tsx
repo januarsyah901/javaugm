@@ -45,7 +45,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
         <div className="bg-white dark:bg-black min-h-screen pb-20">
 
             {/* Hero Image / Featured Image */}
-            <div className="relative h-[400px] w-full bg-slate-200">
+            <div className="relative h-[400px] w-full bg-slate-200 mt-20">
                 {post.image_url ? (
                     <Image
                         src={post.image_url}
@@ -56,7 +56,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                     />
                 ) : (
                     <div className="w-full h-full bg-slate-800 flex items-center justify-center">
-                        <span className="text-white text-4xl font-bold opacity-30">JAVA</span>
+                        <span className="text-white text-4xl font-bold opacity-30">Java</span>
                     </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
@@ -81,12 +81,12 @@ export default async function BlogDetailPage({ params }: PageProps) {
                             {post.title}
                         </h1>
 
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-3 ">
                             <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white overflow-hidden">
                                 <User size={20} />
                             </div>
                             <div>
-                                <p className="text-white font-medium">Ditulis oleh {post.author || 'Admin JAVA'}</p>
+                                <p className="text-white font-medium">Ditulis oleh {post.author || 'Admin Java'}</p>
                                 <p className="text-white/60 text-xs">Divisi Syiar</p>
                             </div>
                         </div>
@@ -95,7 +95,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
             </div>
 
             {/* Content Body */}
-            <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10">
+            <article className="max-w-4xl mx-auto px-4 pt-6 sm:px-6 lg:px-8 -mt-10 relative z-10">
                 <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-8 md:p-12 border border-zinc-100 dark:border-zinc-800">
 
                     <div className="prose prose-lg dark:prose-invert max-w-none text-slate-800 dark:text-slate-200">
@@ -186,7 +186,7 @@ async function RelatedPosts({ currentPostId, category }: { currentPostId: number
                             />
                         ) : (
                             <div className="w-full h-full flex items-center justify-center text-slate-300">
-                                <span className="text-4xl font-bold opacity-20">JAVA</span>
+                                <span className="text-4xl font-bold opacity-20">Java</span>
                             </div>
                         )}
                         <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">
