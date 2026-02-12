@@ -63,7 +63,7 @@ export default function Navbar() {
 
                         <Link
                             href="/"
-                            className={`font-bold text-xl tracking-tight transition-colors ${scrolled ? 'text-zinc-800 dark:text-zinc-100' : 'text-zinc-800 dark:text-white'
+                            className={`font-bold text-xl tracking-tight transition-colors ${scrolled || pathname?.startsWith('/blog') ? 'text-zinc-800 dark:text-zinc-100' : 'text-white'
                                 }`}
                         >
                             Java <span className="text-primary">Al-'Alim</span>
@@ -76,12 +76,12 @@ export default function Navbar() {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className={`relative group text-sm font-medium transition-colors ${scrolled ? 'text-white dark:text-white' : 'text-white dark:text-white'
+                                className={`relative group text-sm font-medium transition-colors ${scrolled || pathname?.startsWith('/blog') ? 'text-zinc-800 dark:text-white' : 'text-white'
                                     }`}
                             >
                                 {link.name}
                                 {/* Animated Underline */}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${scrolled || pathname?.startsWith('/blog') ? 'bg-primary' : 'bg-white'}`}></span>
                             </Link>
                         ))}
 
@@ -89,11 +89,11 @@ export default function Navbar() {
                         {session && (
                             <Link
                                 href="/dashboard"
-                                className={`relative group text-sm font-medium transition-colors ${scrolled ? 'text-white dark:text-white' : 'text-white dark:text-white'
+                                className={`relative group text-sm font-medium transition-colors ${scrolled || pathname?.startsWith('/blog') ? 'text-zinc-800 dark:text-white' : 'text-white'
                                     }`}
                             >
                                 Dashboard
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${scrolled || pathname?.startsWith('/blog') ? 'bg-primary' : 'bg-white'}`}></span>
                             </Link>
                         )}
 
@@ -133,9 +133,9 @@ export default function Navbar() {
                     <div className="md:hidden flex items-center">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className={`p-2 rounded-md transition-colors ${scrolled
+                            className={`p-2 rounded-md transition-colors ${scrolled || pathname?.startsWith('/blog')
                                 ? 'text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-                                : 'text-zinc-800 dark:text-zinc-100 hover:bg-white/10'
+                                : 'text-white hover:bg-white/10'
                                 }`}
                             aria-label="Toggle menu"
                         >
