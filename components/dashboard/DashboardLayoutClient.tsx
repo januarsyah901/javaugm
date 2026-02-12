@@ -5,13 +5,15 @@ import { useState, useEffect } from "react";
 import Link from 'next/link';
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { FileText, Settings, X, Menu, LayoutDashboard } from "lucide-react";
+import { FileText, Settings, X, Menu, LayoutDashboard, Users } from "lucide-react";
 import SignOutButton from "@/components/dashboard/SignOutButton";
 
 interface User {
     name?: string | null;
     email?: string | null;
     image?: string | null;
+    role?: string | null;
+    department?: string | null;
 }
 
 export default function DashboardLayoutClient({
@@ -35,12 +37,23 @@ export default function DashboardLayoutClient({
             label: "Kelola Artikel",
             icon: FileText
         },
-        {
-            href: "/dashboard/settings",
-            label: "Pengaturan",
-            icon: Settings
-        }
     ];
+
+    // Add admin-only links
+    if (user?.role === 'admin') {
+        navItems.push({
+            href: "/dashboard/users",
+            label: "Kelola Pengguna",
+            icon: Users
+        });
+    }
+
+    // Settings is for everyone
+    navItems.push({
+        href: "/dashboard/settings",
+        label: "Pengaturan",
+        icon: Settings
+    });
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-black">
