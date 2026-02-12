@@ -33,7 +33,7 @@ export default function ProfilePage() {
                     </div>
 
                     <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white mb-6">
-                        Java <span className="text-transparent bg-clip-text bg-gradient-to-br from-emerald-400 to-cyan-300">Al-'Alim</span>
+                        Java <span className="text-transparent bg-clip-text bg-gradient-to-br from-emerald-400 to-emerald-200">Al-'Alim</span>
                     </h1>
 
                     <p className="text-lg md:text-2xl text-zinc-300 max-w-3xl mx-auto leading-relaxed font-light italic">
@@ -150,7 +150,7 @@ export default function ProfilePage() {
                                 key={idx}
                                 className="group bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-8 rounded-3xl transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-2 hover:border-emerald-500/50"
                             >
-                                <div className={`w-14 h-14 ${dept.bgColor} ${dept.textColor} rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:rotate-12`}>
+                                <div className={`w-14 h-14 ${dept.bgColor} ${dept.textColor} rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 `}>
                                     <dept.icon size={28} />
                                 </div>
                                 <h3 className="font-bold text-zinc-900 dark:text-white text-xl mb-3">

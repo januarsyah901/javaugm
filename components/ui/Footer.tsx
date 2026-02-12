@@ -42,7 +42,7 @@ export default function Footer() {
                                 { name: 'Beranda', href: '/' },
                                 { name: 'Profil Organisasi', href: '/profile' },
                                 { name: 'Blog & Dakwah', href: '/blog' },
-                                { name: 'Program Kerja', href: '/proker' }, // Tambahan opsional
+                                // { name: 'Program Kerja', href: '/proker' }, // Tambahan opsional
                             ].map((item) => (
                                 <li key={item.name}>
                                     <Link
