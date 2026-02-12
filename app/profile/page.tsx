@@ -89,7 +89,7 @@ export default function ProfilePage() {
             </div>
 
             {/* 4. Philosophy Section */}
-            <section className="py-32 overflow-hidden">
+            <section className="py-12 overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                         <div className="space-y-8 order-2 lg:order-1">

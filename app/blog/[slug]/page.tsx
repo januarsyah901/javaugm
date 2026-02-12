@@ -1,7 +1,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Calendar, User, Tag, ArrowLeft, Share2 } from 'lucide-react';
+import { Calendar, User, Tag, ArrowLeft } from 'lucide-react';
+import ShareButton from '@/components/blog/ShareButton';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
@@ -81,7 +82,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                         fill
                         className="object-cover"
                         priority
-                    />  
+                    />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
 
@@ -143,10 +144,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                                 </div>
                             </div>
 
-                            <button className="flex items-center gap-2 text-primary font-medium hover:text-emerald-700 transition-colors">
-                                <Share2 size={20} />
-                                Bagikan Tulisan Ini
-                            </button>
+                            <ShareButton slug={post.slug} title={post.title} />
                         </div>
                     </div>
                 </div>
