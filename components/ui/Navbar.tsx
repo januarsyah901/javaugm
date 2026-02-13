@@ -66,7 +66,7 @@ export default function Navbar() {
                             className={`font-bold text-xl tracking-tight transition-colors ${scrolled || pathname?.startsWith('/blog') ? 'text-zinc-800 dark:text-zinc-100' : 'text-white'
                                 }`}
                         >
-                            Java <span className="text-primary">Al-'Alim</span>
+                            Java Al-'Alim
                         </Link>
                     </div>
 
