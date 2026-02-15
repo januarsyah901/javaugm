@@ -42,7 +42,7 @@ export default function VisiMisi() {
 
                         <div className="space-y-4">
                             {missions.map((mission, index) => (
-                                <div key={index} className="flex gap-4 items-start p-4 bg-white dark:bg-zinc-900 rounded-xl border border-slate-100 dark:border-zinc-800 hover:shadow-md transition-shadow">
+                                <div key={index} className="flex gap-4 items-start p-4 bg-white dark:bg-zinc-900 rounded-xl border border-slate-300 dark:border-zinc-800 hover:shadow-md transition-shadow">
                                     <CheckCircle2 className="flex-shrink-0 text-secondary mt-1" size={20} />
                                     <p className="text-slate-700 dark:text-slate-300">{mission}</p>
                                 </div>

@@ -28,7 +28,7 @@ export async function POST(req: Request) {
 
         const { data, error } = await supabaseAdmin
             .from('posts')
-            .insert([{ ...body, author, author_id: authorId }])
+            .insert([{ ...body, author }]) // TODO: Add author_id: authorId back after running migration (supabase_posts_migration.sql)
             .select()
             .single();
 
