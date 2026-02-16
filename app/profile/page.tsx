@@ -77,7 +77,7 @@ export default function ProfilePage() {
                                         alt="Logo Jama'ah Vokasi Al-'Alim"
                                         width={240}
                                         height={240}
-                                        className="object-contain"
+                                        className="object-contain rounded-3xl"
                                     />
                                 </div>
                                 {/* Aksen Glow Emas/Hijau */}

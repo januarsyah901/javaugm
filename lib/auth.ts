@@ -20,7 +20,27 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async signIn({ account, profile }) {
             if (account?.provider === "google") {
-                return profile?.email?.endsWith("@mail.ugm.ac.id") || false;
+                const email = profile?.email;
+                if (!email) return false;
+
+                // 1. Validate Email Domain
+                if (!email.endsWith("@mail.ugm.ac.id")) {
+                    return false;
+                }
+
+                // 2. Check if email is registered in the database
+                try {
+                    const { data: existingUser } = await supabaseAdmin
+                        .from('users')
+                        .select('id')
+                        .eq('email', email)
+                        .single();
+
+                    return !!existingUser;
+                } catch (error) {
+                    console.error("Error checking user registration:", error);
+                    return false;
+                }
             }
             return true;
         },
@@ -57,33 +77,8 @@ export const authOptions: NextAuthOptions = {
                                 .eq('email', email);
                         }
 
-                    } else {
-                        // First time user, create record
-                        const newUser = {
-                            email,
-                            name: user.name,
-                            image: user.image,
-                            role: 'user', // Default role
-                            department: 'Anggota' // Default department or empty
-                        };
-
-                        const { data: createdUser, error } = await supabaseAdmin
-                            .from('users')
-                            .insert([newUser])
-                            .select()
-                            .single();
-
-                        if (!error && createdUser) {
-                            token.id = createdUser.id;
-                            token.role = createdUser.role;
-                            token.department = createdUser.department;
-                        } else {
-                            console.error("Failed to create user in DB:", error);
-                            // Fallback to defaults
-                            token.role = 'user';
-                            token.department = 'Anggota';
-                        }
                     }
+                    // Do not create new users automatically
                 } catch (error) {
                     console.error("Error syncing user:", error);
                 }

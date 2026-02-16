@@ -149,7 +149,7 @@ export default function UserList() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Daftar Pengguna</h1>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Kelola akses dan member Javaugm.</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Kelola akses keanggotaan.</p>
                 </div>
                 <div className="flex gap-3">
                     <div className="relative group">
