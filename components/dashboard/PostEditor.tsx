@@ -310,7 +310,7 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
                                     onChange={handleChange}
                                     className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
                                 >
-                                    {["Dakwah", "Vokasi", "Internal", "Opini", "Informasi"].map(cat => (
+                                    {["Dakwah", "Internal", "Informasi"].map(cat => (
                                         <option key={cat} value={cat}>{cat}</option>
                                     ))}
                                 </select>

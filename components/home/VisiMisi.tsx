@@ -1,12 +1,14 @@
 import { Target, CheckCircle2 } from 'lucide-react';
 
 export default function VisiMisi() {
+    const vision = "Visi JAVA UGM adalah sebagai wadah bagi mahasiswa muslim dalam membangun lingkungan Sekolah Vokasi yang beriman, bertakwa, dan berakhlak mulia.";
+
     const missions = [
-        "Menanamkan nilai-nilai keislaman yang rahmatan lil 'alamin dalam setiap aspek kegiatan.",
-        "Membangun budaya intelektual yang kritis, inovatif, dan solutif di lingkungan vokasi.",
-        "Mempererat ukhuwah islamiyah antar mahasiswa Sekolah Vokasi UGM.",
-        "Mengembangkan potensi minat dan bakat mahasiswa dalam kerangka dakwah kreatif.",
-        "Memberikan kontribusi nyata bagi masyarakat melalui kegiatan sosial dan pemberdayaan."
+        "Menanamkan nilai-nilai keislaman berdasarkan Al-Qur'an dan As-Sunnah",
+        "Menumbuhkan kesadaran civitas academica untuk berkontribusi bagi kemaslahatan umat",
+        "Meningkatkan dan mengembangkan ilmu pengetahuan untuk kemaslahatan umat",
+        "Mempererat ukhuwah islamiyah antar civitas academica Sekolah Vokasi UGM",
+        "Menjalin hubungan multilateral antara JAVA UGM dengan lembaga dakwah lain, baik di dalam maupun di luar Universitas Gadjah Mada"
     ];
 
     return (
@@ -29,7 +31,7 @@ export default function VisiMisi() {
                         </div>
 
                         <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed italic">
-                            "Mewujudkan Java sebagai ruang untuk menumbuhkan intelektual muslim yang beradab, solutif, dan berdaya guna dalam rangka membangun peradaban yang mulia."
+                            &#34;{vision}&#34;
                         </p>
                     </div>
 
@@ -37,7 +39,7 @@ export default function VisiMisi() {
                     <div className="space-y-6">
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
                             <span className="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center text-sm font-bold">5</span>
-                            Poin Misi
+                            Misi Kami
                         </h3>
 
                         <div className="space-y-4">

@@ -17,7 +17,7 @@ interface Post {
     image_url: string;
 }
 
-const CATEGORIES = ["Semua", "Dakwah", "Vokasi", "Internal", "Opini", "Informasi"];
+const CATEGORIES = ["Semua", "Dakwah", "Internal", "Informasi"];
 
 export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
     const [selectedCategory, setSelectedCategory] = useState("Semua");

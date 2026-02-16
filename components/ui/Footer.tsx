@@ -1,8 +1,17 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { MapPin, Mail, Instagram, ArrowRight, ExternalLink, Youtube } from 'lucide-react';
 
 export default function Footer() {
+    const pathname = usePathname();
     const currentYear = new Date().getFullYear();
+
+    // Hide footer on dashboard pages
+    if (pathname?.startsWith('/dashboard')) {
+        return null;
+    }
 
     return (
         <footer className="bg-zinc-950 text-zinc-300 pt-20 pb-10 border-t border-zinc-900 relative overflow-hidden">

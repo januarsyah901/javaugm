@@ -30,7 +30,7 @@ export default async function BlogPage() {
 
                 {/* Page Header */}
                 <div className="text-center mb-12">
-                    <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Blog & Artikel</h1>
+                    <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Blog</h1>
                     <p className="text-lg text-slate-600 dark:text-slate-400">
                         Kumpulan tulisan inspiratif dan informasi terkini seputar dakwah dan vokasi.
                     </p>

@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation';
 const navLinks = [
     { name: 'Beranda', href: '/' },
     { name: 'Profil', href: '/profile' },
-    { name: 'Blog & Dakwah', href: '/blog' },
+    { name: 'Blog', href: '/blog' },
     // { name: 'Galeri', href: '/gallery' }, // Tambahan opsional
 ];
 
