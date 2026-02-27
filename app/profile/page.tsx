@@ -231,7 +231,7 @@ export default function ProfilePage() {
                                     </span>
                                     </div>
                                     <h2 className="text-4xl md:text-5xl font-serif font-medium text-zinc-900 dark:text-zinc-50">
-                                        Januarsyah Akbar
+                                        Muhammad Taufiqul Hakim
                                     </h2>
                                 </div>
 
