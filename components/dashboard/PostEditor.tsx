@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, Save, AlertCircle } from "lucide-react";
+import { ChevronLeft, Save, AlertCircle, Upload, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import ReactMarkdown from 'react-markdown';
@@ -55,6 +55,8 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [isPreview, setIsPreview] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
+    const [uploadError, setUploadError] = useState<string | null>(null);
 
     // Track if fields were manually edited
     const [slugManuallyEdited, setSlugManuallyEdited] = useState(!!initialData?.slug);
@@ -106,6 +108,48 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
     const handleExcerptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setFormData(prev => ({ ...prev, excerpt: e.target.value }));
         setExcerptManuallyEdited(true);
+    };
+
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        // Client side validation
+        const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+        if (file.size > MAX_FILE_SIZE) {
+            setUploadError("Ukuran file terlalu besar. Maksimal 2MB.");
+            return;
+        }
+
+        setIsUploading(true);
+        setUploadError(null);
+
+        try {
+            const uploadFormData = new FormData();
+            uploadFormData.append('file', file);
+
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                body: uploadFormData,
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || "Gagal mengunggah gambar.");
+            }
+
+            setFormData(prev => ({ ...prev, image_url: result.url }));
+        } catch (err: any) {
+            console.error(err);
+            setUploadError(err.message || "Terjadi kesalahan saat mengunggah.");
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+    const removeImage = () => {
+        setFormData(prev => ({ ...prev, image_url: '' }));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -328,22 +372,70 @@ export default function PostEditor({ initialData, pageTitle = "Tambah Artikel Ba
                                 ></textarea>
                             </div>
 
-                            {/* Image URL */}
+                            {/* Image Upload */}
                             <div>
-                                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Cover Image URL</label>
-                                <input
-                                    type="text"
-                                    name="image_url"
-                                    value={formData.image_url}
-                                    onChange={handleChange}
-                                    placeholder="https://"
-                                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm mb-3"
-                                />
-                                {formData.image_url && (
-                                    <div className="relative h-32 w-full rounded-lg overflow-hidden border border-slate-200 dark:border-zinc-700 bg-slate-100">
-                                        <Image src={formData.image_url} alt="Preview" fill className="object-cover" />
+                                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Cover Image</label>
+                                
+                                <div className="space-y-3">
+                                    {/* Upload Button/Input */}
+                                    <div className="relative">
+                                        <input
+                                            type="file"
+                                            id="image-upload"
+                                            className="hidden"
+                                            accept="image/*"
+                                            onChange={handleFileUpload}
+                                            disabled={isUploading}
+                                        />
+                                        <label
+                                            htmlFor="image-upload"
+                                            className={`flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl border-2 border-dashed border-slate-200 dark:border-zinc-700 hover:border-primary hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all cursor-pointer ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        >
+                                            <Upload size={18} className="text-slate-500" />
+                                            <span className="text-sm font-medium text-slate-600 dark:text-slate-300">
+                                                {isUploading ? 'Mengunggah...' : 'Pilih Gambar'}
+                                            </span>
+                                        </label>
                                     </div>
-                                )}
+
+                                    {/* URL Input (Alternative) */}
+                                    <div>
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <div className="h-px flex-1 bg-slate-100 dark:bg-zinc-800"></div>
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase">Atau URL</span>
+                                            <div className="h-px flex-1 bg-slate-100 dark:bg-zinc-800"></div>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="image_url"
+                                            value={formData.image_url}
+                                            onChange={handleChange}
+                                            placeholder="https://"
+                                            className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+                                        />
+                                    </div>
+
+                                    {uploadError && (
+                                        <p className="text-[10px] text-red-500 font-medium">{uploadError}</p>
+                                    )}
+
+                                    {/* Preview */}
+                                    {formData.image_url && (
+                                        <div className="relative group">
+                                            <div className="relative h-40 w-full rounded-xl overflow-hidden border border-slate-200 dark:border-zinc-700 bg-slate-100 shadow-inner">
+                                                <Image src={formData.image_url} alt="Preview" fill className="object-cover" />
+                                            </div>
+                                            <button
+                                                type="button"
+                                                onClick={removeImage}
+                                                className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                                                title="Hapus gambar"
+                                            >
+                                                <X size={14} />
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
