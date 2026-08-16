@@ -39,7 +39,7 @@ export default function ProfilePage() {
 
                     <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white mb-6">
                         Java <span
-                        className="text-transparent bg-clip-text bg-gradient-to-br from-emerald-400 to-emerald-200">Al-'Alim</span>
+                        className="text-emerald-300">Al-'Alim</span>
                     </h1>
 
                     <p className="text-lg md:text-2xl text-zinc-300 max-w-3xl mx-auto leading-relaxed font-light italic">
@@ -49,7 +49,7 @@ export default function ProfilePage() {
 
                     <div className="mt-12 flex flex-col items-center">
                         <div className="h-16 w-px bg-gradient-to-b from-emerald-500 to-transparent"></div>
-                        <p className="mt-4 text-[10px] text-emerald-400/80 font-bold tracking-[0.3em] uppercase">
+                        <p className="mt-4 text-xs text-emerald-300 font-bold tracking-[0.3em] uppercase">
                             Kabinet Fathul Afaq • 1447/1448 H
                         </p>
                     </div>

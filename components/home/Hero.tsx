@@ -27,8 +27,8 @@ export default function Hero() {
 
                 {/* Main Heading */}
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white mb-8 leading-[1.1] drop-shadow-sm">
-                    Membuka <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">Cakrawala</span>, <br />
-                    Menebar <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">Manfaat</span>.
+                    Membuka <span className="text-emerald-300">Cakrawala</span>, <br />
+                    Menebar <span className="text-amber-300">Manfaat</span>.
                 </h1>
 
                 {/* Subheading */}

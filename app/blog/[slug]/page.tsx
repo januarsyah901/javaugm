@@ -112,7 +112,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                             </div>
                             <div>
                                 <p className="text-white font-medium">Ditulis oleh {post.author || 'Admin Java'}</p>
-                                <p className="text-white/60 text-xs">{authorDepartment}</p>
+                                <p className="text-zinc-200 text-xs">{authorDepartment}</p>
                             </div>
                         </div>
                     </div>

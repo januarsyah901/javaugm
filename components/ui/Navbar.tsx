@@ -35,6 +35,15 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (!isOpen) return;
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setIsOpen(false);
+        };
+        document.addEventListener('keydown', onKey);
+        return () => document.removeEventListener('keydown', onKey);
+    }, [isOpen]);
+
     // Don't show navbar on dashboard
     if (pathname?.startsWith('/dashboard')) return null;
 
@@ -133,11 +142,12 @@ export default function Navbar() {
                     <div className="md:hidden flex items-center">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className={`p-2 rounded-md transition-colors ${scrolled || pathname?.startsWith('/blog')
-                                ? 'text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                            className={`min-h-11 min-w-11 p-2.5 rounded-md transition-colors ${scrolled || pathname?.startsWith('/blog')
+                                ? 'text-zinc-600 hover:bg-zinc-100'
                                 : 'text-white hover:bg-white/10'
                                 }`}
-                            aria-label="Toggle menu"
+                            aria-label={isOpen ? 'Tutup menu' : 'Buka menu'}
+                            aria-expanded={isOpen}
                         >
                             {isOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>

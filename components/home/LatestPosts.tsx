@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase';
 import Image from 'next/image';
 
 export default async function LatestPosts() {
-    const { data: posts } = await supabase
+    const { data: posts, error } = await supabase
         .from('posts')
         .select('id, title, slug, excerpt, category, author, created_at, image_url')
         .eq('is_published', true)
@@ -13,7 +13,7 @@ export default async function LatestPosts() {
         .limit(3);
 
     return (
-        <section className="py-20 bg-white dark:bg-zinc-900">
+        <section className="py-20 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-end mb-12">
                     <div>
@@ -26,7 +26,14 @@ export default async function LatestPosts() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {posts?.map((post) => (
+                    {error && (
+                        <div className="col-span-full rounded-xl border border-red-200 bg-red-50 px-6 py-10 text-center">
+                            <p className="font-semibold text-red-800">Artikel gagal dimuat.</p>
+                            <p className="mt-2 text-sm text-red-700">Coba muat ulang halaman.</p>
+                        </div>
+                    )}
+
+                    {!error && posts?.map((post) => (
                         <article key={post.id} className="group flex flex-col bg-slate-50 dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-zinc-700 h-full">
                             <div className="relative h-48 overflow-hidden bg-slate-200 dark:bg-zinc-700">
                                 {post.image_url ? (
@@ -84,7 +91,7 @@ export default async function LatestPosts() {
                         </article>
                     ))}
 
-                    {(!posts || posts.length === 0) && (
+                    {!error && (!posts || posts.length === 0) && (
                         <div className="col-span-full text-center py-10 text-slate-500 dark:text-slate-400">
                             Belum ada artikel terbaru.
                         </div>

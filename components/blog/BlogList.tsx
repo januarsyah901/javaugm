@@ -46,9 +46,9 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                         <button
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedCategory === cat
+                            className={`min-h-11 px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedCategory === cat}
                                 ? 'bg-primary text-white shadow-md'
-                                : 'bg-white dark:bg-zinc-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-zinc-700'
+                                : 'bg-white text-slate-600 hover:bg-slate-100'
                                 }`}
                         >
                             {cat}
@@ -63,7 +63,7 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                         placeholder="Cari artikel..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 rounded-full border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm"
+                        className="w-full min-h-11 pl-10 pr-4 py-2 rounded-full border border-slate-200 bg-white focus:ring-2 focus:ring-primary/50 transition-all text-sm"
                     />
                     <Search className="absolute left-3 top-2.5 text-slate-400" size={16} />
                 </div>
@@ -128,13 +128,7 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                 )}
             </div>
 
-            {/* Pagination Placeholder */}
-            {filteredPosts.length > 9 && (
-                <div className="mt-16 flex justify-center gap-2">
-                    <button className="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-bold">1</button>
-                    {/* Add logic for more pages if needed */}
-                </div>
-            )}
+
         </>
     );
 }

@@ -38,14 +38,14 @@ export default function VisiMisi() {
                     {/* Mission List */}
                     <div className="space-y-6">
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center text-sm font-bold">5</span>
+                            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">5</span>
                             Misi Kami
                         </h3>
 
                         <div className="space-y-4">
                             {missions.map((mission, index) => (
                                 <div key={index} className="flex gap-4 items-start p-4 bg-white dark:bg-zinc-900 rounded-xl border border-slate-300 dark:border-zinc-800 hover:shadow-md transition-shadow">
-                                    <CheckCircle2 className="flex-shrink-0 text-secondary mt-1" size={20} />
+                                    <CheckCircle2 className="flex-shrink-0 text-primary mt-1" size={20} />
                                     <p className="text-slate-700 dark:text-slate-300">{mission}</p>
                                 </div>
                             ))}

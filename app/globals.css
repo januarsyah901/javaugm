@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: #ffffff;
@@ -27,18 +28,6 @@
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    /* Adjust for dark mode if needed, maybe slightly lighter/darker */
-    --primary: #4ade80;
-    /* Lighter green for dark mode */
-    --secondary: #fbbf24;
-    /* Lighter gold for dark mode */
-  }
 }
 
 body {

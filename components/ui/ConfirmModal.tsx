@@ -2,6 +2,7 @@
 "use client";
 
 import { AlertTriangle, X } from "lucide-react";
+import { useDialog } from '@/lib/use-dialog';
 
 interface ConfirmModalProps {
     isOpen: boolean;
@@ -28,7 +29,7 @@ export default function ConfirmModal({
     itemName,
     variant = 'danger'
 }: ConfirmModalProps) {
-    if (!isOpen) return null;
+    const panelRef = useDialog(isOpen, onClose);
 
     const getVariantColors = () => {
         switch (variant) {
@@ -55,12 +56,24 @@ export default function ConfirmModal({
 
     const colors = getVariantColors();
 
+    if (!isOpen) return null;
+
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-200 border border-slate-200 dark:border-zinc-800">
+        <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 animate-in fade-in duration-200"
+            onClick={onClose}
+        >
+            <div
+                ref={panelRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="confirm-title"
+                className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-200 border border-slate-200"
+                onClick={(e) => e.stopPropagation()}
+            >
                 {/* Header */}
                 <div className={`px-6 py-4 border-b ${colors.border} flex justify-between items-center bg-slate-50/50 dark:bg-zinc-800/50`}>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <h3 id="confirm-title" className="text-lg font-bold text-slate-900 flex items-center gap-2">
                         <span className={`p-1.5 rounded-lg ${colors.icon}`}>
                             <AlertTriangle size={18} />
                         </span>
@@ -69,7 +82,8 @@ export default function ConfirmModal({
                     <button
                         onClick={onClose}
                         disabled={isLoading}
-                        className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors p-1 rounded-full hover:bg-slate-100 dark:hover:bg-zinc-800"
+                        className="min-h-11 min-w-11 text-slate-500 hover:text-slate-700 transition-colors p-2 rounded-full hover:bg-slate-100"
+                        aria-label="Tutup"
                     >
                         <X size={20} />
                     </button>
@@ -92,14 +106,14 @@ export default function ConfirmModal({
                     <button
                         onClick={onClose}
                         disabled={isLoading}
-                        className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 bg-white dark:bg-zinc-800 border border-slate-300 dark:border-zinc-600 rounded-lg hover:bg-slate-50 dark:hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-slate-200 transition-colors"
+                        className="min-h-11 px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:ring-2 focus:ring-slate-400 transition-colors"
                     >
                         {cancelText}
                     </button>
                     <button
                         onClick={onConfirm}
                         disabled={isLoading}
-                        className={`px-4 py-2 text-sm font-bold text-white rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-1 transition-all flex items-center gap-2 ${colors.button} ${isLoading ? 'opacity-70 cursor-wait' : ''}`}
+                        className={`min-h-11 px-4 py-2 text-sm font-bold text-white rounded-lg shadow-md focus:ring-2 focus:ring-offset-1 transition-all flex items-center gap-2 ${colors.button} ${isLoading ? 'opacity-70 cursor-wait' : ''}`}
                     >
                         {isLoading ? (
                             <>

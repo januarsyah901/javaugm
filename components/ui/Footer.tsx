@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MapPin, Mail, Instagram, ArrowRight, ExternalLink, Youtube } from 'lucide-react';
+import { MapPin, Mail, Instagram, ArrowRight, Youtube } from 'lucide-react';
 
 export default function Footer() {
     const pathname = usePathname();
@@ -27,7 +27,7 @@ export default function Footer() {
                             <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent inline-block">
                                 Java Al-'Alim
                             </h3>
-                            <p className="text-zinc-500 text-sm mt-2 font-medium tracking-wide">
+                            <p className="text-zinc-400 text-sm mt-2 font-medium tracking-wide">
                                 KABINET FATHUL AFAQ (1447/1448 H)
                             </p>
                         </div>
@@ -89,7 +89,7 @@ export default function Footer() {
 
                         {/* Social Media Buttons */}
                         <div className="pt-2">
-                            <p className="text-xs text-zinc-500 mb-3 uppercase tracking-wider font-semibold">
+                            <p className="text-xs text-zinc-400 mb-3 uppercase tracking-wider font-semibold">
                                 Media Sosial
                             </p>
                             <div className="flex flex-wrap gap-3">
@@ -98,7 +98,7 @@ export default function Footer() {
                                     href="https://instagram.com/javaugm"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-pink-600 hover:text-white hover:border-pink-600 transition-all duration-300"
+                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-pink-600 hover:text-white hover:border-pink-600 transition-all duration-300"
                                     aria-label="Instagram"
                                 >
                                     <Instagram className="w-5 h-5" />
@@ -109,7 +109,7 @@ export default function Footer() {
                                     href="https://www.tiktok.com/@Javaugm1147"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-black hover:text-white hover:border-zinc-500 transition-all duration-300"
+                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-black hover:text-white hover:border-zinc-500 transition-all duration-300"
                                     aria-label="TikTok"
                                 >
                                     <svg
@@ -133,7 +133,7 @@ export default function Footer() {
                                     href="https://youtube.com/@javaugm"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300"
+                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300"
                                     aria-label="YouTube"
                                 >
                                     <Youtube className="w-5 h-5" />
@@ -142,7 +142,7 @@ export default function Footer() {
                                 {/* 4. Email */}
                                 <a
                                     href="mailto:javaugm1447@gmail.com"
-                                    className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all duration-300"
+                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all duration-300"
                                     aria-label="Email"
                                 >
                                     <Mail className="w-5 h-5" />
@@ -154,11 +154,7 @@ export default function Footer() {
 
                 {/* Copyright Section */}
                 <div className="border-t border-zinc-900 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-500">
-                    <p>&copy; {currentYear} Jama’ah Vokasi Al-‘Alim (Java) UGM. All rights reserved.</p>
-                    <div className="flex gap-6">
-                        <Link href="/privacy" className="hover:text-zinc-300 transition-colors">Privacy Policy</Link>
-                        <Link href="/terms" className="hover:text-zinc-300 transition-colors">Terms of Service</Link>
-                    </div>
+                    <p className="text-zinc-400">&copy; {currentYear} Jama’ah Vokasi Al-‘Alim (Java) UGM. All rights reserved.</p>
                 </div>
             </div>
         </footer>

@@ -2,7 +2,8 @@
 "use client";
 
 import { useMemo } from 'react';
-import { AlertCircle, CheckCircle, Info, X } from "lucide-react";
+import { AlertCircle, CheckCircle, Info } from "lucide-react";
+import { useDialog } from '@/lib/use-dialog';
 
 interface AlertModalProps {
     isOpen: boolean;
@@ -19,7 +20,7 @@ export default function AlertModal({
     message,
     type = 'info'
 }: AlertModalProps) {
-    if (!isOpen) return null;
+    const panelRef = useDialog(isOpen, onClose);
 
     const variant = useMemo(() => {
         switch (type) {
@@ -47,20 +48,32 @@ export default function AlertModal({
         }
     }, [type]);
 
+    if (!isOpen) return null;
+
     return (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl max-w-sm w-full overflow-hidden animate-in zoom-in-95 duration-200 border border-slate-200 dark:border-zinc-800">
+        <div
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/40 animate-in fade-in duration-200"
+            onClick={onClose}
+        >
+            <div
+                ref={panelRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="alert-title"
+                className="bg-white rounded-xl shadow-2xl max-w-sm w-full overflow-hidden animate-in zoom-in-95 duration-200 border border-slate-200"
+                onClick={(e) => e.stopPropagation()}
+            >
                 <div className="p-6 text-center">
                     <div className={`mx-auto w-12 h-12 flex items-center justify-center rounded-full ${variant.bgColor} mb-4`}>
                         {variant.icon}
                     </div>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{title}</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                    <h3 id="alert-title" className="text-lg font-bold text-slate-900 mb-2">{title}</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed mb-6">
                         {message}
                     </p>
                     <button
                         onClick={onClose}
-                        className={`w-full py-2.5 px-4 rounded-lg text-white font-medium transition-colors shadow-md ${variant.btnColor}`}
+                        className={`w-full min-h-11 py-2.5 px-4 rounded-lg text-white font-medium transition-colors shadow-md ${variant.btnColor}`}
                     >
                         Tutup
                     </button>

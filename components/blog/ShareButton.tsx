@@ -31,6 +31,15 @@ export default function ShareButton({ slug, title }: ShareButtonProps) {
         }
     }, [slug]);
 
+    useEffect(() => {
+        if (!isOpen) return;
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setIsOpen(false);
+        };
+        document.addEventListener('keydown', onKey);
+        return () => document.removeEventListener('keydown', onKey);
+    }, [isOpen]);
+
     const handleCopy = async () => {
         try {
             await navigator.clipboard.writeText(url);
@@ -47,8 +56,9 @@ export default function ShareButton({ slug, title }: ShareButtonProps) {
         <div className="relative">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 text-primary font-medium hover:text-emerald-700 transition-colors"
+                className="flex items-center gap-2 min-h-11 text-primary font-medium hover:text-emerald-700 transition-colors"
                 aria-label="Share this post"
+                aria-expanded={isOpen}
             >
                 {isOpen ? <X size={20} /> : <Share2 size={20} />}
                 <span>{isOpen ? 'Tutup' : 'Bagikan Tulisan Ini'}</span>

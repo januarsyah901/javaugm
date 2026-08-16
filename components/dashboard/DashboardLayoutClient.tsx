@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Link from 'next/link';
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { FileText, Settings, X, Menu, LayoutDashboard, Users } from "lucide-react";
+import { FileText, X, Menu, Users } from "lucide-react";
 import SignOutButton from "@/components/dashboard/SignOutButton";
 
 interface User {
@@ -48,12 +48,14 @@ export default function DashboardLayoutClient({
         });
     }
 
-    // Settings is for everyone
-    navItems.push({
-        href: "/dashboard/settings",
-        label: "Pengaturan",
-        icon: Settings
-    });
+    useEffect(() => {
+        if (!isSidebarOpen) return;
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setIsSidebarOpen(false);
+        };
+        document.addEventListener('keydown', onKey);
+        return () => document.removeEventListener('keydown', onKey);
+    }, [isSidebarOpen]);
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-black">
@@ -67,7 +69,9 @@ export default function DashboardLayoutClient({
                 </Link>
                 <button
                     onClick={() => setIsSidebarOpen(true)}
-                    className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-lg"
+                    className="min-h-11 min-w-11 p-2.5 text-slate-600 hover:bg-slate-100 rounded-lg"
+                    aria-label="Buka menu"
+                    aria-expanded={isSidebarOpen}
                 >
                     <Menu size={24} />
                 </button>
@@ -104,7 +108,8 @@ export default function DashboardLayoutClient({
                     </Link>
                     <button
                         onClick={() => setIsSidebarOpen(false)}
-                        className="p-1 text-slate-400 hover:text-slate-600 md:hidden"
+                        className="min-h-11 min-w-11 p-2 text-slate-500 hover:text-slate-700 md:hidden"
+                        aria-label="Tutup menu"
                     >
                         <X size={20} />
                     </button>
