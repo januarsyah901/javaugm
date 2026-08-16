@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Hero() {
@@ -21,9 +20,9 @@ export default function Hero() {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
                 {/* Badge Kabinet */}
-                <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-emerald-100 bg-emerald-900/40 backdrop-blur-md border border-emerald-500/30 mb-8 shadow-lg shadow-emerald-900/20 cursor-default">
-                    <span>Kabinet Fathul Afaq (1447/1448 H)</span>
-                </div>
+                <p className="mb-8 text-sm font-medium text-emerald-200">
+                    Kabinet Fathul Afaq (1447/1448 H)
+                </p>
 
                 {/* Main Heading */}
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white mb-8 leading-[1.1] drop-shadow-sm">
@@ -40,15 +39,14 @@ export default function Hero() {
                 <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4 items-center">
                     <Link
                         href="/profile"
-                        className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-primary px-8 font-medium text-white transition-all duration-300 hover:bg-emerald-700 hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]"
+                        className="inline-flex h-12 min-h-11 items-center justify-center rounded-lg bg-primary px-8 font-medium text-white hover:bg-emerald-800"
                     >
-                        <span className="mr-2">Tentang Kami</span>
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        Tentang Kami
                     </Link>
 
                     <Link
                         href="/blog"
-                        className="inline-flex h-12 items-center justify-center px-8 text-base font-medium text-white bg-transparent border border-white/30 rounded-full hover:bg-white/10 hover:text-white hover:border-white transition-all backdrop-blur-sm"
+                        className="inline-flex h-12 min-h-11 items-center justify-center rounded-lg border border-white/50 px-8 text-base font-medium text-white hover:bg-white/10"
                     >
                         Baca Artikel
                     </Link>
@@ -56,7 +54,7 @@ export default function Hero() {
 
                 {/* Footer Quote / Small Text */}
                 <div className="mt-16 pt-8 border-t border-white/20 max-w-lg mx-auto">
-                    <p className="text-xs text-slate-300 font-medium tracking-wide uppercase">
+                    <p className="text-sm text-slate-200 font-medium">
                         Sekolah Vokasi Universitas Gadjah Mada
                     </p>
                 </div>

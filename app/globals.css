@@ -12,10 +12,6 @@
   /* Gold */
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
-
-  /* Modern Gradients */
-  --gradient-gold: linear-gradient(135deg, #d4af37 0%, #fcd34d 50%, #d4af37 100%);
-  --gradient-emerald: linear-gradient(135deg, #2e7d32 0%, #4ade80 50%, #2e7d32 100%);
 }
 
 @theme inline {

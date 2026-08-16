@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Search, Calendar, User, ArrowRight } from 'lucide-react';
+import { Search, Calendar, User } from 'lucide-react';
 import Image from 'next/image';
 
 interface Post {
@@ -46,9 +46,9 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                         <button
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
-                            className={`min-h-11 px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedCategory === cat}
-                                ? 'bg-primary text-white shadow-md'
-                                : 'bg-white text-slate-600 hover:bg-slate-100'
+                            className={`min-h-11 px-4 py-2 rounded-lg text-sm font-medium ${selectedCategory === cat
+                                ? 'bg-primary text-white'
+                                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
                                 }`}
                         >
                             {cat}
@@ -63,7 +63,7 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                         placeholder="Cari artikel..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full min-h-11 pl-10 pr-4 py-2 rounded-full border border-slate-200 bg-white focus:ring-2 focus:ring-primary/50 transition-all text-sm"
+                        className="w-full min-h-11 pl-10 pr-4 py-2 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-primary/50 text-sm"
                     />
                     <Search className="absolute left-3 top-2.5 text-slate-400" size={16} />
                 </div>
@@ -73,26 +73,17 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map((post) => (
-                        <article key={post.id} className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-zinc-800 flex flex-col h-full">
-                            <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-zinc-800">
-                                {post.image_url ? (
-                                    <Image
-                                        src={post.image_url}
-                                        alt={post.title}
-                                        fill
-                                        className="object-cover transform group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                ) : (
-                                    <Image
-                                        src="/placeholder.png"
-                                        alt="Placeholder"
-                                        fill
-                                        className="object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                )}
-                                <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">
+                        <article key={post.id} className="bg-white border border-slate-200 overflow-hidden flex flex-col h-full">
+                            <div className="relative h-48 overflow-hidden bg-slate-100">
+                                <Image
+                                    src={post.image_url || '/placeholder.png'}
+                                    alt={post.title}
+                                    fill
+                                    className="object-cover"
+                                />
+                                <span className="absolute top-4 left-4 bg-white px-2 py-0.5 text-xs font-semibold text-primary">
                                     {post.category}
-                                </div>
+                                </span>
                             </div>
 
                             <div className="p-6 flex flex-col flex-1">
@@ -101,22 +92,21 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                                     <span className="flex items-center gap-1"><User size={14} /> {post.author || 'Admin'}</span>
                                 </div>
 
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                                    <Link href={`/blog/${post.slug}`}>
+                                <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2">
+                                    <Link href={`/blog/${post.slug}`} className="hover:text-primary">
                                         {post.title}
                                     </Link>
                                 </h3>
 
-                                <p className="text-slate-600 dark:text-slate-300 text-sm line-clamp-3 mb-4 flex-1">
+                                <p className="text-slate-600 text-sm line-clamp-3 mb-4 flex-1">
                                     {post.excerpt}
                                 </p>
 
                                 <Link
                                     href={`/blog/${post.slug}`}
-                                    className="inline-flex items-center text-sm font-semibold text-primary hover:text-emerald-700 transition-colors mt-auto"
+                                    className="text-sm font-semibold text-primary hover:text-emerald-800 mt-auto"
                                 >
-                                    Baca Selengkapnya
-                                    <ArrowRight size={16} className="ml-2" />
+                                    Baca selengkapnya
                                 </Link>
                             </div>
                         </article>

@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { Calendar, User, ArrowRight } from 'lucide-react';
+import { Calendar, User } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import Image from 'next/image';
 
@@ -20,12 +20,12 @@ export default async function LatestPosts() {
                         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">Terbaru dari Kami</h2>
                         <p className="text-slate-600 dark:text-slate-400">Ikuti perkembangan berita dan kajian terkini.</p>
                     </div>
-                    <Link href="/blog" className="hidden sm:flex items-center text-primary font-medium hover:text-emerald-700 transition-colors">
-                        Lihat Semua <ArrowRight size={20} className="ml-2" />
+                    <Link href="/blog" className="hidden sm:inline text-primary font-medium hover:text-emerald-800">
+                        Lihat semua artikel
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {error && (
                         <div className="col-span-full rounded-xl border border-red-200 bg-red-50 px-6 py-10 text-center">
                             <p className="font-semibold text-red-800">Artikel gagal dimuat.</p>
@@ -33,31 +33,22 @@ export default async function LatestPosts() {
                         </div>
                     )}
 
-                    {!error && posts?.map((post) => (
-                        <article key={post.id} className="group flex flex-col bg-slate-50 dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-zinc-700 h-full">
-                            <div className="relative h-48 overflow-hidden bg-slate-200 dark:bg-zinc-700">
-                                {post.image_url ? (
-                                    <Image
-                                        src={post.image_url}
-                                        alt={post.title}
-                                        fill
-                                        className="object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                ) : (
-                                    <Image
-                                        src="/placeholder.png"
-                                        alt="Placeholder"
-                                        fill
-                                        className="object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                )}
-                                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary shadow-lg">
+                    {!error && posts?.map((post, index) => (
+                        <article key={post.id} className={`flex flex-col border border-slate-200 bg-white overflow-hidden ${index === 0 ? 'md:col-span-2 md:grid md:grid-cols-2' : ''}`}>
+                            <div className={`relative overflow-hidden bg-slate-200 ${index === 0 ? 'h-64 md:h-full min-h-56' : 'h-48'}`}>
+                                <Image
+                                    src={post.image_url || '/placeholder.png'}
+                                    alt={post.title}
+                                    fill
+                                    className="object-cover"
+                                />
+                                <span className="absolute top-4 left-4 bg-white px-2 py-0.5 text-xs font-semibold text-primary">
                                     {post.category}
-                                </div>
+                                </span>
                             </div>
 
                             <div className="flex-1 p-6 flex flex-col">
-                                <div className="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 mb-3">
+                                <div className="flex items-center gap-4 text-xs text-slate-600 mb-3">
                                     <span className="flex items-center gap-1">
                                         <Calendar size={14} />
                                         {new Date(post.created_at).toLocaleDateString('id-ID', {
@@ -71,21 +62,21 @@ export default async function LatestPosts() {
                                     </span>
                                 </div>
 
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                                    <Link href={`/blog/${post.slug}`}>
+                                <h3 className={`font-bold text-slate-900 mb-3 line-clamp-2 ${index === 0 ? 'text-2xl' : 'text-xl'}`}>
+                                    <Link href={`/blog/${post.slug}`} className="hover:text-primary">
                                         {post.title}
                                     </Link>
                                 </h3>
 
-                                <p className="text-slate-600 dark:text-slate-400 text-sm line-clamp-3 mb-4 flex-1">
+                                <p className="text-slate-600 text-sm line-clamp-3 mb-4 flex-1">
                                     {post.excerpt}
                                 </p>
 
                                 <Link
                                     href={`/blog/${post.slug}`}
-                                    className="inline-flex items-center text-sm font-semibold text-primary hover:text-emerald-700 transition-colors mt-auto"
+                                    className="text-sm font-semibold text-primary hover:text-emerald-800 mt-auto"
                                 >
-                                    Baca Selengkapnya
+                                    Baca selengkapnya
                                 </Link>
                             </div>
                         </article>
@@ -99,8 +90,8 @@ export default async function LatestPosts() {
                 </div>
 
                 <div className="mt-8 text-center sm:hidden">
-                    <Link href="/blog" className="inline-flex items-center text-primary font-medium hover:text-emerald-700 transition-colors">
-                        Lihat Semua Artikel <ArrowRight size={20} className="ml-2" />
+                    <Link href="/blog" className="inline-flex min-h-11 items-center text-primary font-medium hover:text-emerald-800">
+                        Lihat semua artikel
                     </Link>
                 </div>
             </div>

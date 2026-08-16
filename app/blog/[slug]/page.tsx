@@ -96,7 +96,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                         </Link>
 
                         <div className="flex items-center gap-4 mb-4">
-                            <span className="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">{post.category}</span>
+                            <span className="px-3 py-1 bg-primary text-white text-xs font-bold rounded-md">{post.category}</span>
                             <span className="text-white/80 text-sm flex items-center gap-1">
                                 <Calendar size={14} /> {formattedDate}
                             </span>
@@ -189,30 +189,30 @@ async function RelatedPosts({ currentPostId, category }: { currentPostId: number
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {relatedPosts.map((post) => (
-                <Link href={`/blog/${post.slug}`} key={post.id} className="group block bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-slate-100 dark:border-zinc-800">
-                    <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-zinc-800">
+                <Link href={`/blog/${post.slug}`} key={post.id} className="block bg-white border border-slate-200 overflow-hidden">
+                    <div className="relative h-48 overflow-hidden bg-slate-100">
                         {post.image_url ? (
                             <Image
                                 src={post.image_url}
                                 alt={post.title}
                                 fill
-                                className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                className="object-cover"
                             />
                         ) : (
                             <div className="w-full h-full flex items-center justify-center text-slate-300">
                                 <span className="text-4xl font-bold opacity-20">Java</span>
                             </div>
                         )}
-                        <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">
+                        <span className="absolute top-4 left-4 bg-white px-2 py-0.5 text-xs font-semibold text-primary">
                             {post.category}
-                        </div>
+                        </span>
                     </div>
                     <div className="p-6">
                         <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-3">
                             <Calendar size={14} />
                             {new Date(post.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
                         </div>
-                        <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                        <h4 className="text-lg font-bold text-slate-900 mb-2 line-clamp-2 hover:text-primary">
                             {post.title}
                         </h4>
                         <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">

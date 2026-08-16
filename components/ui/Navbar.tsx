@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, ChevronRight, User } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useSession, signIn, signOut } from "next-auth/react";
 import { usePathname } from 'next/navigation';
@@ -50,7 +50,7 @@ export default function Navbar() {
     return (
         <nav
             className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-                ? 'bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-lg border-b border-zinc-200/50 dark:border-zinc-800/50 py-3'
+                ? 'bg-white/90 backdrop-blur-md border-b border-zinc-200 py-3'
                 : 'bg-transparent py-5'
                 }`}
         >
@@ -122,7 +122,7 @@ export default function Navbar() {
                                 )}
                                 <button
                                     onClick={() => signOut()}
-                                    className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-500/90 text-white text-sm font-medium hover:bg-red-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                                    className="flex min-h-11 items-center gap-2 px-5 py-2.5 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700"
                                 >
                                     <span>Logout</span>
                                 </button>
@@ -130,7 +130,7 @@ export default function Navbar() {
                         ) : (
                             <button
                                 onClick={() => signIn('google')}
-                                className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                                className="flex min-h-11 items-center gap-2 px-5 py-2.5 rounded-lg bg-zinc-900 text-white text-sm font-medium hover:bg-primary"
                             >
                                 <User size={16} />
                                 <span>Login Pengurus</span>
@@ -167,11 +167,10 @@ export default function Navbar() {
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="flex items-center justify-between p-3 rounded-xl text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-primary dark:hover:text-primary transition-all group"
+                            className="flex items-center min-h-11 p-3 rounded-lg text-zinc-600 hover:bg-zinc-50 hover:text-primary"
                             onClick={() => setIsOpen(false)}
                         >
                             <span className="font-medium">{link.name}</span>
-                            <ChevronRight size={16} className="text-zinc-400 group-hover:text-primary transition-colors" />
                         </Link>
                     ))}
 
@@ -179,11 +178,10 @@ export default function Navbar() {
                     {session && (
                         <Link
                             href="/dashboard"
-                            className="flex items-center justify-between p-3 rounded-xl text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-primary dark:hover:text-primary transition-all group"
+                            className="flex items-center min-h-11 p-3 rounded-lg text-zinc-600 hover:bg-zinc-50 hover:text-primary"
                             onClick={() => setIsOpen(false)}
                         >
                             <span className="font-medium">Dashboard</span>
-                            <ChevronRight size={16} className="text-zinc-400 group-hover:text-primary transition-colors" />
                         </Link>
                     )}
 
@@ -194,7 +192,7 @@ export default function Navbar() {
                                     setIsOpen(false);
                                     signOut();
                                 }}
-                                className="flex w-full items-center justify-center gap-2 px-4 py-3 rounded-xl bg-red-500 text-white font-medium hover:bg-red-600 transition-colors shadow-lg shadow-red-500/20"
+                                className="flex w-full min-h-11 items-center justify-center gap-2 px-4 py-3 rounded-lg bg-red-600 text-white font-medium hover:bg-red-700"
                             >
                                 Logout
                             </button>
@@ -204,7 +202,7 @@ export default function Navbar() {
                                     setIsOpen(false);
                                     signIn('google');
                                 }}
-                                className="flex w-full items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-white font-medium hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-500/20"
+                                className="flex w-full min-h-11 items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-white font-medium hover:bg-emerald-800"
                             >
                                 <User size={18} />
                                 Login Pengurus

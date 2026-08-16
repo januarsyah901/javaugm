@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MapPin, Mail, Instagram, ArrowRight, Youtube } from 'lucide-react';
+import { MapPin, Mail, Instagram, Youtube } from 'lucide-react';
 
 export default function Footer() {
     const pathname = usePathname();
@@ -15,20 +15,17 @@ export default function Footer() {
 
     return (
         <footer className="bg-zinc-950 text-zinc-300 pt-20 pb-10 border-t border-zinc-900 relative overflow-hidden">
-            {/* Dekorasi Background Halus (Opsional) */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50"></div>
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8">
 
                     {/* 1. Logo & Identitas (Mengambil 5 kolom di desktop) */}
                     <div className="md:col-span-5 space-y-6">
                         <div>
-                            <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent inline-block">
+                            <h3 className="text-3xl font-bold text-white">
                                 Java Al-'Alim
                             </h3>
-                            <p className="text-zinc-400 text-sm mt-2 font-medium tracking-wide">
-                                KABINET FATHUL AFAQ (1447/1448 H)
+                            <p className="text-zinc-400 text-sm mt-2 font-medium">
+                                Kabinet Fathul Afaq (1447/1448 H)
                             </p>
                         </div>
                         <p className="text-zinc-400 text-sm leading-relaxed max-w-sm">
@@ -56,9 +53,8 @@ export default function Footer() {
                                 <li key={item.name}>
                                     <Link
                                         href={item.href}
-                                        className="group flex items-center text-sm text-zinc-400 hover:text-primary transition-colors duration-300"
+                                        className="text-sm text-zinc-400 hover:text-white"
                                     >
-                                        <ArrowRight className="w-3 h-3 mr-2 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                                         {item.name}
                                     </Link>
                                 </li>
@@ -89,8 +85,8 @@ export default function Footer() {
 
                         {/* Social Media Buttons */}
                         <div className="pt-2">
-                            <p className="text-xs text-zinc-400 mb-3 uppercase tracking-wider font-semibold">
-                                Media Sosial
+                            <p className="text-xs text-zinc-400 mb-3 font-semibold">
+                                Media sosial
                             </p>
                             <div className="flex flex-wrap gap-3">
                                 {/* 1. Instagram */}
@@ -98,7 +94,7 @@ export default function Footer() {
                                     href="https://instagram.com/javaugm"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-pink-600 hover:text-white hover:border-pink-600 transition-all duration-300"
+                                    className="w-11 h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white"
                                     aria-label="Instagram"
                                 >
                                     <Instagram className="w-5 h-5" />
@@ -109,7 +105,7 @@ export default function Footer() {
                                     href="https://www.tiktok.com/@Javaugm1147"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-black hover:text-white hover:border-zinc-500 transition-all duration-300"
+                                    className="w-11 h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white"
                                     aria-label="TikTok"
                                 >
                                     <svg
@@ -133,7 +129,7 @@ export default function Footer() {
                                     href="https://youtube.com/@javaugm"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300"
+                                    className="w-11 h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white"
                                     aria-label="YouTube"
                                 >
                                     <Youtube className="w-5 h-5" />
@@ -142,7 +138,7 @@ export default function Footer() {
                                 {/* 4. Email */}
                                 <a
                                     href="mailto:javaugm1447@gmail.com"
-                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all duration-300"
+                                    className="w-11 h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white"
                                     aria-label="Email"
                                 >
                                     <Mail className="w-5 h-5" />
