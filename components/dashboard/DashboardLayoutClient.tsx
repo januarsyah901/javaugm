@@ -60,7 +60,7 @@ export default function DashboardLayoutClient({
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-black">
             {/* Mobile Header */}
-            <header className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-white border-b border-slate-200 md:hidden">
+            <header className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-white/80 backdrop-blur-md border-b border-slate-200 dark:bg-zinc-900/80 dark:border-zinc-800 md:hidden">
                 <Link href="/" className="flex items-center gap-2">
                     <div className="relative w-8 h-8 rounded-full overflow-hidden">
                         <Image src="/logo.png" alt="Logo" fill className="object-cover" />
@@ -80,14 +80,14 @@ export default function DashboardLayoutClient({
             {/* Overlay */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 z-40 bg-black/50 md:hidden"
+                    className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
                     onClick={() => setIsSidebarOpen(false)}
                 />
             )}
 
             {/* Sidebar */}
             <aside
-                className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col border-r border-slate-200 bg-white transition-transform duration-300 ease-in-out md:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col border-r border-slate-200 bg-white/95 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/95 transition-transform duration-300 ease-in-out md:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                     }`}
             >
                 {/* Logo Section */}
@@ -117,8 +117,8 @@ export default function DashboardLayoutClient({
 
                 {/* Navigation Section */}
                 <nav className="flex-1 space-y-1.5 px-4 py-4 overflow-y-auto">
-                    <div className="mb-2 px-2 text-xs font-semibold text-slate-500">
-                        Menu
+                    <div className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-zinc-500">
+                        Main Menu
                     </div>
 
                     {navItems.map((item) => {
@@ -132,7 +132,7 @@ export default function DashboardLayoutClient({
                                     : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100'
                                     }`}
                             >
-                                <item.icon size={18} />
+                                <item.icon size={18} className={`transition-transform ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
                                 <span>{item.label}</span>
                                 {isActive && (
                                     <div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />
