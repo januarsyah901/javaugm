@@ -24,41 +24,39 @@ export default function Footer() {
                     {/* 1. Logo & Identitas (Mengambil 5 kolom di desktop) */}
                     <div className="md:col-span-5 space-y-6">
                         <div>
-                            <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent inline-block">
+                            <h3 className="text-2xl font-bold text-white inline-block">
                                 Java Al-'Alim
                             </h3>
-                            <p className="text-zinc-400 text-sm mt-2 font-medium tracking-wide">
-                                KABINET FATHUL AFAQ (1447/1448 H)
+                            <p className="text-emerald-400 text-xs mt-1 font-semibold">
+                                Kabinet Fathul Afaq (1447/1448 H)
                             </p>
                         </div>
                         <p className="text-zinc-400 text-sm leading-relaxed max-w-sm">
-                            Jama’ah Vokasi Al-‘Alim (Java) adalah Lembaga dakwah Fakultas di Sekolah Vokasi UGM. Berkomitmen untuk membuka cakrawala pemikiran dan menebar kebermanfaatan.
+                            Jama’ah Vokasi Al-‘Alim (Java) adalah Lembaga Dakwah Fakultas di Sekolah Vokasi UGM. Berkomitmen untuk membuka cakrawala pemikiran dan menebar kebermanfaatan.
                         </p>
 
                         {/* Quote Kecil / Tagline */}
-                        <div className="inline-block px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 italic">
+                        <div className="inline-block px-3.5 py-1.5 rounded-md bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 italic">
                             "Membuka Cakrawala, Menebar Manfaat."
                         </div>
                     </div>
 
                     {/* 2. Quick Links (Mengambil 3 kolom) */}
                     <div className="md:col-span-3 space-y-6">
-                        <h4 className="text-white font-semibold text-lg border-b border-zinc-800 pb-2 inline-block">
+                        <h4 className="text-white font-semibold text-base border-b border-zinc-800 pb-2 inline-block">
                             Menu Utama
                         </h4>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2.5">
                             {[
                                 { name: 'Beranda', href: '/' },
                                 { name: 'Profil Organisasi', href: '/profile' },
                                 { name: 'Blog & Dakwah', href: '/blog' },
-                                // { name: 'Program Kerja', href: '/proker' }, // Tambahan opsional
                             ].map((item) => (
                                 <li key={item.name}>
                                     <Link
                                         href={item.href}
-                                        className="group flex items-center text-sm text-zinc-400 hover:text-primary transition-colors duration-300"
+                                        className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors"
                                     >
-                                        <ArrowRight className="w-3 h-3 mr-2 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                                         {item.name}
                                     </Link>
                                 </li>
@@ -68,19 +66,19 @@ export default function Footer() {
 
                     {/* 3. Kontak & Sosmed (Mengambil 4 kolom) */}
                     <div className="md:col-span-4 space-y-6">
-                        <h4 className="text-white font-semibold text-lg border-b border-zinc-800 pb-2 inline-block">
+                        <h4 className="text-white font-semibold text-base border-b border-zinc-800 pb-2 inline-block">
                             Hubungi Kami
                         </h4>
-                        <ul className="space-y-4 text-sm">
+                        <ul className="space-y-3 text-sm">
                             <li className="flex items-start gap-3 text-zinc-400">
-                                <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                                <MapPin className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                                 <span>
                                     Sekolah Vokasi, Universitas Gadjah Mada,<br />
                                     Yogyakarta, Indonesia.
                                 </span>
                             </li>
                             <li className="flex items-center gap-3">
-                                <Mail className="w-5 h-5 text-primary flex-shrink-0" />
+                                <Mail className="w-5 h-5 text-emerald-500 flex-shrink-0" />
                                 <a href="mailto:javaugm1447@gmail.com" className="text-zinc-400 hover:text-white transition-colors">
                                     javaugm1447@gmail.com
                                 </a>
@@ -92,13 +90,13 @@ export default function Footer() {
                             <p className="text-xs text-zinc-400 mb-3 uppercase tracking-wider font-semibold">
                                 Media Sosial
                             </p>
-                            <div className="flex flex-wrap gap-3">
+                            <div className="flex flex-wrap gap-2.5">
                                 {/* 1. Instagram */}
                                 <a
                                     href="https://instagram.com/javaugm"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-pink-600 hover:text-white hover:border-pink-600 transition-all duration-300"
+                                    className="min-w-11 min-h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
                                     aria-label="Instagram"
                                 >
                                     <Instagram className="w-5 h-5" />
@@ -109,7 +107,7 @@ export default function Footer() {
                                     href="https://www.tiktok.com/@Javaugm1147"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-black hover:text-white hover:border-zinc-500 transition-all duration-300"
+                                    className="min-w-11 min-h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
                                     aria-label="TikTok"
                                 >
                                     <svg
@@ -133,7 +131,7 @@ export default function Footer() {
                                     href="https://youtube.com/@javaugm"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300"
+                                    className="min-w-11 min-h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
                                     aria-label="YouTube"
                                 >
                                     <Youtube className="w-5 h-5" />
@@ -142,7 +140,7 @@ export default function Footer() {
                                 {/* 4. Email */}
                                 <a
                                     href="mailto:javaugm1447@gmail.com"
-                                    className="w-11 h-11 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all duration-300"
+                                    className="min-w-11 min-h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
                                     aria-label="Email"
                                 >
                                     <Mail className="w-5 h-5" />

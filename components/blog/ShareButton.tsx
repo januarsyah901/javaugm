@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Share2, X, Link as LinkIcon, Check } from "lucide-react";
 import {
     FacebookShareButton,
@@ -24,6 +24,7 @@ export default function ShareButton({ slug, title }: ShareButtonProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [url, setUrl] = useState("");
     const [copied, setCopied] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -33,11 +34,23 @@ export default function ShareButton({ slug, title }: ShareButtonProps) {
 
     useEffect(() => {
         if (!isOpen) return;
+
         const onKey = (e: KeyboardEvent) => {
             if (e.key === 'Escape') setIsOpen(false);
         };
+
+        const onClickOutside = (e: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
         document.addEventListener('keydown', onKey);
-        return () => document.removeEventListener('keydown', onKey);
+        document.addEventListener('mousedown', onClickOutside);
+        return () => {
+            document.removeEventListener('keydown', onKey);
+            document.removeEventListener('mousedown', onClickOutside);
+        };
     }, [isOpen]);
 
     const handleCopy = async () => {
@@ -53,7 +66,7 @@ export default function ShareButton({ slug, title }: ShareButtonProps) {
     if (!url) return null;
 
     return (
-        <div className="relative">
+        <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center gap-2 min-h-11 text-primary font-medium hover:text-emerald-700 transition-colors"

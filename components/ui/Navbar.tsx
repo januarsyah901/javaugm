@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, ChevronRight, User } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSession, signIn, signOut } from "next-auth/react";
 import { usePathname } from 'next/navigation';
 
@@ -20,6 +20,7 @@ export default function Navbar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const navRef = useRef<HTMLElement>(null);
 
     // Efek untuk mendeteksi scroll (mengubah style navbar)
     useEffect(() => {
@@ -37,11 +38,23 @@ export default function Navbar() {
 
     useEffect(() => {
         if (!isOpen) return;
+
         const onKey = (e: KeyboardEvent) => {
             if (e.key === 'Escape') setIsOpen(false);
         };
+
+        const onClickOutside = (e: MouseEvent) => {
+            if (navRef.current && !navRef.current.contains(e.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
         document.addEventListener('keydown', onKey);
-        return () => document.removeEventListener('keydown', onKey);
+        document.addEventListener('mousedown', onClickOutside);
+        return () => {
+            document.removeEventListener('keydown', onKey);
+            document.removeEventListener('mousedown', onClickOutside);
+        };
     }, [isOpen]);
 
     // Don't show navbar on dashboard
@@ -49,6 +62,7 @@ export default function Navbar() {
 
     return (
         <nav
+            ref={navRef}
             className={`fixed w-full z-50 transition-all duration-300 ${scrolled
                 ? 'bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-lg border-b border-zinc-200/50 dark:border-zinc-800/50 py-3'
                 : 'bg-transparent py-5'
@@ -108,7 +122,7 @@ export default function Navbar() {
 
                         {/* Login Button - Updated to use session */}
                         {session ? (
-                            <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-3">
                                 {session.user?.image && (
                                     <div className="relative w-8 h-8 rounded-full overflow-hidden border border-zinc-200 dark:border-zinc-700">
                                         <Image
@@ -122,7 +136,7 @@ export default function Navbar() {
                                 )}
                                 <button
                                     onClick={() => signOut()}
-                                    className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-500/90 text-white text-sm font-medium hover:bg-red-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition-colors shadow-xs"
                                 >
                                     <span>Logout</span>
                                 </button>
@@ -130,7 +144,7 @@ export default function Navbar() {
                         ) : (
                             <button
                                 onClick={() => signIn('google')}
-                                className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-700 text-white text-sm font-medium hover:bg-emerald-800 transition-colors shadow-xs"
                             >
                                 <User size={16} />
                                 <span>Login Pengurus</span>
@@ -194,7 +208,7 @@ export default function Navbar() {
                                     setIsOpen(false);
                                     signOut();
                                 }}
-                                className="flex w-full items-center justify-center gap-2 px-4 py-3 rounded-xl bg-red-500 text-white font-medium hover:bg-red-600 transition-colors shadow-lg shadow-red-500/20"
+                                className="flex w-full items-center justify-center gap-2 min-h-11 px-4 py-2.5 rounded-lg bg-red-600 text-white font-medium hover:bg-red-700 transition-colors shadow-xs"
                             >
                                 Logout
                             </button>
@@ -204,7 +218,7 @@ export default function Navbar() {
                                     setIsOpen(false);
                                     signIn('google');
                                 }}
-                                className="flex w-full items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-white font-medium hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-500/20"
+                                className="flex w-full items-center justify-center gap-2 min-h-11 px-4 py-2.5 rounded-lg bg-emerald-700 text-white font-medium hover:bg-emerald-800 transition-colors shadow-xs"
                             >
                                 <User size={18} />
                                 Login Pengurus

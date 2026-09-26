@@ -34,24 +34,24 @@ export default async function LatestPosts() {
                     )}
 
                     {!error && posts?.map((post) => (
-                        <article key={post.id} className="group flex flex-col bg-slate-50 dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-zinc-700 h-full">
-                            <div className="relative h-48 overflow-hidden bg-slate-200 dark:bg-zinc-700">
+                        <article key={post.id} className="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-slate-200 h-full">
+                            <div className="relative h-48 overflow-hidden bg-slate-100">
                                 {post.image_url ? (
                                     <Image
                                         src={post.image_url}
                                         alt={post.title}
                                         fill
-                                        className="object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                        className="object-cover"
                                     />
                                 ) : (
                                     <Image
                                         src="/placeholder.png"
                                         alt="Placeholder"
                                         fill
-                                        className="object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                        className="object-cover"
                                     />
                                 )}
-                                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary shadow-lg">
+                                <div className="absolute top-3 left-3 bg-white/95 border border-slate-200 px-2.5 py-0.5 rounded-md text-xs font-semibold text-emerald-800 shadow-xs">
                                     {post.category}
                                 </div>
                             </div>

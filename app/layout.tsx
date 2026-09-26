@@ -29,15 +29,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="id">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-50 text-slate-900`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 text-slate-900`}
       >
         <Providers>
           <div className="flex flex-col min-h-screen">
-            {/* We need to dynamically import Navbar if it has client side logic? 
-              Navbar has 'use client', so it's fine to import here in a server component (RootLayout). 
-              Next.js handles the boundary automatically. */}
             <Navbar />
             <main className="flex-grow">
               {children}
