@@ -7,9 +7,9 @@ export default function Hero() {
             <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header Text Block */}
                 <div className="text-center max-w-3xl mx-auto flex flex-col items-center">
-                    {/* Editorial Text Label (No Badge Box) */}
+                    {/* Editorial Text Label (No Badge Box, No Pulse) */}
                     <div className="flex items-center gap-2 mb-6">
-                        <span className="w-2 h-2 rounded-full bg-[#ff5a00] animate-pulse" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#ff5a00]" />
                         <span className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00]">
                             Kabinet Fathul Afaq 1447/1448 H
                         </span>
@@ -57,37 +57,37 @@ export default function Hero() {
                 <div className="mt-14 sm:mt-16 rounded-[36px] bg-white border border-[#ececee] p-7 md:p-8">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[#ececee]">
                         <div className="flex flex-col sm:flex-row items-baseline gap-2 sm:gap-3 pt-4 sm:pt-0 sm:px-4 first:pt-0 first:px-0">
-                            <span className="text-4xl sm:text-5xl font-semibold text-[#09090b] tracking-tight leading-none">
+                            <span className="text-2xl sm:text-3xl font-semibold text-[#09090b] tracking-tight leading-none">
                                 5
                             </span>
-                            <span className="text-sm font-normal text-[#52525b] leading-snug">
+                            <span className="text-xs sm:text-sm font-normal text-[#52525b] leading-snug">
                                 Departemen dan biro aktif
                             </span>
                         </div>
 
                         <div className="flex flex-col sm:flex-row items-baseline gap-2 sm:gap-3 pt-4 sm:pt-0 sm:px-4 first:pt-0">
-                            <span className="text-4xl sm:text-5xl font-semibold text-[#09090b] tracking-tight leading-none">
+                            <span className="text-2xl sm:text-3xl font-semibold text-[#09090b] tracking-tight leading-none">
                                 20+
                             </span>
-                            <span className="text-sm font-normal text-[#52525b] leading-snug">
+                            <span className="text-xs sm:text-sm font-normal text-[#52525b] leading-snug">
                                 Program dakwah dan kajian
                             </span>
                         </div>
 
                         <div className="flex flex-col sm:flex-row items-baseline gap-2 sm:gap-3 pt-4 sm:pt-0 sm:px-4 first:pt-0">
-                            <span className="text-4xl sm:text-5xl font-semibold text-[#09090b] tracking-tight leading-none">
+                            <span className="text-2xl sm:text-3xl font-semibold text-[#09090b] tracking-tight leading-none">
                                 100+
                             </span>
-                            <span className="text-sm font-normal text-[#52525b] leading-snug">
+                            <span className="text-xs sm:text-sm font-normal text-[#52525b] leading-snug">
                                 Kader mahasiswa vokasi
                             </span>
                         </div>
 
                         <div className="flex flex-col sm:flex-row items-baseline gap-2 sm:gap-3 pt-4 sm:pt-0 sm:px-4 first:pt-0">
-                            <span className="text-4xl sm:text-5xl font-semibold text-[#09090b] tracking-tight leading-none">
+                            <span className="text-2xl sm:text-3xl font-semibold text-[#09090b] tracking-tight leading-none">
                                 1447 H
                             </span>
-                            <span className="text-sm font-normal text-[#52525b] leading-snug">
+                            <span className="text-xs sm:text-sm font-normal text-[#52525b] leading-snug">
                                 Masa bakti kepengurusan
                             </span>
                         </div>
