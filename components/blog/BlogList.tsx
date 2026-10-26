@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -47,112 +46,135 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
         setCurrentPage(1);
     };
 
-    // Helper for formatting date
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString('id-ID', {
-            day: 'numeric', month: 'short', year: 'numeric'
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
         });
     };
 
     return (
-        <>
-            {/* Filters & Search */}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-10">
-                {/* Category Filter */}
-                <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                    {CATEGORIES.map((cat) => (
-                        <button
-                            key={cat}
-                            onClick={() => handleCategoryChange(cat)}
-                            className={`min-h-11 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                                selectedCategory === cat
-                                    ? 'bg-emerald-700 text-white shadow-xs'
-                                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
-                            }`}
-                        >
-                            {cat}
-                        </button>
-                    ))}
+        <div className="space-y-10">
+            {/* Filter Pills and Search Bar */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                {/* Category Pills */}
+                <div className="flex flex-wrap items-center gap-2">
+                    {CATEGORIES.map((cat) => {
+                        const isActive = selectedCategory === cat;
+                        return (
+                            <button
+                                key={cat}
+                                onClick={() => handleCategoryChange(cat)}
+                                className={`h-10 px-4 rounded-[12px] text-sm font-medium transition-all ${
+                                    isActive
+                                        ? 'bg-[#09090b] text-white shadow-none'
+                                        : 'bg-white text-[#52525b] border border-[#ececee] hover:text-[#09090b] hover:border-[#d4d4d8]'
+                                }`}
+                            >
+                                {cat}
+                            </button>
+                        );
+                    })}
                 </div>
 
-                {/* Search Input */}
-                <div className="relative w-full md:w-64">
+                {/* Search Bar */}
+                <div className="relative w-full md:w-80">
                     <input
                         type="text"
-                        placeholder="Cari artikel..."
+                        placeholder="Cari artikel atau topik..."
                         value={searchQuery}
                         onChange={(e) => handleSearchChange(e.target.value)}
-                        className="w-full min-h-11 pl-10 pr-4 py-2 rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-600 transition-all text-sm"
+                        className="w-full h-11 pl-10 pr-4 rounded-[14px] border border-[#ececee] bg-white text-sm text-[#18181b] placeholder:text-[#a1a1aa] focus:outline-none focus:border-[#09090b] transition-colors"
                     />
-                    <Search className="absolute left-3 top-3 text-slate-400" size={18} />
+                    <Search className="absolute left-3.5 top-3.5 text-[#a1a1aa]" size={16} />
                 </div>
             </div>
 
-            {/* Posts Grid */}
+            {/* Articles Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {paginatedPosts.length > 0 ? (
                     paginatedPosts.map((post) => (
-                        <article key={post.id} className="group bg-white rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-shadow border border-slate-200 flex flex-col h-full">
-                            <div className="relative h-48 overflow-hidden bg-slate-100">
+                        <article
+                            key={post.id}
+                            className="group bg-white rounded-[36px] border border-[#ececee] p-7 flex flex-col h-full shadow-none transition-colors hover:border-[#09090b]"
+                        >
+                            {/* Card Image */}
+                            <div className="relative h-52 w-full rounded-[24px] overflow-hidden bg-[#f4f4f5] border border-[#ececee] mb-6">
                                 {post.image_url ? (
                                     <Image
                                         src={post.image_url}
                                         alt={post.title}
                                         fill
-                                        className="object-cover"
+                                        className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
                                     />
                                 ) : (
                                     <Image
                                         src="/placeholder.png"
                                         alt="Placeholder"
                                         fill
-                                        className="object-cover"
+                                        className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
                                     />
                                 )}
-                                <div className="absolute top-3 left-3 bg-white/95 border border-slate-200 px-2.5 py-0.5 rounded-md text-xs font-semibold text-emerald-800 shadow-xs">
-                                    {post.category}
+                                <div className="absolute top-3.5 left-3.5">
+                                    <span className="inline-flex items-center px-3 py-1 rounded-[12px] bg-white/95 backdrop-blur-xs border border-[#ececee] text-[#09090b] text-xs font-semibold">
+                                        {post.category}
+                                    </span>
                                 </div>
                             </div>
 
-                            <div className="p-6 flex flex-col flex-1">
-                                <div className="flex items-center gap-4 text-xs text-slate-500 mb-3">
-                                    <span className="flex items-center gap-1"><Calendar size={14} /> {formatDate(post.created_at)}</span>
-                                    <span className="flex items-center gap-1"><User size={14} /> {post.author || 'Admin'}</span>
+                            {/* Card Content */}
+                            <div className="flex flex-col flex-1">
+                                {/* Metadata */}
+                                <div className="flex items-center gap-4 text-xs text-[#71717a] mb-3">
+                                    <span className="inline-flex items-center gap-1.5">
+                                        <Calendar size={13} className="text-[#a1a1aa]" />
+                                        {formatDate(post.created_at)}
+                                    </span>
+                                    <span className="inline-flex items-center gap-1.5">
+                                        <User size={13} className="text-[#a1a1aa]" />
+                                        {post.author || 'Admin Java'}
+                                    </span>
                                 </div>
 
-                                <h3 className="text-lg font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-emerald-700 transition-colors">
+                                {/* Title */}
+                                <h2 className="text-xl font-semibold text-[#09090b] group-hover:text-[#ff5a00] transition-colors line-clamp-2 leading-snug mb-3">
                                     <Link href={`/blog/${post.slug}`}>
                                         {post.title}
                                     </Link>
-                                </h3>
+                                </h2>
 
-                                <p className="text-slate-600 text-sm line-clamp-3 mb-4 flex-1 leading-relaxed">
+                                {/* Excerpt */}
+                                <p className="text-sm text-[#52525b] line-clamp-3 leading-relaxed mb-6 flex-1">
                                     {post.excerpt}
                                 </p>
 
+                                {/* Action Link */}
                                 <Link
                                     href={`/blog/${post.slug}`}
-                                    className="inline-flex items-center text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors mt-auto"
+                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#09090b] group-hover:text-[#ff5a00] transition-colors mt-auto pt-2"
                                 >
                                     Baca Selengkapnya
+                                    <ArrowRight size={15} />
                                 </Link>
                             </div>
                         </article>
                     ))
                 ) : (
-                    <div className="col-span-full py-16 text-center text-slate-500 bg-white rounded-xl border border-slate-200">
-                        <p>Tidak ada artikel yang ditemukan.</p>
+                    <div className="col-span-full bg-white rounded-[36px] border border-[#ececee] p-12 text-center text-[#52525b] shadow-none">
+                        <p className="text-base font-medium text-[#18181b]">Tidak ada artikel yang cocok dengan pencarian.</p>
+                        <p className="mt-1 text-sm text-[#71717a]">Gunakan kata kunci lain atau pilih kategori yang berbeda.</p>
                     </div>
                 )}
             </div>
 
             {/* Pagination Controls */}
             {totalPages > 1 && (
-                <div className="mt-12 flex justify-center items-center gap-2">
+                <div className="flex justify-center items-center gap-2 pt-6">
                     <button
                         onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                         disabled={currentPage === 1}
-                        className="min-h-11 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                        className="h-11 px-4 rounded-[14px] text-sm font-medium border border-[#ececee] bg-white text-[#18181b] hover:bg-[#f4f4f5] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                     >
                         Sebelumnya
                     </button>
@@ -160,10 +182,10 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                         <button
                             key={pageNum}
                             onClick={() => setCurrentPage(pageNum)}
-                            className={`min-h-11 min-w-11 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
+                            className={`h-11 min-w-[44px] px-3.5 rounded-[14px] text-sm font-medium transition-colors ${
                                 currentPage === pageNum
-                                    ? 'bg-emerald-700 text-white shadow-xs'
-                                    : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200'
+                                    ? 'bg-[#09090b] text-white border border-[#09090b]'
+                                    : 'bg-white text-[#52525b] hover:text-[#09090b] hover:border-[#d4d4d8] border border-[#ececee]'
                             }`}
                         >
                             {pageNum}
@@ -172,12 +194,12 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                     <button
                         onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                         disabled={currentPage === totalPages}
-                        className="min-h-11 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                        className="h-11 px-4 rounded-[14px] text-sm font-medium border border-[#ececee] bg-white text-[#18181b] hover:bg-[#f4f4f5] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                     >
                         Berikutnya
                     </button>
                 </div>
             )}
-        </>
+        </div>
     );
 }

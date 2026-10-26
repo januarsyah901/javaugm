@@ -1,63 +1,93 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 
 export default function Hero() {
     return (
-        <section className="relative overflow-hidden bg-white dark:bg-zinc-950 pt-32 pb-20 sm:pt-40 sm:pb-32">
+        <section className="pt-8 sm:pt-12">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header Text Block */}
+                <div className="text-center max-w-3xl mx-auto flex flex-col items-center">
+                    {/* Orange Accent Badge */}
+                    <div className="inline-flex items-center gap-2 rounded-[12px] bg-[#ff5a00] px-3.5 py-1 text-xs font-semibold text-white tracking-normal mb-6">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                        <span>Kabinet Fathul Afaq 1447/1448 H</span>
+                    </div>
 
-            {/* Background Image with Overlay */}
-            <div className="absolute inset-0 z-0">
-                <Image
-                    src="/herobg.png"
-                    alt="Hero Background"
-                    fill
-                    className="object-cover"
-                    priority
-                />
-                <div className="absolute inset-0 bg-black/60 md:bg-black/50"></div>
-            </div>
+                    {/* Display Headline */}
+                    <h1 className="text-4xl sm:text-6xl lg:text-[64px] font-semibold text-[#09090b] tracking-tight leading-[1.14]">
+                        Membuka Cakrawala, Menebar Manfaat.
+                    </h1>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-
-                {/* Badge Kabinet */}
-                <div className="inline-flex items-center gap-2 rounded-md px-3.5 py-1 text-xs font-medium text-emerald-200 bg-emerald-950/70 border border-emerald-500/40 mb-8 cursor-default">
-                    <span>Kabinet Fathul Afaq 1447/1448 H</span>
-                </div>
-
-                {/* Main Heading */}
-                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
-                    Membuka <span className="text-emerald-300">Cakrawala</span>, <br />
-                    Menebar <span className="text-amber-300">Manfaat</span>.
-                </h1>
-
-                {/* Subheading */}
-                <p className="mt-4 text-base sm:text-lg md:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
-                    Wadah intelektual muslim Sekolah Vokasi UGM yang beradab, solutif, dan berdaya guna dalam bingkai persaudaraan.
-                </p>
-
-                {/* CTA Buttons */}
-                <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4 items-center">
-                    <Link
-                        href="/profile"
-                        className="inline-flex h-11 items-center justify-center rounded-lg bg-emerald-700 hover:bg-emerald-800 px-6 text-sm font-medium text-white transition-colors shadow-sm"
-                    >
-                        Tentang Kami
-                    </Link>
-
-                    <Link
-                        href="/blog"
-                        className="inline-flex h-11 items-center justify-center rounded-lg border border-white/40 hover:bg-white/10 px-6 text-sm font-medium text-white transition-colors"
-                    >
-                        Baca Artikel
-                    </Link>
-                </div>
-
-                {/* Footer Quote / Small Text */}
-                <div className="mt-16 pt-8 border-t border-white/15 max-w-lg mx-auto">
-                    <p className="text-xs text-slate-300 font-medium">
-                        Sekolah Vokasi Universitas Gadjah Mada
+                    {/* Subheading */}
+                    <p className="mt-5 text-base sm:text-lg text-[#52525b] leading-relaxed max-w-2xl">
+                        Wadah intelektual muslim Sekolah Vokasi Universitas Gadjah Mada yang beradab, solutif, dan berdaya guna dalam bingkai persaudaraan.
                     </p>
+
+                    {/* Action Buttons */}
+                    <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+                        <Link
+                            href="/profile"
+                            className="btn-dark-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium"
+                        >
+                            <span>Tentang Kami</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+
+                        <Link
+                            href="/blog"
+                            className="btn-light-neutral w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium"
+                        >
+                            <span>Baca Artikel</span>
+                        </Link>
+                    </div>
+
+                    {/* Category Tags */}
+                    <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+                        <span className="tag-badge">Sekolah Vokasi UGM</span>
+                        <span className="tag-badge">Lembaga Dakwah Fakultas</span>
+                        <span className="tag-badge">Ukhuwah &amp; Aksi Nyata</span>
+                    </div>
+                </div>
+
+                {/* Stats Block Card */}
+                <div className="mt-14 sm:mt-16 rounded-[36px] bg-white border border-[#ececee] p-7 md:p-8">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[#ececee]">
+                        <div className="flex flex-col sm:flex-row items-baseline gap-2 sm:gap-3 pt-4 sm:pt-0 sm:px-4 first:pt-0 first:px-0">
+                            <span className="text-4xl sm:text-5xl font-semibold text-[#09090b] tracking-tight leading-none">
+                                5
+                            </span>
+                            <span className="text-sm font-normal text-[#52525b] leading-snug">
+                                Departemen dan biro aktif
+                            </span>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row items-baseline gap-2 sm:gap-3 pt-4 sm:pt-0 sm:px-4 first:pt-0">
+                            <span className="text-4xl sm:text-5xl font-semibold text-[#09090b] tracking-tight leading-none">
+                                20+
+                            </span>
+                            <span className="text-sm font-normal text-[#52525b] leading-snug">
+                                Program dakwah dan kajian
+                            </span>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row items-baseline gap-2 sm:gap-3 pt-4 sm:pt-0 sm:px-4 first:pt-0">
+                            <span className="text-4xl sm:text-5xl font-semibold text-[#09090b] tracking-tight leading-none">
+                                100+
+                            </span>
+                            <span className="text-sm font-normal text-[#52525b] leading-snug">
+                                Kader mahasiswa vokasi
+                            </span>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row items-baseline gap-2 sm:gap-3 pt-4 sm:pt-0 sm:px-4 first:pt-0">
+                            <span className="text-4xl sm:text-5xl font-semibold text-[#09090b] tracking-tight leading-none">
+                                1447 H
+                            </span>
+                            <span className="text-sm font-normal text-[#52525b] leading-snug">
+                                Masa bakti kepengurusan
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

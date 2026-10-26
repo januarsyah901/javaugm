@@ -2,231 +2,216 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, ChevronRight, User } from 'lucide-react';
+import { Menu, X, ArrowUpRight, User } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useSession, signIn, signOut } from "next-auth/react";
 import { usePathname } from 'next/navigation';
 
-// Data Navigasi (Mudah diedit)
 const navLinks = [
-    { name: 'Beranda', href: '/' },
-    { name: 'Profil', href: '/profile' },
-    { name: 'Blog', href: '/blog' },
-    // { name: 'Galeri', href: '/gallery' }, // Tambahan opsional
+  { name: 'Beranda', href: '/' },
+  { name: 'Profil', href: '/profile' },
+  { name: 'Blog', href: '/blog' },
 ];
 
 export default function Navbar() {
-    const { data: session } = useSession();
-    const pathname = usePathname();
-    const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    const navRef = useRef<HTMLElement>(null);
+  const { data: session } = useSession();
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
-    // Efek untuk mendeteksi scroll (mengubah style navbar)
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 20) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
-        };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 15);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    const onClickOutside = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onClickOutside);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClickOutside);
+    };
+  }, [isOpen]);
 
-    useEffect(() => {
-        if (!isOpen) return;
+  if (pathname?.startsWith('/dashboard')) return null;
 
-        const onKey = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') setIsOpen(false);
-        };
+  return (
+    <header
+      ref={navRef}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 sm:py-4 px-4 sm:px-6 lg:px-8`}
+    >
+      <div className={`max-w-[1200px] mx-auto bg-white/95 backdrop-blur-md border border-[#ececee] rounded-[10000px] px-4 sm:px-6 py-2.5 transition-shadow ${
+        scrolled ? 'shadow-[0_4px_20px_rgba(0,0,0,0.04)]' : 'shadow-none'
+      }`}>
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#ececee] flex-shrink-0 bg-white">
+              <Image
+                src="/logo.png"
+                alt="Logo Java UGM"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain"
+                priority
+              />
+            </div>
+            <span className="font-semibold text-[15px] tracking-tight text-[#09090b]">
+              Java Al-'Alim
+            </span>
+          </Link>
 
-        const onClickOutside = (e: MouseEvent) => {
-            if (navRef.current && !navRef.current.contains(e.target as Node)) {
-                setIsOpen(false);
-            }
-        };
+          {/* Desktop Nav Links */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== '/' && pathname?.startsWith(link.href));
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`px-3.5 py-1.5 rounded-[10000px] text-[14px] font-medium transition-all ${
+                    isActive
+                      ? 'bg-[#f4f4f5] text-[#09090b]'
+                      : 'text-[#52525b] hover:text-[#09090b] hover:bg-[#fafafa]'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
 
-        document.addEventListener('keydown', onKey);
-        document.addEventListener('mousedown', onClickOutside);
-        return () => {
-            document.removeEventListener('keydown', onKey);
-            document.removeEventListener('mousedown', onClickOutside);
-        };
-    }, [isOpen]);
-
-    // Don't show navbar on dashboard
-    if (pathname?.startsWith('/dashboard')) return null;
-
-    return (
-        <nav
-            ref={navRef}
-            className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-                ? 'bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-lg border-b border-zinc-200/50 dark:border-zinc-800/50 py-3'
-                : 'bg-transparent py-5'
+            {session && (
+              <Link
+                href="/dashboard"
+                className={`px-3.5 py-1.5 rounded-[10000px] text-[14px] font-medium transition-all ${
+                  pathname?.startsWith('/dashboard')
+                    ? 'bg-[#f4f4f5] text-[#09090b]'
+                    : 'text-[#52525b] hover:text-[#09090b] hover:bg-[#fafafa]'
                 }`}
-        >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center">
+              >
+                Dashboard
+              </Link>
+            )}
+          </nav>
 
-                    {/* 1. Logo */}
-                    <div className="flex-shrink-0 flex items-center gap-2">
-                        <div className="relative flex-shrink-0 rounded-full shadow-sm overflow-hidden">
-                            <Image
-                                src="/logo.png"
-                                alt="Logo Java UGM"
-                                width={40}   // Setara w-10 (40px)
-                                height={40}  // Setara h-10 (40px)
-                                className="object-cover w-10 h-10" // Tetap beri class size untuk memastikan responsivitas
-                                priority     // Tambahkan ini agar logo dimuat duluan (mencegah flickering)
-                            />
-                        </div>
+          {/* Right Actions */}
+          <div className="hidden md:flex items-center gap-3">
+            {session ? (
+              <div className="flex items-center gap-2.5">
+                {session.user?.image && (
+                  <div className="w-7 h-7 rounded-full overflow-hidden border border-[#ececee]">
+                    <Image
+                      src={session.user.image}
+                      alt={session.user.name || "User"}
+                      width={28}
+                      height={28}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+                <button
+                  onClick={() => signOut()}
+                  className="px-3.5 py-1.5 text-xs font-medium text-[#71717a] hover:text-[#09090b] rounded-[10000px] border border-[#ececee] hover:border-[#d4d4d8] transition-all"
+                >
+                  Keluar
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => signIn('google')}
+                className="btn-dark-primary px-4 py-1.5 text-[13px] font-medium flex items-center gap-1.5"
+              >
+                <span>Login Pengurus</span>
+                <ArrowUpRight size={14} className="opacity-70" />
+              </button>
+            )}
+          </div>
 
-                        <Link
-                            href="/"
-                            className={`font-bold text-xl tracking-tight transition-colors ${scrolled || pathname?.startsWith('/blog') ? 'text-zinc-800 dark:text-zinc-100' : 'text-white'
-                                }`}
-                        >
-                            Java Al-'Alim
-                        </Link>
-                    </div>
-
-                    {/* 2. Desktop Menu */}
-                    <div className="hidden md:flex space-x-8 items-center">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className={`relative group text-sm font-medium transition-colors ${scrolled || pathname?.startsWith('/blog') ? 'text-zinc-800 dark:text-white' : 'text-white'
-                                    }`}
-                            >
-                                {link.name}
-                                {/* Animated Underline */}
-                                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${scrolled || pathname?.startsWith('/blog') ? 'bg-primary' : 'bg-white'}`}></span>
-                            </Link>
-                        ))}
-
-                        {/* Dashboard Link for Logged-in Users */}
-                        {session && (
-                            <Link
-                                href="/dashboard"
-                                className={`relative group text-sm font-medium transition-colors ${scrolled || pathname?.startsWith('/blog') ? 'text-zinc-800 dark:text-white' : 'text-white'
-                                    }`}
-                            >
-                                Dashboard
-                                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${scrolled || pathname?.startsWith('/blog') ? 'bg-primary' : 'bg-white'}`}></span>
-                            </Link>
-                        )}
-
-                        {/* Login Button - Updated to use session */}
-                        {session ? (
-                            <div className="flex items-center gap-3">
-                                {session.user?.image && (
-                                    <div className="relative w-8 h-8 rounded-full overflow-hidden border border-zinc-200 dark:border-zinc-700">
-                                        <Image
-                                            src={session.user.image}
-                                            alt={session.user.name || "User"}
-                                            width={32}
-                                            height={32}
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                )}
-                                <button
-                                    onClick={() => signOut()}
-                                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition-colors shadow-xs"
-                                >
-                                    <span>Logout</span>
-                                </button>
-                            </div>
-                        ) : (
-                            <button
-                                onClick={() => signIn('google')}
-                                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-700 text-white text-sm font-medium hover:bg-emerald-800 transition-colors shadow-xs"
-                            >
-                                <User size={16} />
-                                <span>Login Pengurus</span>
-                            </button>
-                        )}
-                    </div>
-
-                    {/* 3. Mobile Menu Button */}
-                    <div className="md:hidden flex items-center">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className={`min-h-11 min-w-11 p-2.5 rounded-md transition-colors ${scrolled || pathname?.startsWith('/blog')
-                                ? 'text-zinc-600 hover:bg-zinc-100'
-                                : 'text-white hover:bg-white/10'
-                                }`}
-                            aria-label={isOpen ? 'Tutup menu' : 'Buka menu'}
-                            aria-expanded={isOpen}
-                        >
-                            {isOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* 4. Mobile Menu Dropdown (Animated) */}
-            <div
-                className={`md:hidden absolute top-full left-0 w-full bg-white dark:bg-zinc-950 border-b border-zinc-100 dark:border-zinc-800 shadow-xl transition-all duration-300 ease-in-out origin-top ${isOpen
-                    ? 'opacity-100 scale-y-100 translate-y-0 visible'
-                    : 'opacity-0 scale-y-95 -translate-y-2 invisible'
-                    }`}
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-1.5 text-[#18181b] hover:bg-[#f4f4f5] rounded-full transition-colors"
+              aria-label={isOpen ? 'Tutup menu' : 'Buka menu'}
             >
-                <div className="px-4 py-6 space-y-3">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="flex items-center justify-between p-3 rounded-xl text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-primary dark:hover:text-primary transition-all group"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            <span className="font-medium">{link.name}</span>
-                            <ChevronRight size={16} className="text-zinc-400 group-hover:text-primary transition-colors" />
-                        </Link>
-                    ))}
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+      </div>
 
-                    {/* Dashboard Link Mobile */}
-                    {session && (
-                        <Link
-                            href="/dashboard"
-                            className="flex items-center justify-between p-3 rounded-xl text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-primary dark:hover:text-primary transition-all group"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            <span className="font-medium">Dashboard</span>
-                            <ChevronRight size={16} className="text-zinc-400 group-hover:text-primary transition-colors" />
-                        </Link>
-                    )}
+      {/* Mobile Dropdown */}
+      {isOpen && (
+        <div className="md:hidden mt-2 max-w-[1200px] mx-auto bg-white border border-[#ececee] rounded-[24px] p-4 shadow-[0_8px_30px_rgba(0,0,0,0.06)] animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="space-y-1">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== '/' && pathname?.startsWith(link.href));
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`block px-4 py-2.5 rounded-[14px] text-[14px] font-medium transition-all ${
+                    isActive
+                      ? 'bg-[#f4f4f5] text-[#09090b]'
+                      : 'text-[#52525b] hover:text-[#09090b] hover:bg-[#fafafa]'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
 
-                    <div className="pt-4 mt-4 border-t border-zinc-100 dark:border-zinc-900">
-                        {session ? (
-                            <button
-                                onClick={() => {
-                                    setIsOpen(false);
-                                    signOut();
-                                }}
-                                className="flex w-full items-center justify-center gap-2 min-h-11 px-4 py-2.5 rounded-lg bg-red-600 text-white font-medium hover:bg-red-700 transition-colors shadow-xs"
-                            >
-                                Logout
-                            </button>
-                        ) : (
-                            <button
-                                onClick={() => {
-                                    setIsOpen(false);
-                                    signIn('google');
-                                }}
-                                className="flex w-full items-center justify-center gap-2 min-h-11 px-4 py-2.5 rounded-lg bg-emerald-700 text-white font-medium hover:bg-emerald-800 transition-colors shadow-xs"
-                            >
-                                <User size={18} />
-                                Login Pengurus
-                            </button>
-                        )}
-                    </div>
-                </div>
+            {session && (
+              <Link
+                href="/dashboard"
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2.5 rounded-[14px] text-[14px] font-medium text-[#52525b] hover:text-[#09090b] hover:bg-[#fafafa]"
+              >
+                Dashboard
+              </Link>
+            )}
+
+            <div className="pt-3 mt-2 border-t border-[#ececee]">
+              {session ? (
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    signOut();
+                  }}
+                  className="w-full text-left px-4 py-2 text-sm text-[#71717a] hover:text-[#09090b] font-medium"
+                >
+                  Keluar
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    signIn('google');
+                  }}
+                  className="btn-dark-primary w-full py-2.5 text-[14px] font-medium flex items-center justify-center gap-1.5"
+                >
+                  <User size={15} />
+                  <span>Login Pengurus</span>
+                </button>
+              )}
             </div>
-        </nav>
-    );
+          </div>
+        </div>
+      )}
+    </header>
+  );
 }

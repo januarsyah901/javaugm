@@ -6,7 +6,7 @@ export const revalidate = 60; // Revalidate every 60 seconds
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
+    <div className="flex flex-col gap-20 sm:gap-24 pb-24 bg-[#f4f4f5]">
       <Hero />
       <VisiMisi />
       <LatestPosts />

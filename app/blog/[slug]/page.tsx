@@ -1,7 +1,6 @@
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { Calendar, User, Tag, ArrowLeft } from 'lucide-react';
+import { Calendar, User, Tag, ArrowLeft, ArrowRight } from 'lucide-react';
 import ShareButton from '@/components/blog/ShareButton';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
@@ -16,7 +15,7 @@ export async function generateStaticParams() {
     })) || [];
 }
 
-export const revalidate = 60; // ISR
+export const revalidate = 60;
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -25,7 +24,6 @@ interface PageProps {
 export default async function BlogDetailPage({ params }: PageProps) {
     const { slug } = await params;
 
-    // Fetch the post from Supabase
     const { data: post, error } = await supabase
         .from('posts')
         .select('*')
@@ -33,29 +31,33 @@ export default async function BlogDetailPage({ params }: PageProps) {
         .single();
 
     if (error || !post) {
-        // If not found, return 404
         notFound();
     }
 
-    // Format date inside component
     const formattedDate = new Date(post.created_at).toLocaleDateString('id-ID', {
-        day: 'numeric', month: 'long', year: 'numeric'
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
     });
 
-    // Fetch author department
-    let authorDepartment = 'Divisi';
+    let authorDepartment = 'Keluarga Mahasiswa';
 
     try {
-        // Try to find author in users table
-        // First try by author_id (if exists from migration), then by name
         if ((post as any).author_id) {
-            const { data } = await supabase.from('users').select('department').eq('id', (post as any).author_id).single();
+            const { data } = await supabase
+                .from('users')
+                .select('department')
+                .eq('id', (post as any).author_id)
+                .single();
             if (data?.department) authorDepartment = data.department;
         }
 
-        // Fallback to name search if author_id didnt yield result or didnt exist
-        if (authorDepartment === 'Divisi' && post.author) {
-            const { data } = await supabase.from('users').select('department').eq('name', post.author).single();
+        if (authorDepartment === 'Keluarga Mahasiswa' && post.author) {
+            const { data } = await supabase
+                .from('users')
+                .select('department')
+                .eq('name', post.author)
+                .single();
             if (data?.department) authorDepartment = data.department;
         }
     } catch (e) {
@@ -63,82 +65,93 @@ export default async function BlogDetailPage({ params }: PageProps) {
     }
 
     return (
-        <div className="bg-white dark:bg-black min-h-screen pb-20">
+        <div className="bg-[#f4f4f5] min-h-screen py-10 md:py-16">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Back Button */}
+                <div className="mb-8">
+                    <Link
+                        href="/blog"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-[14px] bg-white border border-[#ececee] text-xs font-semibold text-[#52525b] hover:text-[#09090b] hover:border-[#d4d4d8] transition-colors"
+                    >
+                        <ArrowLeft size={14} />
+                        Kembali ke Blog
+                    </Link>
+                </div>
 
-            {/* Hero Image / Featured Image */}
-            <div className="relative h-[400px] w-full bg-slate-200 mt-20">
-                {post.image_url ? (
-                    <Image
-                        src={post.image_url}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                ) : (
-                    <Image
-                        src="/placeholder.png"
-                        alt="Placeholder"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                {/* Article Header */}
+                <header className="mb-8">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[12px] bg-[#ff5a00] text-white text-xs font-semibold tracking-wide uppercase mb-5">
+                        {post.category || 'Artikel'}
+                    </div>
 
-                <div className="absolute bottom-0 left-0 w-full p-6 md:p-12">
-                    <div className="max-w-4xl mx-auto">
-                        <Link
-                            href="/blog"
-                            className="inline-flex items-center text-white/80 hover:text-white mb-6 text-sm font-medium transition-colors"
-                        >
-                            <ArrowLeft size={16} className="mr-2" /> Kembali ke Blog
-                        </Link>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#09090b] tracking-tight leading-[1.18] mb-6">
+                        {post.title}
+                    </h1>
 
-                        <div className="flex items-center gap-4 mb-4">
-                            <span className="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">{post.category}</span>
-                            <span className="text-white/80 text-sm flex items-center gap-1">
-                                <Calendar size={14} /> {formattedDate}
-                            </span>
+                    <div className="flex items-center gap-4 py-4 border-y border-[#ececee]">
+                        <div className="w-11 h-11 rounded-full bg-white border border-[#ececee] flex items-center justify-center text-[#09090b]">
+                            <User size={18} />
                         </div>
-
-                        <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-                            {post.title}
-                        </h1>
-
-                        <div className="flex items-center gap-3 ">
-                            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white overflow-hidden">
-                                <User size={20} />
-                            </div>
-                            <div>
-                                <p className="text-white font-medium">Ditulis oleh {post.author || 'Admin Java'}</p>
-                                <p className="text-zinc-200 text-xs">{authorDepartment}</p>
-                            </div>
+                        <div>
+                            <p className="text-sm font-semibold text-[#09090b]">
+                                {post.author || 'Admin Java'}
+                            </p>
+                            <p className="text-xs text-[#71717a]">
+                                {authorDepartment}
+                            </p>
+                        </div>
+                        <div className="ml-auto text-xs text-[#71717a] flex items-center gap-1.5">
+                            <Calendar size={13} className="text-[#a1a1aa]" />
+                            {formattedDate}
                         </div>
                     </div>
+                </header>
+
+                {/* Featured Image */}
+                <div className="relative w-full h-[360px] md:h-[460px] rounded-[36px] overflow-hidden bg-white border border-[#ececee] mb-10 shadow-none">
+                    {post.image_url ? (
+                        <Image
+                            src={post.image_url}
+                            alt={post.title}
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                    ) : (
+                        <Image
+                            src="/placeholder.png"
+                            alt="Placeholder"
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                    )}
                 </div>
-            </div>
 
-            {/* Content Body */}
-            <article className="max-w-4xl mx-auto px-4 pt-6 sm:px-6 lg:px-8 -mt-10 relative z-10">
-                <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-8 md:p-12 border border-zinc-100 dark:border-zinc-800">
-
-                    <div className="prose prose-lg dark:prose-invert max-w-none text-slate-800 dark:text-slate-200">
+                {/* Content Article */}
+                <article className="bg-white rounded-[36px] border border-[#ececee] p-8 md:p-14 shadow-none mb-16">
+                    <div className="prose prose-zinc max-w-none text-[#18181b] 
+                        prose-headings:font-semibold prose-headings:text-[#09090b] prose-headings:tracking-tight
+                        prose-p:text-[#3f3f46] prose-p:leading-relaxed prose-p:text-base md:prose-p:text-[17px]
+                        prose-a:text-[#09090b] prose-a:underline hover:prose-a:text-[#ff5a00]
+                        prose-strong:text-[#09090b] prose-strong:font-semibold
+                        prose-blockquote:border-l-2 prose-blockquote:border-[#ff5a00] prose-blockquote:text-[#52525b] prose-blockquote:italic
+                        prose-li:text-[#3f3f46] prose-code:text-[#09090b] prose-code:bg-[#f4f4f5] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {post.content}
                         </ReactMarkdown>
                     </div>
 
-                    {/* Share & Tags */}
-                    <div className="mt-12 pt-8 border-t border-slate-100 dark:border-zinc-800">
-                        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                    {/* Tags & Social Share */}
+                    <div className="mt-12 pt-8 border-t border-[#ececee]">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                             <div className="flex items-center gap-2">
-                                <Tag size={18} className="text-slate-400" />
-                                <div className="flex gap-2">
-                                    <span className="bg-slate-100 dark:bg-zinc-800 px-3 py-1 rounded-full text-sm text-slate-600 dark:text-slate-300">
+                                <Tag size={16} className="text-[#a1a1aa]" />
+                                <div className="flex flex-wrap gap-2">
+                                    <span className="px-3 py-1 rounded-[12px] bg-[#f4f4f5] border border-[#ececee] text-xs font-medium text-[#52525b]">
                                         #{post.category}
                                     </span>
-                                    <span className="bg-slate-100 dark:bg-zinc-800 px-3 py-1 rounded-full text-sm text-slate-600 dark:text-slate-300">
+                                    <span className="px-3 py-1 rounded-[12px] bg-[#f4f4f5] border border-[#ececee] text-xs font-medium text-[#52525b]">
                                         #JAVAUGM
                                     </span>
                                 </div>
@@ -147,29 +160,36 @@ export default async function BlogDetailPage({ params }: PageProps) {
                             <ShareButton slug={post.slug} title={post.title} />
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
 
-            {/* Related Posts Placeholder */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                <div className="flex items-center justify-between mb-8">
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Baca Artikel Lainnya</h3>
-                    <Link href="/blog" className="text-primary hover:underline font-medium">Lihat Semua</Link>
-                </div>
-                {/* Related Posts Logic */}
-                {(() => {
-                    // Fetch related posts (server-side in async component)
-                    // We need to use a separate function or direct logic here.
-                    // Since this is an async component, we can wait for another supabase call.
-                    return <RelatedPosts currentPostId={post.id} category={post.category} />;
-                })()}
+                {/* Related Posts Section */}
+                <section className="pt-4 pb-12">
+                    <div className="flex items-center justify-between mb-8">
+                        <div>
+                            <span className="text-xs uppercase font-semibold tracking-wider text-[#ff5a00]">
+                                Rekomendasi
+                            </span>
+                            <h2 className="text-2xl md:text-3xl font-semibold text-[#09090b] tracking-tight mt-1">
+                                Artikel Terkait
+                            </h2>
+                        </div>
+                        <Link
+                            href="/blog"
+                            className="inline-flex items-center gap-1 text-sm font-semibold text-[#09090b] hover:text-[#ff5a00] transition-colors"
+                        >
+                            Lihat Semua
+                            <ArrowRight size={15} />
+                        </Link>
+                    </div>
 
-            </section>
+                    <RelatedPosts currentPostId={post.id} category={post.category} />
+                </section>
+            </div>
         </div>
     );
 }
 
-async function RelatedPosts({ currentPostId, category }: { currentPostId: number, category: string }) {
+async function RelatedPosts({ currentPostId, category }: { currentPostId: number; category: string }) {
     const { data: relatedPosts } = await supabase
         .from('posts')
         .select('id, title, slug, excerpt, image_url, created_at, category')
@@ -180,44 +200,65 @@ async function RelatedPosts({ currentPostId, category }: { currentPostId: number
 
     if (!relatedPosts || relatedPosts.length === 0) {
         return (
-            <div className="p-8 bg-slate-50 dark:bg-zinc-900 rounded-xl text-center border border-dashed border-slate-300 dark:border-zinc-700">
-                <p className="text-slate-500">Belum ada artikel terkait lainnya.</p>
+            <div className="p-8 bg-white rounded-[36px] border border-[#ececee] text-center text-[#52525b] shadow-none">
+                <p className="text-sm">Belum ada artikel terkait lainnya dalam topik ini.</p>
             </div>
         );
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {relatedPosts.map((post) => (
-                <Link href={`/blog/${post.slug}`} key={post.id} className="group block bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-slate-100 dark:border-zinc-800">
-                    <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-zinc-800">
-                        {post.image_url ? (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {relatedPosts.map((item) => (
+                <Link
+                    href={`/blog/${item.slug}`}
+                    key={item.id}
+                    className="group bg-white rounded-[36px] border border-[#ececee] p-6 flex flex-col h-full shadow-none hover:border-[#09090b] transition-colors"
+                >
+                    <div className="relative h-44 w-full rounded-[20px] overflow-hidden bg-[#f4f4f5] border border-[#ececee] mb-5">
+                        {item.image_url ? (
                             <Image
-                                src={post.image_url}
-                                alt={post.title}
+                                src={item.image_url}
+                                alt={item.title}
                                 fill
-                                className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
                             />
                         ) : (
-                            <div className="w-full h-full flex items-center justify-center text-slate-300">
-                                <span className="text-4xl font-bold opacity-20">Java</span>
-                            </div>
+                            <Image
+                                src="/placeholder.png"
+                                alt="Placeholder"
+                                fill
+                                className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                            />
                         )}
-                        <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">
-                            {post.category}
+                        <div className="absolute top-3 left-3">
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-[12px] bg-white/95 backdrop-blur-xs border border-[#ececee] text-[#09090b] text-[11px] font-semibold">
+                                {item.category}
+                            </span>
                         </div>
                     </div>
-                    <div className="p-6">
-                        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-3">
-                            <Calendar size={14} />
-                            {new Date(post.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+
+                    <div className="flex flex-col flex-1">
+                        <div className="flex items-center gap-1.5 text-xs text-[#71717a] mb-2.5">
+                            <Calendar size={13} className="text-[#a1a1aa]" />
+                            {new Date(item.created_at).toLocaleDateString('id-ID', {
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric'
+                            })}
                         </div>
-                        <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                            {post.title}
-                        </h4>
-                        <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
-                            {post.excerpt}
+
+                        <h3 className="text-base font-semibold text-[#09090b] group-hover:text-[#ff5a00] transition-colors line-clamp-2 leading-snug mb-2">
+                            {item.title}
+                        </h3>
+
+                        <p className="text-xs text-[#52525b] line-clamp-2 leading-relaxed mb-4 flex-1">
+                            {item.excerpt}
                         </p>
+
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#09090b] group-hover:text-[#ff5a00] transition-colors mt-auto pt-1">
+                            Baca Artikel
+                            <ArrowRight size={13} />
+                        </span>
                     </div>
                 </Link>
             ))}

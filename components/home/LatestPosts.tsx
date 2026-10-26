@@ -1,6 +1,5 @@
-
 import Link from 'next/link';
-import { Calendar, User, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import Image from 'next/image';
 
@@ -13,94 +12,120 @@ export default async function LatestPosts() {
         .limit(3);
 
     return (
-        <section className="py-20 bg-white">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-end mb-12">
+        <section className="relative">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12">
                     <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">Terbaru dari Kami</h2>
-                        <p className="text-slate-600 dark:text-slate-400">Ikuti perkembangan berita dan kajian terkini.</p>
+                        <span className="tag-badge mb-3">Warta &amp; Inspirasi</span>
+                        <h2 className="text-3xl sm:text-4xl font-semibold text-[#09090b] tracking-tight leading-[1.2]">
+                            Terbaru dari Kami
+                        </h2>
+                        <p className="text-sm sm:text-base text-[#52525b] mt-1.5">
+                            Ikuti perkembangan warta dakwah, gagasan, dan catatan kegiatan kampus.
+                        </p>
                     </div>
-                    <Link href="/blog" className="hidden sm:flex items-center text-primary font-medium hover:text-emerald-700 transition-colors">
-                        Lihat Semua <ArrowRight size={20} className="ml-2" />
+
+                    <Link
+                        href="/blog"
+                        className="btn-light-neutral hidden sm:inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium shrink-0"
+                    >
+                        <span>Lihat Semua</span>
+                        <ArrowRight className="w-4 h-4" />
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {/* Posts Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                     {error && (
-                        <div className="col-span-full rounded-xl border border-red-200 bg-red-50 px-6 py-10 text-center">
-                            <p className="font-semibold text-red-800">Artikel gagal dimuat.</p>
-                            <p className="mt-2 text-sm text-red-700">Coba muat ulang halaman.</p>
+                        <div className="col-span-full rounded-[36px] border border-[#ececee] bg-white p-8 text-center">
+                            <p className="text-sm font-semibold text-[#09090b]">Artikel belum dapat dimuat</p>
+                            <p className="text-xs text-[#52525b] mt-1">Silakan segarkan halaman untuk mencoba kembali.</p>
                         </div>
                     )}
 
                     {!error && posts?.map((post) => (
-                        <article key={post.id} className="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-slate-200 h-full">
-                            <div className="relative h-48 overflow-hidden bg-slate-100">
+                        <article
+                            key={post.id}
+                            className="group flex flex-col rounded-[36px] bg-white border border-[#ececee] overflow-hidden transition-colors hover:border-[#d4d4d8]"
+                        >
+                            {/* Image Header */}
+                            <div className="relative h-48 sm:h-52 w-full bg-[#f4f4f5] overflow-hidden">
                                 {post.image_url ? (
                                     <Image
                                         src={post.image_url}
                                         alt={post.title}
                                         fill
-                                        className="object-cover"
+                                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                                     />
                                 ) : (
                                     <Image
                                         src="/placeholder.png"
                                         alt="Placeholder"
                                         fill
-                                        className="object-cover"
+                                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                                     />
                                 )}
-                                <div className="absolute top-3 left-3 bg-white/95 border border-slate-200 px-2.5 py-0.5 rounded-md text-xs font-semibold text-emerald-800 shadow-xs">
-                                    {post.category}
-                                </div>
                             </div>
 
-                            <div className="flex-1 p-6 flex flex-col">
-                                <div className="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 mb-3">
-                                    <span className="flex items-center gap-1">
-                                        <Calendar size={14} />
-                                        {new Date(post.created_at).toLocaleDateString('id-ID', {
-                                            day: 'numeric',
-                                            month: 'short',
-                                            year: 'numeric'
-                                        })}
-                                    </span>
-                                    <span className="flex items-center gap-1">
-                                        <User size={14} /> {post.author || 'Admin'}
-                                    </span>
+                            {/* Content Body with 28px internal padding (p-7) */}
+                            <div className="p-7 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div className="flex items-center justify-between gap-2 mb-3">
+                                        <span className="tag-badge">
+                                            {post.category || 'Artikel'}
+                                        </span>
+                                        <span className="text-xs text-[#52525b]">
+                                            {new Date(post.created_at).toLocaleDateString('id-ID', {
+                                                day: 'numeric',
+                                                month: 'short',
+                                                year: 'numeric'
+                                            })}
+                                        </span>
+                                    </div>
+
+                                    <h3 className="text-xl font-semibold text-[#09090b] tracking-tight mb-2 line-clamp-2 group-hover:text-[#ff5a00] transition-colors leading-snug">
+                                        <Link href={`/blog/${post.slug}`}>
+                                            {post.title}
+                                        </Link>
+                                    </h3>
+
+                                    <p className="text-sm text-[#52525b] leading-relaxed line-clamp-3 mb-6">
+                                        {post.excerpt}
+                                    </p>
                                 </div>
 
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                                    <Link href={`/blog/${post.slug}`}>
-                                        {post.title}
+                                <div className="pt-4 border-t border-[#ececee] flex items-center justify-between text-xs">
+                                    <span className="text-[#71717a] font-normal">
+                                        {post.author || 'Admin'}
+                                    </span>
+                                    <Link
+                                        href={`/blog/${post.slug}`}
+                                        className="inline-flex items-center gap-1.5 font-semibold text-[#09090b] group-hover:text-[#ff5a00] transition-colors"
+                                    >
+                                        <span>Baca Tulisan</span>
+                                        <ArrowRight className="w-3.5 h-3.5" />
                                     </Link>
-                                </h3>
-
-                                <p className="text-slate-600 dark:text-slate-400 text-sm line-clamp-3 mb-4 flex-1">
-                                    {post.excerpt}
-                                </p>
-
-                                <Link
-                                    href={`/blog/${post.slug}`}
-                                    className="inline-flex items-center text-sm font-semibold text-primary hover:text-emerald-700 transition-colors mt-auto"
-                                >
-                                    Baca Selengkapnya
-                                </Link>
+                                </div>
                             </div>
                         </article>
                     ))}
 
                     {!error && (!posts || posts.length === 0) && (
-                        <div className="col-span-full text-center py-10 text-slate-500 dark:text-slate-400">
-                            Belum ada artikel terbaru.
+                        <div className="col-span-full rounded-[36px] border border-[#ececee] bg-white p-8 text-center text-sm text-[#52525b]">
+                            Belum ada artikel terbaru yang dipublikasikan.
                         </div>
                     )}
                 </div>
 
+                {/* Mobile All Posts Button */}
                 <div className="mt-8 text-center sm:hidden">
-                    <Link href="/blog" className="inline-flex items-center text-primary font-medium hover:text-emerald-700 transition-colors">
-                        Lihat Semua Artikel <ArrowRight size={20} className="ml-2" />
+                    <Link
+                        href="/blog"
+                        className="btn-light-neutral inline-flex items-center justify-center gap-2 w-full py-3 text-sm font-medium"
+                    >
+                        <span>Lihat Semua Artikel</span>
+                        <ArrowRight className="w-4 h-4" />
                     </Link>
                 </div>
             </div>

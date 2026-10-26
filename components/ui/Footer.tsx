@@ -2,159 +2,111 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MapPin, Mail, Instagram, ArrowRight, Youtube } from 'lucide-react';
+import { MapPin, Mail, Instagram, Youtube, ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
-    const pathname = usePathname();
-    const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+  const currentYear = new Date().getFullYear();
 
-    // Hide footer on dashboard pages
-    if (pathname?.startsWith('/dashboard')) {
-        return null;
-    }
+  if (pathname?.startsWith('/dashboard')) {
+    return null;
+  }
 
-    return (
-        <footer className="bg-zinc-950 text-zinc-300 pt-20 pb-10 border-t border-zinc-900 relative overflow-hidden">
-            {/* Dekorasi Background Halus (Opsional) */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50"></div>
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8">
-
-                    {/* 1. Logo & Identitas (Mengambil 5 kolom di desktop) */}
-                    <div className="md:col-span-5 space-y-6">
-                        <div>
-                            <h3 className="text-2xl font-bold text-white inline-block">
-                                Java Al-'Alim
-                            </h3>
-                            <p className="text-emerald-400 text-xs mt-1 font-semibold">
-                                Kabinet Fathul Afaq (1447/1448 H)
-                            </p>
-                        </div>
-                        <p className="text-zinc-400 text-sm leading-relaxed max-w-sm">
-                            Jama’ah Vokasi Al-‘Alim (Java) adalah Lembaga Dakwah Fakultas di Sekolah Vokasi UGM. Berkomitmen untuk membuka cakrawala pemikiran dan menebar kebermanfaatan.
-                        </p>
-
-                        {/* Quote Kecil / Tagline */}
-                        <div className="inline-block px-3.5 py-1.5 rounded-md bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 italic">
-                            "Membuka Cakrawala, Menebar Manfaat."
-                        </div>
-                    </div>
-
-                    {/* 2. Quick Links (Mengambil 3 kolom) */}
-                    <div className="md:col-span-3 space-y-6">
-                        <h4 className="text-white font-semibold text-base border-b border-zinc-800 pb-2 inline-block">
-                            Menu Utama
-                        </h4>
-                        <ul className="space-y-2.5">
-                            {[
-                                { name: 'Beranda', href: '/' },
-                                { name: 'Profil Organisasi', href: '/profile' },
-                                { name: 'Blog & Dakwah', href: '/blog' },
-                            ].map((item) => (
-                                <li key={item.name}>
-                                    <Link
-                                        href={item.href}
-                                        className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors"
-                                    >
-                                        {item.name}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* 3. Kontak & Sosmed (Mengambil 4 kolom) */}
-                    <div className="md:col-span-4 space-y-6">
-                        <h4 className="text-white font-semibold text-base border-b border-zinc-800 pb-2 inline-block">
-                            Hubungi Kami
-                        </h4>
-                        <ul className="space-y-3 text-sm">
-                            <li className="flex items-start gap-3 text-zinc-400">
-                                <MapPin className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                                <span>
-                                    Sekolah Vokasi, Universitas Gadjah Mada,<br />
-                                    Yogyakarta, Indonesia.
-                                </span>
-                            </li>
-                            <li className="flex items-center gap-3">
-                                <Mail className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-                                <a href="mailto:javaugm1447@gmail.com" className="text-zinc-400 hover:text-white transition-colors">
-                                    javaugm1447@gmail.com
-                                </a>
-                            </li>
-                        </ul>
-
-                        {/* Social Media Buttons */}
-                        <div className="pt-2">
-                            <p className="text-xs text-zinc-400 mb-3 uppercase tracking-wider font-semibold">
-                                Media Sosial
-                            </p>
-                            <div className="flex flex-wrap gap-2.5">
-                                {/* 1. Instagram */}
-                                <a
-                                    href="https://instagram.com/javaugm"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="min-w-11 min-h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
-                                    aria-label="Instagram"
-                                >
-                                    <Instagram className="w-5 h-5" />
-                                </a>
-
-                                {/* 2. TikTok (Custom SVG Icon) */}
-                                <a
-                                    href="https://www.tiktok.com/@Javaugm1147"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="min-w-11 min-h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
-                                    aria-label="TikTok"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="w-5 h-5"
-                                    >
-                                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-                                    </svg>
-                                </a>
-
-                                {/* 3. YouTube */}
-                                <a
-                                    href="https://youtube.com/@javaugm"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="min-w-11 min-h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
-                                    aria-label="YouTube"
-                                >
-                                    <Youtube className="w-5 h-5" />
-                                </a>
-
-                                {/* 4. Email */}
-                                <a
-                                    href="mailto:javaugm1447@gmail.com"
-                                    className="min-w-11 min-h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
-                                    aria-label="Email"
-                                >
-                                    <Mail className="w-5 h-5" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Copyright Section */}
-                <div className="border-t border-zinc-900 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-500">
-                    <p className="text-zinc-400">&copy; {currentYear} Jama’ah Vokasi Al-‘Alim (Java) UGM. All rights reserved.</p>
-                </div>
+  return (
+    <footer className="mt-20 border-t border-[#ececee] bg-[#18181b] text-[#f4f4f5] rounded-t-[36px] sm:rounded-t-[48px] overflow-hidden">
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 pt-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-[#27272a]">
+          {/* Brand Column */}
+          <div className="md:col-span-5 space-y-4">
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-lg text-white tracking-tight">
+                Java Al-'Alim
+              </span>
+              <span className="orange-badge text-[10px] px-2 py-0.5">
+                Fathul Afaq
+              </span>
             </div>
-        </footer>
-    );
+            <p className="text-[14px] text-[#a1a1aa] leading-relaxed max-w-sm">
+              Jama'ah Vokasi Al-'Alim (Java) adalah Lembaga Dakwah Fakultas di Sekolah Vokasi Universitas Gadjah Mada. Membuka cakrawala pemikiran dan menebar kemanfaatan.
+            </p>
+            <div className="pt-2 text-xs text-[#71717a]">
+              Sekolah Vokasi UGM 1447/1448 H
+            </div>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="text-[13px] font-semibold uppercase tracking-wider text-[#71717a]">
+              Navigasi
+            </h4>
+            <ul className="space-y-2 text-[14px]">
+              <li>
+                <Link href="/" className="text-[#d4d4d8] hover:text-white transition-colors">
+                  Beranda
+                </Link>
+              </li>
+              <li>
+                <Link href="/profile" className="text-[#d4d4d8] hover:text-white transition-colors">
+                  Profil Organisasi
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="text-[#d4d4d8] hover:text-white transition-colors">
+                  Artikel & Opini
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact & Socials */}
+          <div className="md:col-span-4 space-y-3">
+            <h4 className="text-[13px] font-semibold uppercase tracking-wider text-[#71717a]">
+              Kontak
+            </h4>
+            <div className="space-y-2.5 text-[14px] text-[#a1a1aa]">
+              <div className="flex items-start gap-2.5">
+                <MapPin size={16} className="text-[#71717a] mt-0.5 flex-shrink-0" />
+                <span>Sekolah Vokasi UGM, Sekip Unit 1, Sleman, D.I. Yogyakarta</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Mail size={16} className="text-[#71717a] flex-shrink-0" />
+                <a href="mailto:javaugm1447@gmail.com" className="hover:text-white transition-colors">
+                  javaugm1447@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div className="pt-3 flex items-center gap-2">
+              <a
+                href="https://instagram.com/javaugm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full border border-[#27272a] bg-[#27272a]/60 hover:bg-[#27272a] flex items-center justify-center text-[#a1a1aa] hover:text-white transition-all"
+                aria-label="Instagram Java UGM"
+              >
+                <Instagram size={15} />
+              </a>
+              <a
+                href="https://youtube.com/@javaugm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full border border-[#27272a] bg-[#27272a]/60 hover:bg-[#27272a] flex items-center justify-center text-[#a1a1aa] hover:text-white transition-all"
+                aria-label="YouTube Java UGM"
+              >
+                <Youtube size={15} />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#71717a]">
+          <p>© {currentYear} Jama'ah Vokasi Al-'Alim. Hak cipta dilindungi.</p>
+          <div className="flex items-center gap-6">
+            <span className="text-[#52525b]">Universitas Gadjah Mada</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }

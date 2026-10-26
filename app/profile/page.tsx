@@ -1,288 +1,317 @@
-'use client';
-
 import Image from 'next/image';
-import { Users, BookOpen, Heart, Award, Target, UserCircle, Quote, Camera, Globe } from 'lucide-react';
-import VisiMisi from '@/components/home/VisiMisi';
-
-export default function ProfilePage() {
-    return (
-        <div className="bg-white dark:bg-zinc-950 min-h-screen pb-20 overflow-x-hidden">
-            {/* 1. Hero Section */}
-            <section className="relative h-[70vh] flex items-center justify-center overflow-hidden pt-20">
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/herobg.png"
-                        alt="Profile Background"
-                        fill
-                        className="object-cover scale-105"
-                        priority
-                    />
-                    {/* Overlay Layered Gradients */}
-                    <div className="absolute inset-0 bg-zinc-950/40"></div>
-                    <div
-                        className="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/60 to-zinc-950"></div>
-                    <div
-                        className="absolute inset-0 bg-gradient-to-r from-emerald-950/40 via-transparent to-emerald-950/40"></div>
-                </div>
-
-                <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-                    <div className="inline-flex items-center gap-2 rounded-md px-3.5 py-1 text-xs font-medium text-emerald-200 bg-emerald-950/70 border border-emerald-500/40 mb-6">
-                        <span>Lembaga Dakwah Fakultas</span>
-                    </div>
-
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
-                        Java <span className="text-emerald-300">Al-'Alim</span>
-                    </h1>
-
-                    <p className="text-lg md:text-xl text-zinc-300 max-w-3xl mx-auto leading-relaxed font-light italic">
-                        "Rumah perjuangan dan persaudaraan mahasiswa Sekolah Vokasi UGM dalam bingkai nilai-nilai keislaman."
-                    </p>
-
-                    <div className="mt-10 flex flex-col items-center">
-                        <div className="h-12 w-px bg-emerald-500/30"></div>
-                        <p className="mt-4 text-xs text-emerald-300 font-medium">
-                            Kabinet Fathul Afaq (1447/1448 H)
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            {/* 2. Profil JAVA */}
-            <section className="py-20 relative overflow-hidden">
-                <div className="max-w-6xl mx-auto px-4">
-                    <div className="relative bg-zinc-50 dark:bg-zinc-900/50 rounded-2xl p-8 md:p-12 border border-zinc-200 dark:border-zinc-800">
-                        <div className="flex flex-col md:flex-row items-center gap-10 relative z-10">
-                            {/* Bagian Logo */}
-                            <div className="relative">
-                                <div className="w-48 h-48 md:w-56 md:h-56 bg-white dark:bg-zinc-800 rounded-2xl p-6 shadow-sm flex items-center justify-center border border-zinc-200 dark:border-zinc-700">
-                                    <Image
-                                        src="/logo.png"
-                                        alt="Logo Jama'ah Vokasi Al-'Alim"
-                                        width={200}
-                                        height={200}
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Bagian Deskripsi */}
-                            <div className="flex-1 text-center md:text-left">
-                                <span className="text-emerald-700 font-semibold text-xs uppercase tracking-wider">Profil Organisasi</span>
-                                <h2 className="text-2xl md:text-4xl font-bold text-zinc-900 dark:text-white mt-1 mb-4 tracking-tight">
-                                    Jama'ah Vokasi <span className="text-emerald-700">Al-'Alim</span>
-                                </h2>
-
-                                <div className="space-y-4">
-                                    <p className="text-base text-zinc-700 dark:text-zinc-300 leading-relaxed">
-                                        <strong className="text-emerald-800 dark:text-emerald-300 font-semibold">Jama’ah Vokasi Al-‘Alim (JAVA) UGM</strong> adalah wadah strategis bagi mahasiswa muslim dalam membangun lingkungan Sekolah Vokasi yang beriman, bertakwa, dan berakhlak mulia. Kami hadir untuk menanamkan nilai-nilai keislaman berdasarkan Al-Qur’an dan As-Sunnah sebagai fondasi utama dalam setiap aktivitas akademis.
-                                    </p>
-                                    <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed border-l-3 border-emerald-600/40 pl-4 italic">
-                                        "Menumbuhkan kesadaran civitas academica untuk berkontribusi bagi kemaslahatan umat, mempererat ukhuwah, serta membangun sinergi multilateral guna mengembangkan ilmu pengetahuan yang bermanfaat bagi masyarakat luas."
-                                    </p>
-                                </div>
-
-                                <div className="mt-6 flex flex-wrap justify-center md:justify-start gap-2">
-                                    <span className="px-3 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium">
-                                        #IntelektualMuslim
-                                    </span>
-                                    <span className="px-3 py-1 rounded-md bg-amber-50 border border-amber-200 text-amber-900 text-xs font-medium">
-                                        #LembagaDakwahVokasi
-                                    </span>
-                                    <span className="px-3 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-700 text-xs font-medium">
-                                        #FathulAfaq
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 3. Visi Misi */}
-            <div className="py-12 bg-zinc-50/50 dark:bg-transparent">
-                <VisiMisi/>
-            </div>
-
-            {/* 4. Philosophy Section */}
-            <section className="py-12 overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                        <div className="space-y-8 order-2 lg:order-1">
-                            <div>
-                                <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-4">
-                                    Filosofi <span className="text-emerald-500">Kabinet</span>
-                                </h2>
-                                <div className="h-1 w-20 bg-emerald-600 rounded-sm"></div>
-                            </div>
-
-                            <div className="space-y-6">
-                                <h3 className="text-2xl md:text-3xl font-serif italic text-zinc-800 dark:text-zinc-200">
-                                    "Fathul Afaq"
-                                </h3>
-                                <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-lg leading-relaxed">
-                                    Bermakna <strong className="text-emerald-700">"Pembuka Cakrawala"</strong>. Nama ini merepresentasikan semangat perluasan wawasan dan kebermanfaatan nilai Islam di bidang vokasi.
-                                </p>
-                                <div className="p-5 bg-emerald-50/60 border-l-3 border-emerald-700 rounded-r-lg">
-                                    <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed italic">
-                                        "Kami percaya bahwa mahasiswa vokasi memiliki potensi luar biasa untuk membuka cakrawala baru dalam teknologi, sosial, dan humaniora."
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="order-1 lg:order-2 relative">
-                            <div className="relative h-[400px] md:h-[450px] w-full overflow-hidden rounded-2xl shadow-sm border border-slate-200">
-                                <Image
-                                    src="/kabinet.png"
-                                    alt="Philosophy"
-                                    fill
-                                    className="object-cover"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
-                                <div className="absolute bottom-6 left-6 right-6">
-                                    <p className="text-emerald-300 font-semibold text-xs mb-1">Spirit 1447 H</p>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
-                                        Membuka Cakrawala,<br />Menebar Manfaat.
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 5. Sambutan Ketua */}
-            <section className="py-20 relative overflow-hidden">
-                <div className="max-w-6xl mx-auto px-4">
-                    <div className="relative bg-zinc-50 dark:bg-zinc-900/50 rounded-2xl p-8 md:p-14 border border-zinc-200 dark:border-zinc-800">
-                        <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                            <Quote className="text-emerald-700 w-20 h-20 stroke-[1px]"/>
-                        </div>
-
-                        <div className="flex flex-col md:flex-row items-center gap-12 relative z-10">
-                            {/* Frame Foto */}
-                            <div className="relative">
-                                <div className="relative w-56 h-72 md:w-72 md:h-96 rounded-xl overflow-hidden ring-1 ring-zinc-200 dark:ring-zinc-800 p-2 bg-white dark:bg-zinc-900 shadow-xs">
-                                    <div className="relative w-full h-full rounded-lg overflow-hidden">
-                                        <Image
-                                            src="/ketua.png"
-                                            alt="Ketua Umum Java"
-                                            fill
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="flex-1 text-center md:text-left space-y-6">
-                                <div className="space-y-2">
-                                    <div className="flex items-center justify-center md:justify-start gap-2">
-                                        <div className="h-px w-6 bg-emerald-700"></div>
-                                        <span className="text-emerald-800 dark:text-emerald-300 font-medium text-xs uppercase tracking-wider">
-                                            Sambutan Ketua
-                                        </span>
-                                    </div>
-                                    <h2 className="text-3xl md:text-4xl font-serif font-medium text-zinc-900 dark:text-zinc-50">
-                                        Muhammad Taufiqul Hakim
-                                    </h2>
-                                </div>
-
-                                <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-serif italic">
-                                    "Selamat datang di keluarga besar Java Al-'Alim. Di era disrupsi ini, kita membutuhkan pemuda yang tidak hanya cakap secara vokasional, tetapi juga kokoh secara spiritual. Mari bersama-sama membuka cakrawala untuk menebar kebermanfaatan seluas-luasnya."
-                                </p>
-
-                                <div className="pt-2">
-                                    <div className="inline-flex items-center gap-3">
-                                        <div className="h-10 w-px bg-zinc-300 dark:bg-zinc-700"></div>
-                                        <div className="text-left">
-                                            <p className="text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider">
-                                                Mas'ul Utama
-                                            </p>
-                                            <p className="text-xs text-zinc-500">
-                                                Kabinet Fathul Afaq 1447/1448 H
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 6. Organizational Structure */}
-            <section className="py-20 bg-zinc-50 dark:bg-zinc-900/30">
-                <div className="max-w-7xl mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-3">Struktur Organisasi</h2>
-                        <p className="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto text-sm md:text-base">
-                            Sinergi antar bidang untuk mewujudkan visi besar Fathul Afaq.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {departments.map((dept, idx) => (
-                            <div
-                                key={idx}
-                                className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 rounded-xl transition-colors hover:border-emerald-600/40 shadow-xs"
-                            >
-                                <div className="w-11 h-11 bg-emerald-50 text-emerald-800 rounded-lg flex items-center justify-center mb-4 border border-emerald-100">
-                                    <dept.icon size={22}/>
-                                </div>
-                                <h3 className="font-bold text-zinc-900 dark:text-white text-lg mb-2">
-                                    {dept.title}
-                                </h3>
-                                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                                    {dept.desc}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        </div>
-    );
-}
+import {
+    Users,
+    BookOpen,
+    Heart,
+    Award,
+    Target,
+    UserCircle,
+    Camera,
+    Globe,
+    Compass
+} from 'lucide-react';
 
 const departments = [
     {
-        title: "PH",
-        desc: "Jantung organisasi yang mengelola administrasi, keuangan, dan kebijakan strategis.",
+        title: "PH (Pengurus Harian)",
+        desc: "Jantung koordinasi organisasi yang mengelola administrasi, tata kelola keuangan, serta perumusan kebijakan strategis lembaga.",
         icon: UserCircle,
     },
     {
-        title: "BKK",
-        desc: "Fokus pada penjagaan ruhiyah pengurus, peningkatan kompetensi, dan regenerasi kader.",
+        title: "BKK (Biro Kaderisasi)",
+        desc: "Fokus pada pembinaan ruhiyah pengurus, peningkatan kompetensi kepemimpinan, dan keberlanjutan regenerasi kader dakwah.",
         icon: Users,
     },
     {
-        title: "Media",
-        desc: "Wajah organisasi yang menyebarkan konten dakwah kreatif melalui desain dan media digital.",
+        title: "Media & Syiar Digital",
+        desc: "Wajah publik organisasi yang memproduksi konten dakwah kreatif, publikasi digital, dan pengelolaan identitas visual lembaga.",
         icon: Camera,
     },
     {
         title: "Kemuslimahan",
-        desc: "Wadah khusus mahasiswi untuk berkarya, berdaya, dan mengkaji isu keperempuanan.",
+        desc: "Ruang aktualisasi mahasiswi vokasi untuk berdaya, mengkaji fikih perempuan, serta memperkuat solidaritas muslimah.",
         icon: Heart,
     },
     {
-        title: "DPS",
-        desc: "Jembatan kebaikan yang terjun langsung membantu masyarakat dan merespons isu sosial.",
+        title: "DPS (Departemen Pelayanan Sosial)",
+        desc: "Penyalur aksi nyata pengabdian, tanggap kemanusiaan, serta advokasi kepedulian sosial bagi civitas dan masyarakat luas.",
         icon: Target,
     },
     {
         title: "Kewirausahaan",
-        desc: "Penopang kemandirian finansial organisasi melalui kewirausahaan mahasiswa.",
+        desc: "Motor kemandirian finansial lembaga melalui pengelolaan unit usaha kreatif mahasiswa berbasis nilai syariah.",
         icon: Award,
     },
     {
-        title: "VISA",
-        desc: "Divisi yang berfokus pada pendalaman ilmu Al-Qur’an dan Hadits serta penerapannya.",
+        title: "VISA (Vokasi Studi Al-Qur'an)",
+        desc: "Wadah pendalaman ilmu Al-Qur'an, tahsin, kajian keislaman tematik, dan pembiasaan adab Qur'ani dalam keseharian.",
         icon: BookOpen,
     },
     {
-        title: "Eksternal",
-        desc: "Menjalin hubungan strategis dengan stakeholder luar dan memperluas jejaring organisasi.",
+        title: "Hubungan Eksternal",
+        desc: "Pembangun jejaring kolaborasi dengan birokrasi kampus, himpunan mahasiswa, serta lembaga dakwah tingkat universitas dan nasional.",
         icon: Globe,
     }
 ];
+
+const missions = [
+    "Menanamkan nilai-nilai keislaman berlandaskan Al-Qur'an dan As-Sunnah dalam kehidupan akademis.",
+    "Menumbuhkan kesadaran civitas academica untuk berkontribusi bagi kemaslahatan masyarakat.",
+    "Meningkatkan dan mendiseminasikan ilmu pengetahuan aplikatif untuk kebaikan umat.",
+    "Mempererat ukhuwah islamiyah dan rasa persaudaraan antar civitas academica Sekolah Vokasi UGM.",
+    "Membangun hubungan kolaboratif multilateral dengan mitra kelembagaan di dalam dan luar kampus."
+];
+
+export default function ProfilePage() {
+    return (
+        <div className="bg-[#f4f4f5] min-h-screen py-12 md:py-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+                {/* 1. Hero Editorial Section */}
+                <section className="max-w-3xl">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[12px] bg-[#ff5a00] text-white text-xs font-semibold tracking-wide uppercase mb-4">
+                        Profil Lembaga
+                    </div>
+                    <h1 className="text-4xl md:text-5xl lg:text-[56px] font-semibold text-[#09090b] tracking-tight leading-[1.14]">
+                        Jama'ah Vokasi Al-'Alim.
+                    </h1>
+                    <p className="mt-4 text-base md:text-lg text-[#52525b] leading-relaxed">
+                        Rumah perjuangan dan persaudaraan mahasiswa Sekolah Vokasi UGM dalam bingkai nilai keislaman, membuka wawasan dan menebar kemanfaatan bersama.
+                    </p>
+                </section>
+
+                {/* 2. Profil Lembaga & Identitas */}
+                <section className="bg-white rounded-[36px] border border-[#ececee] p-7 md:p-12 shadow-none">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+                        {/* Logo Container */}
+                        <div className="lg:col-span-4 flex justify-center">
+                            <div className="w-48 h-48 md:w-56 md:h-56 rounded-[28px] bg-[#f4f4f5] border border-[#ececee] p-8 flex items-center justify-center">
+                                <Image
+                                    src="/logo.png"
+                                    alt="Logo Jama'ah Vokasi Al-'Alim"
+                                    width={180}
+                                    height={180}
+                                    className="object-contain"
+                                    priority
+                                />
+                            </div>
+                        </div>
+
+                        {/* Description */}
+                        <div className="lg:col-span-8 space-y-5">
+                            <div>
+                                <span className="inline-flex items-center px-3 py-1 rounded-[12px] bg-[#f4f4f5] border border-[#ececee] text-xs font-medium text-[#52525b] mb-3">
+                                    Lembaga Dakwah Fakultas
+                                </span>
+                                <h2 className="text-2xl md:text-3xl font-semibold text-[#09090b] tracking-tight">
+                                    Fondasi Gerakan Intelektual Muslim
+                                </h2>
+                            </div>
+
+                            <p className="text-sm md:text-base text-[#3f3f46] leading-relaxed">
+                                <strong className="text-[#09090b] font-semibold">Jama'ah Vokasi Al-'Alim (JAVA) UGM</strong> merupakan ruang gerak mahasiswa muslim untuk membentuk atmosfer kampus vokasi yang menjunjung tinggi keimanan, ketakwaan, dan keluhuran akhlak. Kami berikhtiar menanamkan prinsip Al-Qur'an dan As-Sunnah sebagai landasan setiap karya vokasional.
+                            </p>
+
+                            <div className="border-l-2 border-[#ff5a00] pl-4 py-1">
+                                <p className="text-sm text-[#52525b] italic leading-relaxed">
+                                    "Menumbuhkan kesadaran kolektif untuk berkontribusi nyata, memperkuat ukhuwah, serta membangun kolaborasi demi pengembangan ilmu yang bermanfaat bagi masyarakat."
+                                </p>
+                            </div>
+
+                            <div className="flex flex-wrap gap-2 pt-2">
+                                <span className="px-3 py-1 rounded-[12px] bg-white border border-[#ececee] text-xs font-medium text-[#18181b]">
+                                    #IntelektualMuslim
+                                </span>
+                                <span className="px-3 py-1 rounded-[12px] bg-white border border-[#ececee] text-xs font-medium text-[#18181b]">
+                                    #LembagaDakwahVokasi
+                                </span>
+                                <span className="px-3 py-1 rounded-[12px] bg-white border border-[#ececee] text-xs font-medium text-[#18181b]">
+                                    #FathulAfaq
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 3. Filosofi Kabinet Fathul Afaq */}
+                <section className="bg-[#09090b] text-white rounded-[36px] border border-[#27272a] p-7 md:p-12 shadow-none">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+                        <div className="lg:col-span-7 space-y-6">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[12px] bg-[#ff5a00] text-white text-xs font-semibold tracking-wide uppercase">
+                                Kabinet Fathul Afaq (1447/1448 H)
+                            </div>
+
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-[1.16]">
+                                Membuka Cakrawala, Menebar Manfaat.
+                            </h2>
+
+                            <p className="text-sm md:text-base text-[#a1a1aa] leading-relaxed">
+                                <span className="text-white font-medium">Fathul Afaq</span> bermakna pembuka cakrawala. Nama ini menegaskan komitmen pengurus untuk memperluas perspektif keilmuan, mengasah kepedulian sosial, serta mengalirkan maslahat Islam di lingkungan vokasi UGM.
+                            </p>
+
+                            <div className="p-5 rounded-[20px] bg-[#18181b] border border-[#27272a]">
+                                <p className="text-sm text-[#d4d4d8] leading-relaxed italic">
+                                    Mahasiswa vokasi memiliki kapasitas terapan yang krusial. Nilai spiritualitas menjadi kompas agar keahlian teknis senantiasa bermuara pada pengabdian tulus bagi sesama.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="lg:col-span-5">
+                            <div className="relative h-64 md:h-80 w-full rounded-[24px] overflow-hidden border border-[#27272a] bg-[#18181b]">
+                                <Image
+                                    src="/kabinet.png"
+                                    alt="Filosofi Kabinet Fathul Afaq"
+                                    fill
+                                    className="object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                                <div className="absolute bottom-5 left-5 right-5">
+                                    <p className="text-xs uppercase font-semibold text-[#ff5a00] tracking-wider mb-1">
+                                        Spirit Perjuangan
+                                    </p>
+                                    <p className="text-sm font-medium text-white">
+                                        Integritas Ruhiyah dan Keunggulan Terapan
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 4. Sambutan Mas'ul Utama */}
+                <section className="bg-white rounded-[36px] border border-[#ececee] p-7 md:p-12 shadow-none">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+                        <div className="md:col-span-4 flex justify-center">
+                            <div className="relative w-60 h-80 rounded-[28px] overflow-hidden border border-[#ececee] bg-[#f4f4f5]">
+                                <Image
+                                    src="/ketua.png"
+                                    alt="Muhammad Taufiqul Hakim"
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="md:col-span-8 space-y-5">
+                            <div>
+                                <span className="inline-flex items-center px-3 py-1 rounded-[12px] bg-[#f4f4f5] border border-[#ececee] text-xs font-semibold text-[#09090b] mb-3">
+                                    Sambutan Pimpinan
+                                </span>
+                                <h2 className="text-2xl md:text-3xl font-semibold text-[#09090b] tracking-tight">
+                                    Muhammad Taufiqul Hakim
+                                </h2>
+                                <p className="text-xs text-[#71717a] mt-1 font-medium">
+                                    Ketua Umum (Mas'ul Utama) Kabinet Fathul Afaq 1447/1448 H
+                                </p>
+                            </div>
+
+                            <blockquote className="border-l-2 border-[#ff5a00] pl-5 py-2">
+                                <p className="text-base md:text-lg text-[#3f3f46] italic leading-relaxed">
+                                    "Selamat datang di keluarga besar Java Al-'Alim. Di tengah dinamika zaman, kita memerlukan generasi muda yang cakap secara kompetensi terapan sekaligus kokoh dalam keteguhan ruhiyah. Mari bersama-sama meluaskan ruang gerak dakwah dan menebar kebermanfaatan seluas-luasnya."
+                                </p>
+                            </blockquote>
+
+                            <div className="pt-2">
+                                <span className="inline-flex items-center gap-2 text-xs font-semibold text-[#09090b]">
+                                    <Compass size={14} className="text-[#ff5a00]" />
+                                    Sekolah Vokasi Universitas Gadjah Mada
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 5. Nilai Dakwah (Visi & Misi) */}
+                <section className="space-y-6">
+                    <div>
+                        <span className="text-xs uppercase font-semibold tracking-wider text-[#ff5a00]">
+                            Arah & Nilai Gerak
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-semibold text-[#09090b] tracking-tight mt-1">
+                            Visi & Misi Strategis
+                        </h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                        {/* Visi Card */}
+                        <div className="lg:col-span-5 bg-white rounded-[36px] border border-[#ececee] p-7 md:p-10 flex flex-col justify-between shadow-none">
+                            <div>
+                                <div className="inline-flex items-center px-3 py-1 rounded-[12px] bg-[#09090b] text-white text-xs font-semibold mb-6">
+                                    Visi Lembaga
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-semibold text-[#09090b] leading-snug">
+                                    Wadah strategis mahasiswa muslim dalam membangun lingkungan Sekolah Vokasi yang beriman, bertakwa, dan berakhlak mulia.
+                                </h3>
+                            </div>
+                            <div className="pt-8 border-t border-[#ececee] mt-8">
+                                <p className="text-xs text-[#71717a]">
+                                    Landasan pergerakan seluruh elemen kepengurusan JAVA UGM.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Misi Card */}
+                        <div className="lg:col-span-7 bg-white rounded-[36px] border border-[#ececee] p-7 md:p-10 shadow-none">
+                            <div className="inline-flex items-center px-3 py-1 rounded-[12px] bg-[#f4f4f5] border border-[#ececee] text-xs font-semibold text-[#09090b] mb-6">
+                                Misi Pelaksanaan
+                            </div>
+
+                            <ul className="space-y-4">
+                                {missions.map((mission, idx) => (
+                                    <li key={idx} className="flex items-start gap-4 p-3.5 rounded-[16px] bg-[#f4f4f5] border border-[#ececee]">
+                                        <span className="w-7 h-7 rounded-[10px] bg-white border border-[#ececee] text-[#09090b] text-xs font-semibold flex items-center justify-center shrink-0">
+                                            {idx + 1}
+                                        </span>
+                                        <p className="text-sm text-[#3f3f46] leading-relaxed">
+                                            {mission}
+                                        </p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 6. Struktur Organisasi */}
+                <section className="space-y-6">
+                    <div>
+                        <span className="text-xs uppercase font-semibold tracking-wider text-[#ff5a00]">
+                            Sinergi Bidang
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-semibold text-[#09090b] tracking-tight mt-1">
+                            Struktur Organisasi
+                        </h2>
+                        <p className="text-sm md:text-base text-[#52525b] mt-2">
+                            Kolaborasi antardivisi yang menggerakkan dakwah aplikatif, inklusif, dan profesional.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {departments.map((dept, idx) => {
+                            const IconComponent = dept.icon;
+                            return (
+                                <div
+                                    key={idx}
+                                    className="group bg-white rounded-[36px] border border-[#ececee] p-7 flex flex-col shadow-none hover:border-[#09090b] transition-colors"
+                                >
+                                    <div className="w-12 h-12 rounded-[14px] bg-[#f4f4f5] border border-[#ececee] flex items-center justify-center text-[#09090b] mb-5 group-hover:bg-[#09090b] group-hover:text-white transition-colors">
+                                        <IconComponent size={22} />
+                                    </div>
+
+                                    <h3 className="text-base font-semibold text-[#09090b] mb-2 leading-snug">
+                                        {dept.title}
+                                    </h3>
+
+                                    <p className="text-xs md:text-sm text-[#52525b] leading-relaxed">
+                                        {dept.desc}
+                                    </p>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    );
+}

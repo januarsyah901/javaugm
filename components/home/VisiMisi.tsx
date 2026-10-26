@@ -1,4 +1,4 @@
-import { Target, CheckCircle2 } from 'lucide-react';
+import { Target } from 'lucide-react';
 
 export default function VisiMisi() {
     const vision = "Visi JAVA UGM adalah sebagai wadah bagi mahasiswa muslim dalam membangun lingkungan Sekolah Vokasi yang beriman, bertakwa, dan berakhlak mulia.";
@@ -12,43 +12,82 @@ export default function VisiMisi() {
     ];
 
     return (
-        <section className="py-20 bg-slate-50 dark:bg-black">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Visi & Misi</h2>
-                    <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+        <section className="relative">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Section Header */}
+                <div className="mb-10 sm:mb-12">
+                    <span className="tag-badge mb-3">Arah Gerak</span>
+                    <h2 className="text-3xl sm:text-4xl font-semibold text-[#09090b] tracking-tight leading-[1.2]">
+                        Visi &amp; Misi Organisasi
+                    </h2>
+                    <p className="text-sm sm:text-base text-[#52525b] mt-1.5 max-w-xl">
+                        Landasan nilai dan orientasi program kerja Jama&apos;ah Vokasi Al-&apos;Alim dalam menebar manfaat di kampus.
+                    </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                {/* Cards Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
                     {/* Vision Card */}
-                    <div>
-
-                        <div className="flex items-center gap-4 mb-6">
-                            <div className="p-3 bg-primary/10 rounded-xl text-primary">
-                                <Target size={32} />
+                    <div className="lg:col-span-5 rounded-[36px] bg-white border border-[#ececee] p-7 md:p-8 flex flex-col justify-between">
+                        <div>
+                            <div className="flex items-center justify-between">
+                                <span className="tag-badge">Visi Utama</span>
+                                <span className="inline-flex items-center rounded-[12px] bg-[#ff5a00]/10 px-2.5 py-1 text-xs font-semibold text-[#ff5a00]">
+                                    Orientasi
+                                </span>
                             </div>
-                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Visi Kami</h3>
+
+                            <h3 className="text-2xl font-semibold text-[#09090b] tracking-tight mt-6 mb-4">
+                                Membangun Lingkungan Beriman &amp; Berakhlak Mulia
+                            </h3>
+
+                            <p className="text-base text-[#18181b] leading-relaxed">
+                                &ldquo;{vision}&rdquo;
+                            </p>
                         </div>
 
-                        <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed italic">
-                            &#34;{vision}&#34;
-                        </p>
+                        <div className="mt-8 rounded-[20px] bg-[#f4f4f5] border border-[#ececee] p-5">
+                            <div className="flex items-start gap-3">
+                                <div className="w-9 h-9 rounded-full bg-white border border-[#ececee] flex items-center justify-center shrink-0 mt-0.5">
+                                    <Target className="w-4 h-4 text-[#ff5a00]" />
+                                </div>
+                                <div>
+                                    <p className="text-xs font-semibold text-[#09090b]">Fokus Gerakan</p>
+                                    <p className="text-xs text-[#52525b] mt-0.5 leading-relaxed">
+                                        Pembinaan karakter, penguatan akidah, serta kepedulian sosial mahasiswa vokasi.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Mission List */}
-                    <div className="space-y-6">
-                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">5</span>
-                            Misi Kami
-                        </h3>
-
-                        <div className="space-y-4">
-                            {missions.map((mission, index) => (
-                                <div key={index} className="flex gap-4 items-start p-4 bg-white dark:bg-zinc-900 rounded-xl border border-slate-300 dark:border-zinc-800 hover:shadow-md transition-shadow">
-                                    <CheckCircle2 className="flex-shrink-0 text-primary mt-1" size={20} />
-                                    <p className="text-slate-700 dark:text-slate-300">{mission}</p>
+                    {/* Mission Card */}
+                    <div className="lg:col-span-7 rounded-[36px] bg-white border border-[#ececee] p-7 md:p-8 flex flex-col justify-between">
+                        <div>
+                            <div className="flex items-center justify-between pb-5 border-b border-[#ececee]">
+                                <div>
+                                    <span className="tag-badge mb-2">Langkah Strategis</span>
+                                    <h3 className="text-2xl font-semibold text-[#09090b] tracking-tight">
+                                        5 Pilar Misi
+                                    </h3>
                                 </div>
-                            ))}
+                                <span className="text-xs font-medium text-[#52525b] bg-[#f4f4f5] border border-[#ececee] rounded-[12px] px-3 py-1">
+                                    Aksi Nyata
+                                </span>
+                            </div>
+
+                            <div className="divide-y divide-[#ececee]">
+                                {missions.map((mission, index) => (
+                                    <div key={index} className="py-4 first:pt-4 last:pb-0 flex items-start gap-3.5">
+                                        <span className="w-7 h-7 rounded-full bg-[#f4f4f5] border border-[#ececee] text-xs font-semibold text-[#09090b] flex items-center justify-center shrink-0 mt-0.5">
+                                            0{index + 1}
+                                        </span>
+                                        <p className="text-sm sm:text-[15px] text-[#18181b] leading-relaxed">
+                                            {mission}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
