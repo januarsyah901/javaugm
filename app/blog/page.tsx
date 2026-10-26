@@ -17,9 +17,9 @@ export default async function BlogPage() {
             <div className="bg-[#f4f4f5] min-h-screen py-12 md:py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-2xl mx-auto text-center">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[12px] bg-[#ff5a00] text-white text-xs font-semibold mb-6">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00] mb-4">
                             Pemberitahuan
-                        </div>
+                        </p>
                         <h1 className="text-3xl md:text-4xl font-semibold text-[#09090b] tracking-tight mb-4">
                             Wawasan & Tulisan
                         </h1>
@@ -38,11 +38,11 @@ export default async function BlogPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header Section */}
                 <div className="max-w-3xl mb-12">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[12px] bg-[#ff5a00] text-white text-xs font-semibold tracking-wide uppercase mb-4">
-                        Wawasan & Artikel
-                    </div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00] mb-4">
+                        Wawasan &amp; Artikel
+                    </p>
                     <h1 className="text-4xl md:text-5xl lg:text-[56px] font-semibold text-[#09090b] tracking-tight leading-[1.14]">
-                        Jurnal Dakwah & Intelektual Vokasi.
+                        Jurnal Dakwah &amp; Intelektual Vokasi.
                     </h1>
                     <p className="mt-4 text-base md:text-lg text-[#52525b] leading-relaxed">
                         Kumpulan catatan pemikiran, dokumentasi kegiatan, dan gagasan keislaman dari mahasiswa Sekolah Vokasi UGM.

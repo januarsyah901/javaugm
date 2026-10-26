@@ -58,7 +58,7 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
         <div className="space-y-10">
             {/* Filter Pills and Search Bar */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                {/* Category Pills */}
+                {/* Category Filters - Full Rounded */}
                 <div className="flex flex-wrap items-center gap-2">
                     {CATEGORIES.map((cat) => {
                         const isActive = selectedCategory === cat;
@@ -66,7 +66,7 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                             <button
                                 key={cat}
                                 onClick={() => handleCategoryChange(cat)}
-                                className={`h-10 px-4 rounded-[12px] text-sm font-medium transition-all ${
+                                className={`h-10 px-5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all ${
                                     isActive
                                         ? 'bg-[#09090b] text-white shadow-none'
                                         : 'bg-white text-[#52525b] border border-[#ececee] hover:text-[#09090b] hover:border-[#d4d4d8]'
@@ -78,14 +78,14 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                     })}
                 </div>
 
-                {/* Search Bar */}
+                {/* Search Bar - Full Rounded */}
                 <div className="relative w-full md:w-80">
                     <input
                         type="text"
                         placeholder="Cari artikel atau topik..."
                         value={searchQuery}
                         onChange={(e) => handleSearchChange(e.target.value)}
-                        className="w-full h-11 pl-10 pr-4 rounded-[14px] border border-[#ececee] bg-white text-sm text-[#18181b] placeholder:text-[#a1a1aa] focus:outline-none focus:border-[#09090b] transition-colors"
+                        className="w-full h-11 pl-10 pr-4 rounded-full border border-[#ececee] bg-white text-sm text-[#18181b] placeholder:text-[#a1a1aa] focus:outline-none focus:border-[#09090b] transition-colors"
                     />
                     <Search className="absolute left-3.5 top-3.5 text-[#a1a1aa]" size={16} />
                 </div>
@@ -116,22 +116,22 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                                         className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
                                     />
                                 )}
-                                <div className="absolute top-3.5 left-3.5">
-                                    <span className="inline-flex items-center px-3 py-1 rounded-[12px] bg-white/95 backdrop-blur-xs border border-[#ececee] text-[#09090b] text-xs font-semibold">
-                                        {post.category}
-                                    </span>
-                                </div>
                             </div>
 
                             {/* Card Content */}
                             <div className="flex flex-col flex-1">
-                                {/* Metadata */}
-                                <div className="flex items-center gap-4 text-xs text-[#71717a] mb-3">
-                                    <span className="inline-flex items-center gap-1.5">
+                                {/* Metadata with Plain Text Category (No Badge Box) */}
+                                <div className="flex items-center gap-2.5 text-xs text-[#71717a] mb-3">
+                                    <span className="font-semibold uppercase tracking-wider text-[#ff5a00]">
+                                        {post.category}
+                                    </span>
+                                    <span className="w-1 h-1 rounded-full bg-[#d4d4d8]" />
+                                    <span className="inline-flex items-center gap-1">
                                         <Calendar size={13} className="text-[#a1a1aa]" />
                                         {formatDate(post.created_at)}
                                     </span>
-                                    <span className="inline-flex items-center gap-1.5">
+                                    <span className="w-1 h-1 rounded-full bg-[#d4d4d8]" />
+                                    <span className="inline-flex items-center gap-1">
                                         <User size={13} className="text-[#a1a1aa]" />
                                         {post.author || 'Admin Java'}
                                     </span>
@@ -168,13 +168,13 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                 )}
             </div>
 
-            {/* Pagination Controls */}
+            {/* Pagination Controls - Full Rounded */}
             {totalPages > 1 && (
                 <div className="flex justify-center items-center gap-2 pt-6">
                     <button
                         onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                         disabled={currentPage === 1}
-                        className="h-11 px-4 rounded-[14px] text-sm font-medium border border-[#ececee] bg-white text-[#18181b] hover:bg-[#f4f4f5] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                        className="h-11 px-5 rounded-full text-xs font-semibold border border-[#ececee] bg-white text-[#18181b] hover:bg-[#f4f4f5] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                     >
                         Sebelumnya
                     </button>
@@ -182,7 +182,7 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                         <button
                             key={pageNum}
                             onClick={() => setCurrentPage(pageNum)}
-                            className={`h-11 min-w-[44px] px-3.5 rounded-[14px] text-sm font-medium transition-colors ${
+                            className={`h-11 min-w-[44px] px-3.5 rounded-full text-xs font-semibold transition-colors ${
                                 currentPage === pageNum
                                     ? 'bg-[#09090b] text-white border border-[#09090b]'
                                     : 'bg-white text-[#52525b] hover:text-[#09090b] hover:border-[#d4d4d8] border border-[#ececee]'
@@ -194,7 +194,7 @@ export default function BlogList({ initialPosts }: { initialPosts: Post[] }) {
                     <button
                         onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                         disabled={currentPage === totalPages}
-                        className="h-11 px-4 rounded-[14px] text-sm font-medium border border-[#ececee] bg-white text-[#18181b] hover:bg-[#f4f4f5] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                        className="h-11 px-5 rounded-full text-xs font-semibold border border-[#ececee] bg-white text-[#18181b] hover:bg-[#f4f4f5] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                     >
                         Berikutnya
                     </button>

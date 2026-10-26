@@ -1,11 +1,10 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
 import Link from 'next/link';
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { FileText, X, Menu, Users } from "lucide-react";
+import { FileText, X, Menu, Users, ArrowUpRight, Shield } from "lucide-react";
 import SignOutButton from "@/components/dashboard/SignOutButton";
 
 interface User {
@@ -58,42 +57,46 @@ export default function DashboardLayoutClient({
     }, [isSidebarOpen]);
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-black">
-            {/* Mobile Header */}
-            <header className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-white/80 backdrop-blur-md border-b border-slate-200 dark:bg-zinc-900/80 dark:border-zinc-800 md:hidden">
-                <Link href="/" className="flex items-center gap-2">
-                    <div className="relative w-8 h-8 rounded-full overflow-hidden">
+        <div className="min-h-screen bg-[#f4f4f5] text-[#18181b]">
+            {/* Mobile Top Navigation */}
+            <header className="sticky top-0 z-30 flex items-center justify-between px-5 py-3.5 bg-white/95 backdrop-blur-md border-b border-[#ececee] md:hidden">
+                <Link href="/" className="flex items-center gap-2.5">
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden border border-[#ececee]">
                         <Image src="/logo.png" alt="Logo" fill className="object-cover" />
                     </div>
-                    <span className="font-bold text-slate-800 dark:text-white">Java Al-'Alim</span>
+                    <div className="leading-tight">
+                        <span className="font-semibold text-sm text-[#09090b]">Java Al-'Alim</span>
+                        <p className="text-[10px] text-[#71717a]">Panel Pengurus</p>
+                    </div>
                 </Link>
                 <button
                     onClick={() => setIsSidebarOpen(true)}
-                    className="min-h-11 min-w-11 p-2.5 text-slate-600 hover:bg-slate-100 rounded-lg"
-                    aria-label="Buka menu"
+                    className="w-10 h-10 rounded-full border border-[#ececee] flex items-center justify-center text-[#09090b] hover:bg-[#f4f4f5] transition-colors"
+                    aria-label="Buka menu navigasi"
                     aria-expanded={isSidebarOpen}
                 >
-                    <Menu size={24} />
+                    <Menu size={18} />
                 </button>
             </header>
 
-            {/* Overlay */}
+            {/* Backdrop Overlay */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+                    className="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs md:hidden"
                     onClick={() => setIsSidebarOpen(false)}
                 />
             )}
 
-            {/* Sidebar */}
+            {/* Sidebar Navigation */}
             <aside
-                className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col border-r border-slate-200 bg-white/95 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/95 transition-transform duration-300 ease-in-out md:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-                    }`}
+                className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col border-r border-[#ececee] bg-white transition-transform duration-300 ease-in-out md:translate-x-0 ${
+                    isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                }`}
             >
-                {/* Logo Section */}
-                <div className="flex h-16 items-center justify-between px-6 md:h-20">
+                {/* Brand Header */}
+                <div className="flex h-20 items-center justify-between px-6 border-b border-[#ececee]">
                     <Link href="/" className="group flex items-center gap-3">
-                        <div className="relative w-9 h-9 flex-shrink-0 rounded-full shadow-sm overflow-hidden">
+                        <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#ececee] group-hover:scale-105 transition-transform">
                             <Image
                                 src="/logo.png"
                                 alt="Logo Java UGM"
@@ -102,24 +105,29 @@ export default function DashboardLayoutClient({
                                 priority
                             />
                         </div>
-                        <span className="text-lg font-bold tracking-tight text-slate-800 dark:text-white">
-                            Java Al-'Alim
-                        </span>
+                        <div>
+                            <span className="text-sm font-semibold tracking-tight text-[#09090b] block">
+                                Java Al-'Alim
+                            </span>
+                            <span className="text-[11px] font-medium text-[#71717a]">
+                                Panel Pengurus
+                            </span>
+                        </div>
                     </Link>
                     <button
                         onClick={() => setIsSidebarOpen(false)}
-                        className="min-h-11 min-w-11 p-2 text-slate-500 hover:text-slate-700 md:hidden"
-                        aria-label="Tutup menu"
+                        className="w-8 h-8 rounded-full border border-[#ececee] flex items-center justify-center text-[#71717a] hover:text-[#09090b] md:hidden"
+                        aria-label="Tutup menu navigasi"
                     >
-                        <X size={20} />
+                        <X size={16} />
                     </button>
                 </div>
 
-                {/* Navigation Section */}
-                <nav className="flex-1 space-y-1.5 px-4 py-4 overflow-y-auto">
-                    <div className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-zinc-500">
-                        Main Menu
-                    </div>
+                {/* Navigation Links */}
+                <nav className="flex-1 space-y-1.5 px-4 py-6 overflow-y-auto">
+                    <p className="px-3 mb-2 text-[11px] font-semibold uppercase tracking-wider text-[#71717a]">
+                        Menu Utama
+                    </p>
 
                     {navItems.map((item) => {
                         const isActive = pathname === item.href;
@@ -127,45 +135,60 @@ export default function DashboardLayoutClient({
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`group flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ${isActive
-                                    ? 'bg-primary/5 text-primary dark:bg-primary/10'
-                                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100'
-                                    }`}
+                                className={`flex items-center justify-between px-4 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-all ${
+                                    isActive
+                                        ? 'bg-[#09090b] text-white shadow-none'
+                                        : 'text-[#52525b] hover:text-[#09090b] hover:bg-[#f4f4f5]'
+                                }`}
                             >
-                                <item.icon size={18} className={`transition-transform ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
-                                <span>{item.label}</span>
+                                <div className="flex items-center gap-3">
+                                    <item.icon size={16} />
+                                    <span>{item.label}</span>
+                                </div>
                                 {isActive && (
-                                    <div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-white" />
                                 )}
                             </Link>
                         );
                     })}
+
+                    <div className="pt-4 mt-4 border-t border-[#ececee]">
+                        <p className="px-3 mb-2 text-[11px] font-semibold uppercase tracking-wider text-[#71717a]">
+                            Akses Cepat
+                        </p>
+                        <Link
+                            href="/"
+                            className="flex items-center justify-between px-4 py-2.5 rounded-full text-xs font-semibold text-[#52525b] hover:text-[#09090b] hover:bg-[#f4f4f5] transition-all"
+                        >
+                            <span>Lihat Website</span>
+                            <ArrowUpRight size={14} className="text-[#a1a1aa]" />
+                        </Link>
+                    </div>
                 </nav>
 
-                {/* User Profile Section */}
-                <div className="border-t border-slate-100 p-4 dark:border-zinc-800">
-                    <div className="mb-4 flex items-center gap-3 rounded-2xl bg-slate-50 p-3 dark:bg-zinc-800/50">
-                        <div className="relative h-10 w-10 flex-shrink-0">
+                {/* User Profile Card */}
+                <div className="border-t border-[#ececee] p-4">
+                    <div className="mb-3 flex items-center gap-3 rounded-[20px] bg-[#f4f4f5] border border-[#ececee] p-3">
+                        <div className="relative h-10 w-10 shrink-0 rounded-full overflow-hidden border border-[#ececee] bg-white">
                             {user?.image ? (
                                 <img
                                     src={user.image}
-                                    alt="User"
-                                    className="h-full w-full rounded-xl object-cover ring-2 ring-white dark:ring-zinc-700"
+                                    alt={user.name || "User"}
+                                    className="h-full w-full object-cover"
                                 />
                             ) : (
-                                <div className="flex h-full w-full items-center justify-center rounded-xl bg-primary/10 text-sm font-bold text-primary">
-                                    {user?.name?.[0] || 'A'}
+                                <div className="flex h-full w-full items-center justify-center font-bold text-xs text-[#09090b]">
+                                    {user?.name?.[0] || 'U'}
                                 </div>
                             )}
-                            <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white bg-green-500 dark:border-zinc-900" />
                         </div>
 
                         <div className="flex-1 min-w-0">
-                            <p className="truncate text-sm font-semibold text-slate-900 dark:text-white">
-                                {user?.name || "Pengguna"}
+                            <p className="truncate text-xs font-semibold text-[#09090b]">
+                                {user?.name || "Pengurus"}
                             </p>
-                            <p className="truncate text-[11px] text-slate-500 dark:text-zinc-400">
-                                {user?.email}
+                            <p className="truncate text-[11px] text-[#71717a]">
+                                {user?.department || (user?.role === 'admin' ? 'Administrator' : 'Anggota')}
                             </p>
                         </div>
                     </div>
@@ -174,9 +197,11 @@ export default function DashboardLayoutClient({
                 </div>
             </aside>
 
-            {/* Main Content */}
-            <main className={`flex-1 transition-all duration-300 md:ml-64 p-4 md:p-8`}>
-                {children}
+            {/* Main Content Area */}
+            <main className="flex-1 transition-all duration-300 md:ml-64 p-5 sm:p-8 lg:p-10">
+                <div className="max-w-6xl mx-auto">
+                    {children}
+                </div>
             </main>
         </div>
     );

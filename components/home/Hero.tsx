@@ -7,10 +7,12 @@ export default function Hero() {
             <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header Text Block */}
                 <div className="text-center max-w-3xl mx-auto flex flex-col items-center">
-                    {/* Orange Accent Badge */}
-                    <div className="inline-flex items-center gap-2 rounded-[12px] bg-[#ff5a00] px-3.5 py-1 text-xs font-semibold text-white tracking-normal mb-6">
-                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                        <span>Kabinet Fathul Afaq 1447/1448 H</span>
+                    {/* Editorial Text Label (No Badge Box) */}
+                    <div className="flex items-center gap-2 mb-6">
+                        <span className="w-2 h-2 rounded-full bg-[#ff5a00] animate-pulse" />
+                        <span className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00]">
+                            Kabinet Fathul Afaq 1447/1448 H
+                        </span>
                     </div>
 
                     {/* Display Headline */}
@@ -23,11 +25,11 @@ export default function Hero() {
                         Wadah intelektual muslim Sekolah Vokasi Universitas Gadjah Mada yang beradab, solutif, dan berdaya guna dalam bingkai persaudaraan.
                     </p>
 
-                    {/* Action Buttons */}
+                    {/* Action Buttons - Full Rounded */}
                     <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
                         <Link
                             href="/profile"
-                            className="btn-dark-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium"
+                            className="btn-dark-primary rounded-full w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-medium"
                         >
                             <span>Tentang Kami</span>
                             <ArrowRight className="w-4 h-4" />
@@ -35,17 +37,19 @@ export default function Hero() {
 
                         <Link
                             href="/blog"
-                            className="btn-light-neutral w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium"
+                            className="btn-light-neutral rounded-full w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-medium"
                         >
                             <span>Baca Artikel</span>
                         </Link>
                     </div>
 
-                    {/* Category Tags */}
-                    <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-                        <span className="tag-badge">Sekolah Vokasi UGM</span>
-                        <span className="tag-badge">Lembaga Dakwah Fakultas</span>
-                        <span className="tag-badge">Ukhuwah &amp; Aksi Nyata</span>
+                    {/* Clean Text List (No Badge Pills) */}
+                    <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-medium text-[#71717a]">
+                        <span>Sekolah Vokasi UGM</span>
+                        <span className="w-1 h-1 rounded-full bg-[#d4d4d8]" />
+                        <span>Lembaga Dakwah Fakultas</span>
+                        <span className="w-1 h-1 rounded-full bg-[#d4d4d8]" />
+                        <span>Ukhuwah &amp; Aksi Nyata</span>
                     </div>
                 </div>
 

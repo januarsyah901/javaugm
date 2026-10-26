@@ -71,7 +71,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
                 <div className="mb-8">
                     <Link
                         href="/blog"
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-[14px] bg-white border border-[#ececee] text-xs font-semibold text-[#52525b] hover:text-[#09090b] hover:border-[#d4d4d8] transition-colors"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-[#ececee] text-xs font-semibold text-[#52525b] hover:text-[#09090b] hover:border-[#d4d4d8] transition-colors"
                     >
                         <ArrowLeft size={14} />
                         Kembali ke Blog
@@ -80,9 +80,9 @@ export default async function BlogDetailPage({ params }: PageProps) {
 
                 {/* Article Header */}
                 <header className="mb-8">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[12px] bg-[#ff5a00] text-white text-xs font-semibold tracking-wide uppercase mb-5">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00] mb-3">
                         {post.category || 'Artikel'}
-                    </div>
+                    </p>
 
                     <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#09090b] tracking-tight leading-[1.18] mb-6">
                         {post.title}
@@ -147,13 +147,9 @@ export default async function BlogDetailPage({ params }: PageProps) {
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                             <div className="flex items-center gap-2">
                                 <Tag size={16} className="text-[#a1a1aa]" />
-                                <div className="flex flex-wrap gap-2">
-                                    <span className="px-3 py-1 rounded-[12px] bg-[#f4f4f5] border border-[#ececee] text-xs font-medium text-[#52525b]">
-                                        #{post.category}
-                                    </span>
-                                    <span className="px-3 py-1 rounded-[12px] bg-[#f4f4f5] border border-[#ececee] text-xs font-medium text-[#52525b]">
-                                        #JAVAUGM
-                                    </span>
+                                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs font-medium text-[#71717a]">
+                                    <span>#{post.category}</span>
+                                    <span>#JAVAUGM</span>
                                 </div>
                             </div>
 
@@ -230,21 +226,22 @@ async function RelatedPosts({ currentPostId, category }: { currentPostId: number
                                 className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
                             />
                         )}
-                        <div className="absolute top-3 left-3">
-                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-[12px] bg-white/95 backdrop-blur-xs border border-[#ececee] text-[#09090b] text-[11px] font-semibold">
-                                {item.category}
-                            </span>
-                        </div>
                     </div>
 
                     <div className="flex flex-col flex-1">
-                        <div className="flex items-center gap-1.5 text-xs text-[#71717a] mb-2.5">
-                            <Calendar size={13} className="text-[#a1a1aa]" />
-                            {new Date(item.created_at).toLocaleDateString('id-ID', {
-                                day: 'numeric',
-                                month: 'short',
-                                year: 'numeric'
-                            })}
+                        <div className="flex items-center gap-2 text-xs text-[#71717a] mb-2.5">
+                            <span className="font-semibold uppercase tracking-wider text-[#ff5a00]">
+                                {item.category}
+                            </span>
+                            <span className="w-1 h-1 rounded-full bg-[#d4d4d8]" />
+                            <span className="inline-flex items-center gap-1">
+                                <Calendar size={13} className="text-[#a1a1aa]" />
+                                {new Date(item.created_at).toLocaleDateString('id-ID', {
+                                    day: 'numeric',
+                                    month: 'short',
+                                    year: 'numeric'
+                                })}
+                            </span>
                         </div>
 
                         <h3 className="text-base font-semibold text-[#09090b] group-hover:text-[#ff5a00] transition-colors line-clamp-2 leading-snug mb-2">

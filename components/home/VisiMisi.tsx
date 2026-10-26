@@ -16,7 +16,9 @@ export default function VisiMisi() {
             <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="mb-10 sm:mb-12">
-                    <span className="tag-badge mb-3">Arah Gerak</span>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00] mb-3">
+                        Arah Gerak
+                    </p>
                     <h2 className="text-3xl sm:text-4xl font-semibold text-[#09090b] tracking-tight leading-[1.2]">
                         Visi &amp; Misi Organisasi
                     </h2>
@@ -31,8 +33,10 @@ export default function VisiMisi() {
                     <div className="lg:col-span-5 rounded-[36px] bg-white border border-[#ececee] p-7 md:p-8 flex flex-col justify-between">
                         <div>
                             <div className="flex items-center justify-between">
-                                <span className="tag-badge">Visi Utama</span>
-                                <span className="inline-flex items-center rounded-[12px] bg-[#ff5a00]/10 px-2.5 py-1 text-xs font-semibold text-[#ff5a00]">
+                                <span className="text-xs font-semibold uppercase tracking-wider text-[#71717a]">
+                                    Visi Utama
+                                </span>
+                                <span className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00]">
                                     Orientasi
                                 </span>
                             </div>
@@ -66,12 +70,14 @@ export default function VisiMisi() {
                         <div>
                             <div className="flex items-center justify-between pb-5 border-b border-[#ececee]">
                                 <div>
-                                    <span className="tag-badge mb-2">Langkah Strategis</span>
+                                    <p className="text-xs font-semibold uppercase tracking-wider text-[#71717a] mb-1">
+                                        Langkah Strategis
+                                    </p>
                                     <h3 className="text-2xl font-semibold text-[#09090b] tracking-tight">
                                         5 Pilar Misi
                                     </h3>
                                 </div>
-                                <span className="text-xs font-medium text-[#52525b] bg-[#f4f4f5] border border-[#ececee] rounded-[12px] px-3 py-1">
+                                <span className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00]">
                                     Aksi Nyata
                                 </span>
                             </div>

@@ -69,9 +69,9 @@ export default function ProfilePage() {
 
                 {/* 1. Hero Editorial Section */}
                 <section className="max-w-3xl">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[12px] bg-[#ff5a00] text-white text-xs font-semibold tracking-wide uppercase mb-4">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00] mb-4">
                         Profil Lembaga
-                    </div>
+                    </p>
                     <h1 className="text-4xl md:text-5xl lg:text-[56px] font-semibold text-[#09090b] tracking-tight leading-[1.14]">
                         Jama'ah Vokasi Al-'Alim.
                     </h1>
@@ -100,9 +100,9 @@ export default function ProfilePage() {
                         {/* Description */}
                         <div className="lg:col-span-8 space-y-5">
                             <div>
-                                <span className="inline-flex items-center px-3 py-1 rounded-[12px] bg-[#f4f4f5] border border-[#ececee] text-xs font-medium text-[#52525b] mb-3">
+                                <p className="text-xs font-semibold uppercase tracking-wider text-[#71717a] mb-2">
                                     Lembaga Dakwah Fakultas
-                                </span>
+                                </p>
                                 <h2 className="text-2xl md:text-3xl font-semibold text-[#09090b] tracking-tight">
                                     Fondasi Gerakan Intelektual Muslim
                                 </h2>
@@ -118,16 +118,10 @@ export default function ProfilePage() {
                                 </p>
                             </div>
 
-                            <div className="flex flex-wrap gap-2 pt-2">
-                                <span className="px-3 py-1 rounded-[12px] bg-white border border-[#ececee] text-xs font-medium text-[#18181b]">
-                                    #IntelektualMuslim
-                                </span>
-                                <span className="px-3 py-1 rounded-[12px] bg-white border border-[#ececee] text-xs font-medium text-[#18181b]">
-                                    #LembagaDakwahVokasi
-                                </span>
-                                <span className="px-3 py-1 rounded-[12px] bg-white border border-[#ececee] text-xs font-medium text-[#18181b]">
-                                    #FathulAfaq
-                                </span>
+                            <div className="flex flex-wrap gap-x-4 gap-y-1 pt-2 text-xs font-medium text-[#71717a]">
+                                <span>#IntelektualMuslim</span>
+                                <span>#LembagaDakwahVokasi</span>
+                                <span>#FathulAfaq</span>
                             </div>
                         </div>
                     </div>
@@ -137,9 +131,9 @@ export default function ProfilePage() {
                 <section className="bg-[#09090b] text-white rounded-[36px] border border-[#27272a] p-7 md:p-12 shadow-none">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
                         <div className="lg:col-span-7 space-y-6">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[12px] bg-[#ff5a00] text-white text-xs font-semibold tracking-wide uppercase">
+                            <p className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00]">
                                 Kabinet Fathul Afaq (1447/1448 H)
-                            </div>
+                            </p>
 
                             <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-[1.16]">
                                 Membuka Cakrawala, Menebar Manfaat.
@@ -194,9 +188,9 @@ export default function ProfilePage() {
 
                         <div className="md:col-span-8 space-y-5">
                             <div>
-                                <span className="inline-flex items-center px-3 py-1 rounded-[12px] bg-[#f4f4f5] border border-[#ececee] text-xs font-semibold text-[#09090b] mb-3">
+                                <p className="text-xs font-semibold uppercase tracking-wider text-[#71717a] mb-2">
                                     Sambutan Pimpinan
-                                </span>
+                                </p>
                                 <h2 className="text-2xl md:text-3xl font-semibold text-[#09090b] tracking-tight">
                                     Muhammad Taufiqul Hakim
                                 </h2>
@@ -236,9 +230,9 @@ export default function ProfilePage() {
                         {/* Visi Card */}
                         <div className="lg:col-span-5 bg-white rounded-[36px] border border-[#ececee] p-7 md:p-10 flex flex-col justify-between shadow-none">
                             <div>
-                                <div className="inline-flex items-center px-3 py-1 rounded-[12px] bg-[#09090b] text-white text-xs font-semibold mb-6">
+                                <p className="text-xs font-semibold uppercase tracking-wider text-[#71717a] mb-4">
                                     Visi Lembaga
-                                </div>
+                                </p>
                                 <h3 className="text-xl md:text-2xl font-semibold text-[#09090b] leading-snug">
                                     Wadah strategis mahasiswa muslim dalam membangun lingkungan Sekolah Vokasi yang beriman, bertakwa, dan berakhlak mulia.
                                 </h3>
@@ -252,9 +246,9 @@ export default function ProfilePage() {
 
                         {/* Misi Card */}
                         <div className="lg:col-span-7 bg-white rounded-[36px] border border-[#ececee] p-7 md:p-10 shadow-none">
-                            <div className="inline-flex items-center px-3 py-1 rounded-[12px] bg-[#f4f4f5] border border-[#ececee] text-xs font-semibold text-[#09090b] mb-6">
+                            <p className="text-xs font-semibold uppercase tracking-wider text-[#71717a] mb-4">
                                 Misi Pelaksanaan
-                            </div>
+                            </p>
 
                             <ul className="space-y-4">
                                 {missions.map((mission, idx) => (

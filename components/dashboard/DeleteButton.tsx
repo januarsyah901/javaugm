@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Trash2 } from "lucide-react";
@@ -27,11 +26,11 @@ export default function DeleteButton({ id, title }: { id: number, title?: string
 
             // Refresh the page to reflect deletion
             router.refresh();
-            setShowConfirm(false); // Close modal on success (though refresh might unmount component)
+            setShowConfirm(false);
         } catch (error: any) {
             console.error("Error deleting post:", error);
             setError(error.message || "Gagal menghapus artikel.");
-            setShowConfirm(false); // Close confirm modal
+            setShowConfirm(false);
         } finally {
             setIsDeleting(false);
         }
@@ -42,10 +41,11 @@ export default function DeleteButton({ id, title }: { id: number, title?: string
             <button
                 onClick={() => setShowConfirm(true)}
                 disabled={isDeleting}
-                className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
-                title="Hapus"
+                className="w-8 h-8 rounded-full border border-[#ececee] bg-white flex items-center justify-center text-[#71717a] hover:text-[#e11d48] hover:border-rose-200 hover:bg-rose-50 transition-colors disabled:opacity-50"
+                title="Hapus Artikel"
+                aria-label="Hapus Artikel"
             >
-                <Trash2 size={16} />
+                <Trash2 size={14} />
             </button>
 
             <ConfirmModal

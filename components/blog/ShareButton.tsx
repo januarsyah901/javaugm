@@ -69,18 +69,20 @@ export default function ShareButton({ slug, title }: ShareButtonProps) {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 min-h-11 text-primary font-medium hover:text-emerald-700 transition-colors"
+                className="btn-light-neutral rounded-full px-5 py-2 text-xs font-semibold flex items-center gap-2 hover:border-[#09090b] transition-all"
                 aria-label="Share this post"
                 aria-expanded={isOpen}
             >
-                {isOpen ? <X size={20} /> : <Share2 size={20} />}
-                <span>{isOpen ? 'Tutup' : 'Bagikan Tulisan Ini'}</span>
+                {isOpen ? <X size={15} /> : <Share2 size={15} />}
+                <span>{isOpen ? 'Tutup' : 'Bagikan Tulisan'}</span>
             </button>
 
             {/* Dropdown Menu */}
             {isOpen && (
-                <div className="absolute right-0 bottom-full mb-2 w-64 bg-white dark:bg-zinc-800 rounded-xl shadow-xl border border-slate-100 dark:border-zinc-700 p-4 z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
-                    <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Bagikan ke Media Sosial</h4>
+                <div className="absolute right-0 bottom-full mb-3 w-64 bg-white rounded-[24px] shadow-[0_12px_36px_rgba(0,0,0,0.12)] border border-[#ececee] p-4 z-50 animate-in fade-in slide-in-from-bottom-2 duration-200">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[#71717a] mb-3">
+                        Bagikan ke Media Sosial
+                    </p>
 
                     <div className="grid grid-cols-5 gap-2 mb-4">
                         <WhatsappShareButton url={url} title={title} separator=" - ">
@@ -105,14 +107,14 @@ export default function ShareButton({ slug, title }: ShareButtonProps) {
                     </div>
 
                     <div className="relative">
-                        <div className="flex items-center justify-between bg-slate-100 dark:bg-zinc-900 rounded-lg p-2 border border-slate-200 dark:border-zinc-700">
-                            <span className="text-xs text-slate-500 truncate max-w-[150px]">{url}</span>
+                        <div className="flex items-center justify-between bg-[#f4f4f5] rounded-full pl-3 pr-1.5 py-1 border border-[#ececee]">
+                            <span className="text-xs text-[#71717a] truncate max-w-[140px]">{url}</span>
                             <button
                                 onClick={handleCopy}
-                                className="p-1.5 hover:bg-slate-200 dark:hover:bg-zinc-800 rounded-md transition-colors text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                                title="Copy Link"
+                                className="w-7 h-7 rounded-full bg-white border border-[#ececee] flex items-center justify-center hover:bg-[#ececee] transition-colors text-[#09090b]"
+                                title="Salin Tautan"
                             >
-                                {copied ? <Check size={14} className="text-emerald-500" /> : <LinkIcon size={14} />}
+                                {copied ? <Check size={13} className="text-emerald-600" /> : <LinkIcon size={13} />}
                             </button>
                         </div>
                     </div>

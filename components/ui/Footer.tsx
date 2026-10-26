@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { MapPin, Mail, Instagram, Youtube, ArrowUpRight } from 'lucide-react';
+import { MapPin, Mail, Instagram, Youtube } from 'lucide-react';
 
 export default function Footer() {
   const pathname = usePathname();
@@ -18,27 +18,29 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-[#27272a]">
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-lg text-white tracking-tight">
-                Java Al-'Alim
-              </span>
-              <span className="orange-badge text-[10px] px-2 py-0.5">
-                Fathul Afaq
-              </span>
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-lg text-white tracking-tight">
+                  Java Al-'Alim
+                </span>
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00]">
+                  Fathul Afaq
+                </span>
+              </div>
+              <p className="text-xs text-[#71717a]">
+                Sekolah Vokasi Universitas Gadjah Mada 1447/1448 H
+              </p>
             </div>
             <p className="text-[14px] text-[#a1a1aa] leading-relaxed max-w-sm">
               Jama'ah Vokasi Al-'Alim (Java) adalah Lembaga Dakwah Fakultas di Sekolah Vokasi Universitas Gadjah Mada. Membuka cakrawala pemikiran dan menebar kemanfaatan.
             </p>
-            <div className="pt-2 text-xs text-[#71717a]">
-              Sekolah Vokasi UGM 1447/1448 H
-            </div>
           </div>
 
           {/* Navigation Links */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-[13px] font-semibold uppercase tracking-wider text-[#71717a]">
+            <p className="text-[12px] font-semibold uppercase tracking-wider text-[#71717a]">
               Navigasi
-            </h4>
+            </p>
             <ul className="space-y-2 text-[14px]">
               <li>
                 <Link href="/" className="text-[#d4d4d8] hover:text-white transition-colors">
@@ -60,9 +62,9 @@ export default function Footer() {
 
           {/* Contact & Socials */}
           <div className="md:col-span-4 space-y-3">
-            <h4 className="text-[13px] font-semibold uppercase tracking-wider text-[#71717a]">
+            <p className="text-[12px] font-semibold uppercase tracking-wider text-[#71717a]">
               Kontak
-            </h4>
+            </p>
             <div className="space-y-2.5 text-[14px] text-[#a1a1aa]">
               <div className="flex items-start gap-2.5">
                 <MapPin size={16} className="text-[#71717a] mt-0.5 flex-shrink-0" />
@@ -81,19 +83,19 @@ export default function Footer() {
                 href="https://instagram.com/javaugm"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-[#27272a] bg-[#27272a]/60 hover:bg-[#27272a] flex items-center justify-center text-[#a1a1aa] hover:text-white transition-all"
+                className="w-10 h-10 rounded-full border border-[#27272a] bg-[#27272a]/60 hover:bg-[#27272a] flex items-center justify-center text-[#a1a1aa] hover:text-white transition-all"
                 aria-label="Instagram Java UGM"
               >
-                <Instagram size={15} />
+                <Instagram size={16} />
               </a>
               <a
                 href="https://youtube.com/@javaugm"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-[#27272a] bg-[#27272a]/60 hover:bg-[#27272a] flex items-center justify-center text-[#a1a1aa] hover:text-white transition-all"
+                className="w-10 h-10 rounded-full border border-[#27272a] bg-[#27272a]/60 hover:bg-[#27272a] flex items-center justify-center text-[#a1a1aa] hover:text-white transition-all"
                 aria-label="YouTube Java UGM"
               >
-                <Youtube size={15} />
+                <Youtube size={16} />
               </a>
             </div>
           </div>

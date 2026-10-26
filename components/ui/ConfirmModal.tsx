@@ -1,4 +1,3 @@
-
 "use client";
 
 import { AlertTriangle, X } from "lucide-react";
@@ -13,7 +12,7 @@ interface ConfirmModalProps {
     confirmText?: string;
     cancelText?: string;
     isLoading?: boolean;
-    itemName?: string; // Optional: name of the item being deleted/acted upon
+    itemName?: string;
     variant?: 'danger' | 'warning' | 'info';
 }
 
@@ -31,36 +30,11 @@ export default function ConfirmModal({
 }: ConfirmModalProps) {
     const panelRef = useDialog(isOpen, onClose);
 
-    const getVariantColors = () => {
-        switch (variant) {
-            case 'danger':
-                return {
-                    icon: 'text-red-600 bg-red-100 dark:bg-red-900/30 dark:text-red-400',
-                    button: 'bg-red-600 hover:bg-red-700 focus:ring-red-500',
-                    border: 'border-red-100 dark:border-red-900/50'
-                };
-            case 'warning':
-                return {
-                    icon: 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30 dark:text-yellow-400',
-                    button: 'bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-500',
-                    border: 'border-yellow-100 dark:border-yellow-900/50'
-                };
-            default:
-                return {
-                    icon: 'text-blue-600 bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400',
-                    button: 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500',
-                    border: 'border-blue-100 dark:border-blue-900/50'
-                };
-        }
-    };
-
-    const colors = getVariantColors();
-
     if (!isOpen) return null;
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 animate-in fade-in duration-200"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200"
             onClick={onClose}
         >
             <div
@@ -68,57 +42,61 @@ export default function ConfirmModal({
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="confirm-title"
-                className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-200 border border-slate-200"
+                className="bg-white rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-200 border border-[#ececee]"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}
-                <div className={`px-6 py-4 border-b ${colors.border} flex justify-between items-center bg-slate-50/50 dark:bg-zinc-800/50`}>
-                    <h3 id="confirm-title" className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                        <span className={`p-1.5 rounded-lg ${colors.icon}`}>
-                            <AlertTriangle size={18} />
+                <div className="px-6 py-5 border-b border-[#ececee] flex justify-between items-center">
+                    <h3 id="confirm-title" className="text-base font-semibold text-[#09090b] flex items-center gap-2.5">
+                        <span className="w-8 h-8 rounded-full bg-rose-50 border border-rose-200 flex items-center justify-center text-[#e11d48]">
+                            <AlertTriangle size={15} />
                         </span>
-                        {title}
+                        <span>{title}</span>
                     </h3>
                     <button
                         onClick={onClose}
                         disabled={isLoading}
-                        className="min-h-11 min-w-11 text-slate-500 hover:text-slate-700 transition-colors p-2 rounded-full hover:bg-slate-100"
+                        className="w-8 h-8 rounded-full border border-[#ececee] flex items-center justify-center text-[#71717a] hover:text-[#09090b] hover:bg-[#f4f4f5] transition-colors"
                         aria-label="Tutup"
                     >
-                        <X size={20} />
+                        <X size={15} />
                     </button>
                 </div>
 
                 {/* Body */}
                 <div className="p-6">
-                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                    <p className="text-sm text-[#52525b] leading-relaxed">
                         {message}
-                        {itemName && (
-                            <span className="block mt-2 font-medium text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-zinc-800 p-3 rounded-lg border border-slate-100 dark:border-zinc-700">
-                                "{itemName}"
-                            </span>
-                        )}
                     </p>
+                    {itemName && (
+                        <div className="mt-3 text-xs font-semibold text-[#09090b] bg-[#f4f4f5] p-3 rounded-[16px] border border-[#ececee] truncate">
+                            "{itemName}"
+                        </div>
+                    )}
                 </div>
 
-                {/* Footer */}
-                <div className="px-6 py-4 bg-slate-50 dark:bg-zinc-800/50 border-t border-slate-100 dark:border-zinc-800 flex justify-end gap-3">
+                {/* Footer - Full Rounded Buttons */}
+                <div className="px-6 py-4 bg-[#fafafa] border-t border-[#ececee] flex justify-end gap-2.5">
                     <button
                         onClick={onClose}
                         disabled={isLoading}
-                        className="min-h-11 px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:ring-2 focus:ring-slate-400 transition-colors"
+                        className="btn-light-neutral rounded-full px-5 py-2 text-xs font-semibold hover:border-[#09090b] transition-all"
                     >
                         {cancelText}
                     </button>
                     <button
                         onClick={onConfirm}
                         disabled={isLoading}
-                        className={`min-h-11 px-4 py-2 text-sm font-bold text-white rounded-lg shadow-md focus:ring-2 focus:ring-offset-1 transition-all flex items-center gap-2 ${colors.button} ${isLoading ? 'opacity-70 cursor-wait' : ''}`}
+                        className={`rounded-full px-5 py-2 text-xs font-semibold text-white transition-all flex items-center gap-2 ${
+                            variant === 'danger'
+                                ? 'bg-[#e11d48] hover:bg-rose-700 shadow-sm'
+                                : 'btn-dark-primary'
+                        } ${isLoading ? 'opacity-70 cursor-wait' : ''}`}
                     >
                         {isLoading ? (
                             <>
-                                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                                Memproses...
+                                <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                                <span>Memproses...</span>
                             </>
                         ) : (
                             confirmText

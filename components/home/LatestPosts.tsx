@@ -17,7 +17,9 @@ export default async function LatestPosts() {
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12">
                     <div>
-                        <span className="tag-badge mb-3">Warta &amp; Inspirasi</span>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00] mb-3">
+                            Warta &amp; Inspirasi
+                        </p>
                         <h2 className="text-3xl sm:text-4xl font-semibold text-[#09090b] tracking-tight leading-[1.2]">
                             Terbaru dari Kami
                         </h2>
@@ -28,7 +30,7 @@ export default async function LatestPosts() {
 
                     <Link
                         href="/blog"
-                        className="btn-light-neutral hidden sm:inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium shrink-0"
+                        className="btn-light-neutral rounded-full hidden sm:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium shrink-0"
                     >
                         <span>Lihat Semua</span>
                         <ArrowRight className="w-4 h-4" />
@@ -72,7 +74,7 @@ export default async function LatestPosts() {
                             <div className="p-7 flex-1 flex flex-col justify-between">
                                 <div>
                                     <div className="flex items-center justify-between gap-2 mb-3">
-                                        <span className="tag-badge">
+                                        <span className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00]">
                                             {post.category || 'Artikel'}
                                         </span>
                                         <span className="text-xs text-[#52525b]">
@@ -122,7 +124,7 @@ export default async function LatestPosts() {
                 <div className="mt-8 text-center sm:hidden">
                     <Link
                         href="/blog"
-                        className="btn-light-neutral inline-flex items-center justify-center gap-2 w-full py-3 text-sm font-medium"
+                        className="btn-light-neutral rounded-full inline-flex items-center justify-center gap-2 w-full py-3 text-sm font-medium"
                     >
                         <span>Lihat Semua Artikel</span>
                         <ArrowRight className="w-4 h-4" />
