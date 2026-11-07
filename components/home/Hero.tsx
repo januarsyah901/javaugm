@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import CountUp from '@/components/motion/CountUp';
-import { Reveal } from '@/components/motion/Reveal';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -15,13 +13,6 @@ const fadeUp = (delay: number) => ({
 });
 
 const headlineWords = ['Membuka', 'Cakrawala,', 'Menebar', 'Manfaat.'];
-
-const stats = [
-    { to: 5, suffix: '', label: 'Departemen dan biro aktif' },
-    { to: 20, suffix: '+', label: 'Program dakwah dan kajian' },
-    { to: 100, suffix: '+', label: 'Kader mahasiswa vokasi' },
-    { to: 1447, suffix: ' H', label: 'Masa bakti kepengurusan' },
-];
 
 export default function Hero() {
     return (
@@ -101,28 +92,6 @@ export default function Hero() {
                         <span>Ukhuwah &amp; Aksi Nyata</span>
                     </motion.div>
                 </div>
-
-                <Reveal delay={0.1} className="mt-14 sm:mt-16">
-                    <div className="rounded-[36px] bg-white border border-[#ececee] p-7 md:p-8">
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[#ececee]">
-                            {stats.map((s) => (
-                                <div
-                                    key={s.label}
-                                    className="flex flex-col sm:flex-row items-baseline gap-2 sm:gap-3 pt-4 sm:pt-0 sm:px-4 first:pt-0 first:px-0"
-                                >
-                                    <CountUp
-                                        to={s.to}
-                                        suffix={s.suffix}
-                                        className="text-2xl sm:text-3xl font-semibold text-[#09090b] tracking-tight leading-none tabular-nums"
-                                    />
-                                    <span className="text-xs sm:text-sm font-normal text-[#52525b] leading-snug">
-                                        {s.label}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </Reveal>
             </div>
         </section>
     );
