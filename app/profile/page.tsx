@@ -175,30 +175,30 @@ export default function ProfilePage() {
                 {/* 4. Sambutan Mas'ul Utama */}
                 <section className="bg-white rounded-[36px] border border-[#ececee] p-7 md:p-12 shadow-none overflow-visible">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-                        <div className="md:col-span-4 flex justify-center pt-8 md:pt-10">
+                        <div className="md:col-span-5 flex justify-center pt-10 md:pt-14">
                             {/* Backdrop box with overlapping character cutout effect */}
-                            <div className="relative w-64 h-80 sm:w-72 sm:h-96">
+                            <div className="relative w-72 h-[380px] sm:w-80 sm:h-[420px]">
                                 {/* Decorative base card / box */}
-                                <div className="absolute inset-x-2 bottom-0 top-12 rounded-[28px] bg-gradient-to-b from-[#f4f4f5] to-[#ececee] border border-[#e4e4e7]" />
+                                <div className="absolute inset-x-2 bottom-0 top-16 rounded-[32px] bg-gradient-to-b from-[#f4f4f5] to-[#ececee] border border-[#e4e4e7]" />
                                 
                                 {/* Subtle inner glow accent behind the leader */}
-                                <div className="absolute inset-x-6 bottom-4 h-48 rounded-full bg-[#ff5a00]/10 blur-2xl pointer-events-none" />
+                                <div className="absolute inset-x-4 bottom-6 h-56 rounded-full bg-[#ff5a00]/10 blur-2xl pointer-events-none" />
 
-                                {/* Cutout photo popping out above the top edge */}
-                                <div className="absolute inset-x-0 bottom-0 -top-12 flex items-end justify-center pointer-events-none">
+                                {/* Cutout photo popping out generously above the top edge */}
+                                <div className="absolute inset-x-0 bottom-0 -top-14 sm:-top-16 flex items-end justify-center pointer-events-none">
                                     <Image
                                         src="/ketua-transparent.png"
                                         alt="Muhammad Taufiqul Hakim"
-                                        width={480}
-                                        height={720}
-                                        className="h-full w-auto object-contain drop-shadow-md select-none"
+                                        width={520}
+                                        height={800}
+                                        className="h-full w-auto object-contain drop-shadow-xl select-none"
                                         priority
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="md:col-span-8 space-y-5">
+                        <div className="md:col-span-7 space-y-5">
                             <div>
                                 <p className="text-xs font-semibold uppercase tracking-wider text-[#71717a] mb-2">
                                     Sambutan Pimpinan
