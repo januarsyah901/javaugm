@@ -173,16 +173,28 @@ export default function ProfilePage() {
                 </section>
 
                 {/* 4. Sambutan Mas'ul Utama */}
-                <section className="bg-white rounded-[36px] border border-[#ececee] p-7 md:p-12 shadow-none">
+                <section className="bg-white rounded-[36px] border border-[#ececee] p-7 md:p-12 shadow-none overflow-visible">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-                        <div className="md:col-span-4 flex justify-center">
-                            <div className="relative w-60 h-80 rounded-[28px] overflow-hidden border border-[#ececee] bg-[#f4f4f5]">
-                                <Image
-                                    src="/ketua.png"
-                                    alt="Muhammad Taufiqul Hakim"
-                                    fill
-                                    className="object-cover"
-                                />
+                        <div className="md:col-span-4 flex justify-center pt-8 md:pt-10">
+                            {/* Backdrop box with overlapping character cutout effect */}
+                            <div className="relative w-64 h-80 sm:w-72 sm:h-96">
+                                {/* Decorative base card / box */}
+                                <div className="absolute inset-x-2 bottom-0 top-12 rounded-[28px] bg-gradient-to-b from-[#f4f4f5] to-[#ececee] border border-[#e4e4e7]" />
+                                
+                                {/* Subtle inner glow accent behind the leader */}
+                                <div className="absolute inset-x-6 bottom-4 h-48 rounded-full bg-[#ff5a00]/10 blur-2xl pointer-events-none" />
+
+                                {/* Cutout photo popping out above the top edge */}
+                                <div className="absolute inset-x-0 bottom-0 -top-12 flex items-end justify-center pointer-events-none">
+                                    <Image
+                                        src="/ketua-transparent.png"
+                                        alt="Muhammad Taufiqul Hakim"
+                                        width={480}
+                                        height={720}
+                                        className="h-full w-auto object-contain drop-shadow-md select-none"
+                                        priority
+                                    />
+                                </div>
                             </div>
                         </div>
 
