@@ -90,3 +90,29 @@ body {
   border: 1px solid #ececee;
   border-radius: 36px;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+.btn-light-neutral:hover {
+  transform: translateY(-1px);
+}
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+  animation: page-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  main { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

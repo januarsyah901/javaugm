@@ -1,4 +1,5 @@
 import { Target } from 'lucide-react';
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
 
 export default function VisiMisi() {
     const vision = "Visi JAVA UGM adalah sebagai wadah bagi mahasiswa muslim dalam membangun lingkungan Sekolah Vokasi yang beriman, bertakwa, dan berakhlak mulia.";
@@ -15,7 +16,7 @@ export default function VisiMisi() {
         <section className="relative">
             <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="mb-10 sm:mb-12">
+                <Reveal className="mb-10 sm:mb-12">
                     <p className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00] mb-3">
                         Arah Gerak
                     </p>
@@ -25,12 +26,12 @@ export default function VisiMisi() {
                     <p className="text-sm sm:text-base text-[#52525b] mt-1.5 max-w-xl">
                         Landasan nilai dan orientasi program kerja Jama&apos;ah Vokasi Al-&apos;Alim dalam menebar manfaat di kampus.
                     </p>
-                </div>
+                </Reveal>
 
                 {/* Cards Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
                     {/* Vision Card */}
-                    <div className="lg:col-span-5 rounded-[36px] bg-white border border-[#ececee] p-7 md:p-8 flex flex-col justify-between">
+                    <Reveal className="lg:col-span-5 rounded-[36px] bg-white border border-[#ececee] p-7 md:p-8 flex flex-col justify-between transition-colors hover:border-[#d4d4d8]">
                         <div>
                             <div className="flex items-center justify-between">
                                 <span className="text-xs font-semibold uppercase tracking-wider text-[#71717a]">
@@ -63,10 +64,10 @@ export default function VisiMisi() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </Reveal>
 
                     {/* Mission Card */}
-                    <div className="lg:col-span-7 rounded-[36px] bg-white border border-[#ececee] p-7 md:p-8 flex flex-col justify-between">
+                    <Reveal delay={0.12} className="lg:col-span-7 rounded-[36px] bg-white border border-[#ececee] p-7 md:p-8 flex flex-col justify-between transition-colors hover:border-[#d4d4d8]">
                         <div>
                             <div className="flex items-center justify-between pb-5 border-b border-[#ececee]">
                                 <div>
@@ -82,20 +83,20 @@ export default function VisiMisi() {
                                 </span>
                             </div>
 
-                            <div className="divide-y divide-[#ececee]">
+                            <Stagger className="divide-y divide-[#ececee]">
                                 {missions.map((mission, index) => (
-                                    <div key={index} className="py-4 first:pt-4 last:pb-0 flex items-start gap-3.5">
+                                    <StaggerItem key={index} className="py-4 first:pt-4 last:pb-0 flex items-start gap-3.5">
                                         <span className="w-7 h-7 rounded-full bg-[#f4f4f5] border border-[#ececee] text-xs font-semibold text-[#09090b] flex items-center justify-center shrink-0 mt-0.5">
                                             0{index + 1}
                                         </span>
                                         <p className="text-sm sm:text-[15px] text-[#18181b] leading-relaxed">
                                             {mission}
                                         </p>
-                                    </div>
+                                    </StaggerItem>
                                 ))}
-                            </div>
+                            </Stagger>
                         </div>
-                    </div>
+                    </Reveal>
                 </div>
             </div>
         </section>

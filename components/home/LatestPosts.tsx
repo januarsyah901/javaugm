@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import Image from 'next/image';
+import { Reveal, Stagger, StaggerItem } from '@/components/motion/Reveal';
 
 export default async function LatestPosts() {
     const { data: posts, error } = await supabase
@@ -15,7 +16,7 @@ export default async function LatestPosts() {
         <section className="relative">
             <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12">
+                <Reveal className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12">
                     <div>
                         <p className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00] mb-3">
                             Warta &amp; Inspirasi
@@ -35,10 +36,10 @@ export default async function LatestPosts() {
                         <span>Lihat Semua</span>
                         <ArrowRight className="w-4 h-4" />
                     </Link>
-                </div>
+                </Reveal>
 
                 {/* Posts Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                     {error && (
                         <div className="col-span-full rounded-[36px] border border-[#ececee] bg-white p-8 text-center">
                             <p className="text-sm font-semibold text-[#09090b]">Artikel belum dapat dimuat</p>
@@ -47,9 +48,9 @@ export default async function LatestPosts() {
                     )}
 
                     {!error && posts?.map((post) => (
+                        <StaggerItem key={post.id} className="flex">
                         <article
-                            key={post.id}
-                            className="group flex flex-col rounded-[36px] bg-white border border-[#ececee] overflow-hidden transition-colors hover:border-[#d4d4d8]"
+                            className="group flex flex-col w-full rounded-[36px] bg-white border border-[#ececee] overflow-hidden transition-all duration-500 hover:border-[#d4d4d8] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.06)]"
                         >
                             {/* Image Header */}
                             <div className="relative h-48 sm:h-52 w-full bg-[#f4f4f5] overflow-hidden">
@@ -111,6 +112,7 @@ export default async function LatestPosts() {
                                 </div>
                             </div>
                         </article>
+                        </StaggerItem>
                     ))}
 
                     {!error && (!posts || posts.length === 0) && (
@@ -118,7 +120,7 @@ export default async function LatestPosts() {
                             Belum ada artikel terbaru yang dipublikasikan.
                         </div>
                     )}
-                </div>
+                </Stagger>
 
                 {/* Mobile All Posts Button */}
                 <div className="mt-8 text-center sm:hidden">
