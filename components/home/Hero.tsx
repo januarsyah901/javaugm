@@ -33,13 +33,6 @@ export default function Hero() {
 
             <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center max-w-3xl mx-auto flex flex-col items-center">
-                    <motion.div {...fadeUp(0)} className="flex items-center gap-2 mb-6">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#ff5a00]" />
-                        <span className="text-xs font-semibold uppercase tracking-wider text-[#ff5a00]">
-                            Kabinet Fathul Afaq 1447/1448 H
-                        </span>
-                    </motion.div>
-
                     <h1 className="text-4xl sm:text-6xl lg:text-[64px] font-semibold text-[#09090b] tracking-tight leading-[1.14]">
                         {headlineWords.map((word, i) => (
                             <span key={word} className="inline-block overflow-hidden align-bottom pb-1 mr-[0.25em] last:mr-0">

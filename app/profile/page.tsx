@@ -85,12 +85,12 @@ export default function ProfilePage() {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
                         {/* Logo Container */}
                         <div className="lg:col-span-4 flex justify-center">
-                            <div className="w-48 h-48 md:w-56 md:h-56 rounded-[28px] bg-[#f4f4f5] border border-[#ececee] p-8 flex items-center justify-center">
+                            <div className="w-48 h-48 md:w-56 md:h-56 flex items-center justify-center">
                                 <Image
                                     src="/logo.png"
                                     alt="Logo Jama'ah Vokasi Al-'Alim"
-                                    width={180}
-                                    height={180}
+                                    width={200}
+                                    height={200}
                                     className="object-contain"
                                     priority
                                 />
@@ -250,13 +250,13 @@ export default function ProfilePage() {
                                 Misi Pelaksanaan
                             </p>
 
-                            <ul className="space-y-4">
+                            <ul className="divide-y divide-[#ececee]">
                                 {missions.map((mission, idx) => (
-                                    <li key={idx} className="flex items-start gap-4 p-3.5 rounded-[16px] bg-[#f4f4f5] border border-[#ececee]">
-                                        <span className="w-7 h-7 rounded-[10px] bg-white border border-[#ececee] text-[#09090b] text-xs font-semibold flex items-center justify-center shrink-0">
+                                    <li key={idx} className="flex items-start gap-4 py-4 first:pt-2 last:pb-0 border-b border-[#ececee] last:border-b-0">
+                                        <span className="w-7 h-7 rounded-full bg-[#f4f4f5] border border-[#ececee] text-[#09090b] text-xs font-semibold flex items-center justify-center shrink-0 mt-0.5">
                                             {idx + 1}
                                         </span>
-                                        <p className="text-sm text-[#3f3f46] leading-relaxed">
+                                        <p className="text-sm md:text-[15px] text-[#3f3f46] leading-relaxed">
                                             {mission}
                                         </p>
                                     </li>
